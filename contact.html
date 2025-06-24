@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Contact Us - PLENTERRA</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1 id="welcome">Contact Us</h1>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about-Us">Our Mission</a></li>
+                <li><a href="index.html#Projects">How We Do It</a></li>
+                <li><a href="index.html#our-farms">Results</a></li>
+                <li><a href="#footer">Contact Us</a></li>
+                <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <form action="submit_form.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer class="footer" id="footer">
+        <h2>Building a Healthier Planet Together</h2>
+        <p>&copy; 2025 PLENTERRA. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
