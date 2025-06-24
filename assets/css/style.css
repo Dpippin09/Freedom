@@ -1,0 +1,810 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+
+
+
+.header div {
+    padding-top: 15px;
+    margin-right: 20px;
+    float: right;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+}
+
+.header div ul li {
+    display: inline-block;
+    margin-left: 25px;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+p {
+    font-size: 16px;
+}
+
+#welcome {
+    margin: 0; /* Removes default margin */
+    float: left;
+}
+/* Base styles */
+.hero {
+     height: 800px;
+    width: 100%;
+    
+    background-image: url("../images/farmerOpening.png");
+    background-size: cover;
+    background-position: center; 
+}
+
+/* Media queries for mobile compatibility */
+@media (max-width: 768px) {
+    .hero {
+        height: 500px; /* Adjust the height for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 300px; /* Adjust the height for mobile phones */
+    }
+}
+nav {
+    display: flex;
+    justify-content: flex-end; /* Aligns the nav-links container to the right */
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #505050;
+    position: fixed;
+    width: 100%; /* Ensures the nav container takes the full width */
+    top: -60px; /* Move the nav bar out of view */
+    transition: top 0.3s ease; /* Smooth transition */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+body:hover nav {
+    top: 0; /* Show the nav bar when hovering at the top */
+}
+
+.Welcome {
+    margin: 0; /* Removes default margin */
+    float: left;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    list-style: none; /* Removes the default list styling */
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: #000000;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    
+}
+
+.nav-links a:hover {
+    background-color: #797979;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #a39171;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content li {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black; 
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ccc5b9;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.nav-links .login-signup {
+    background-color: #386641;
+    color: #ffffff;
+}
+
+.nav-links .login-signup:hover {
+    background-color: #555;
+    color: #ffffff;
+}
+
+h1 {
+    
+    text-decoration: underline;
+}
+
+a { color: #ffffff;
+    text-decoration: none;
+}
+
+p {
+    font-size: 21px; /* Change this value to your desired font size */
+    line-height: 1.75; /* Optional: Adjust the line height for better readability */
+}
+
+.plenterra-logo {
+    width: 100%; /* Adjust the width as needed */
+    max-width: 150px; /* Set a maximum width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image scales properly within the set dimensions */
+    border-radius: 10px; /* Optional: Add border radius for rounded corners */
+    display: block; /* Make the image a block element */
+    margin: 0; /* Remove auto margin to stop centering */
+    float: left; /* Float the logo to the left */
+}
+
+
+ .farming-image, 
+.section-image,
+.graphic-list {
+    border-radius: 30px; /* Adjust the value as needed */
+}
+
+section {
+    border-radius: 30px; /* Adjust the value as needed */
+}
+  
+.float-left {
+    float: left;
+    margin-right: 25px;
+}
+
+.float-right {
+    float: right;
+    margin-left: 25px;
+}
+
+section h3 {
+    text-align: center; /* Center the text horizontally */
+    margin-top: 0; /* Remove any default margin at the top */
+    padding-top: 10px; /* Optional: Add some padding at the top for spacing */
+    font-size: 50px; /* Optional: Adjust the font size */
+    font-weight: bold; /* Optional: Make the text bold */
+    text-decoration: underline;
+}
+
+section {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center-align items horizontally */
+    padding: 200px; /* Optional: Add padding for spacing */
+}
+/* Base styles */
+.about-Us {
+    margin-bottom: 20px;
+    padding: 50px;
+    height: auto; /* Change height to auto for better responsiveness */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #588157;
+    color: #dad7cd;
+    border-radius: 30px; /* Adjust the value as needed */
+}
+
+.about-Us img {
+    width: 400px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't exceed the container's width */
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+main.about-Us h2 {
+    text-decoration: underline;
+    margin-top: 0;
+    color: #dad7cd; /* Set the desired color */
+}
+
+.about-Us p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+/* Media queries for mobile compatibility */
+@media (max-width: 768px) {
+    .about-Us {
+        padding: 30px;
+    }
+
+    .about-Us img {
+        float: none;
+        display: block;
+        margin: 0 auto 20px;
+    }
+
+    .about-Us h2 {
+        font-size: 24px;
+    }
+
+    .about-Us p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-Us {
+        padding: 20px;
+    }
+
+    .about-Us h2 {
+        font-size: 20px;
+    }
+
+    .about-Us p {
+        font-size: 14px;
+    }
+}
+
+/* Base styles */
+.soil-health {
+    margin-bottom: 20px;
+    padding: 50px;
+    height: auto; /* Change height to auto for better responsiveness */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #588157;
+    color: #dad7cd;
+}
+
+.soil-health img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.soil-health h2 {
+    text-decoration: underline;
+    margin-top: 0;
+}
+
+.soil-health p {
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+/* Media queries for mobile compatibility */
+@media (max-width: 768px) {
+    .soil-health {
+        padding: 30px;
+    }
+
+    .soil-health img {
+        float: none;
+        display: block;
+        margin: 0 auto 20px;
+    }
+
+    .soil-health h2 {
+        font-size: 24px;
+    }
+
+    .soil-health p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .soil-health {
+        padding: 20px;
+    }
+
+    .soil-health h2 {
+        font-size: 20px;
+    }
+
+    .soil-health p {
+        font-size: 14px;
+    }
+}
+
+/* Base styles */
+.Projects {
+    margin-bottom: 20px;
+    padding: 50px;
+    height: auto; /* Change height to auto for better responsiveness */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+main.Projects {
+    display: flex;
+    flex-direction: column;
+}
+
+/* main.Projects h2 {
+    color: #008000; /* Set the desired color */
+ 
+
+main.Projects section {
+    padding: 45px; /* Add desired padding */
+    margin-bottom: 10px; /* Optional: Add margin between sections */
+}
+
+#graphic-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px; /* Optional: Add some margin at the top for spacing */
+    width: auto; /* Ensure the width is set to auto */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 1200px; /* Increase the maximum width */
+    max-height: 1000px; /* Increase the maximum height */
+}
+
+
+
+.graphic-list {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px; /* Optional: Add some margin at the top for spacing */
+    width: auto; /* Ensure the width is set to auto */
+    height: auto; /* Ensure the height is set to auto */
+    max-width: none; /* Remove any max-width constraints */
+   
+}
+
+.Projects h2 {
+    text-decoration: underline;
+    margin-top: 0;
+    
+}
+
+.Projects p {
+    font-size: 22px;
+}
+
+.section-image {
+    float: right;
+    margin-left: 20px; /* Optional: Add margin to the left for spacing */
+    width: 200px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: Add border radius */
+}
+
+#Dead-Trees {
+    background-color: #ffffff; /* Set the desired background color */
+    padding: 50px; /* Optional: Add padding for better spacing */
+}
+
+.three-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adjust the gap between columns as needed */
+    margin-top: 20px; /* Add some margin to the top of the columns */
+}
+
+.column {
+    flex: 1;
+    background-color: #dad7cd; /* Optional: Add a background color */
+    padding: 20px; /* Add some padding inside the columns */
+    border-radius: 10px; /* Optional: Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+}
+
+.three-images {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adjust the gap between images as needed */
+    margin-top: 20px; /* Add some margin to the top of the images */
+}
+
+.three-images img {
+    flex: 1;
+    max-width: 100%; /* Ensure the images don't exceed the container's width */
+    border-radius: 10px; /* Optional: Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+}
+
+#Biochar {
+    background-color: #ffffff; /* Set the desired background color */
+    padding: 50px; /* Optional: Add padding for better spacing */
+}
+
+#Biochar ul {
+    font-size: 20px; /* Set the desired font size */
+    line-height: 1.6; /* Optional: Adjust the line height for better readability */
+}
+
+#Fertilizer {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Add spacing between the text and the image */
+}
+
+.fertilizer-content {
+    display: flex;
+    flex-direction: row; /* Align text and image side by side */
+    gap: 20px; /* Add spacing between the text and the image */
+}
+
+.fertilizer-content p {
+    flex: 2; /* Allow the text to take up more space */
+}
+
+.fertilizer-image {
+    flex: 1; /* Allow the image to take up less space */
+    max-width: 300px; /* Set a maximum width for the image */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image scales properly */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+#Healthy-Soil {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Add spacing between the image and the text */
+    
+    padding: 50px; /* Optional: Add padding for better spacing */
+}
+
+.healthy-soil-content {
+    display: flex;
+    flex-direction: row; /* Align image and text side by side */
+    gap: 20px; /* Add spacing between the image and the text */
+}
+
+.healthy-soil-image {
+    flex: 1; /* Allow the image to take up less space in the flex container */
+    max-width: 600px; /* Increase the maximum width of the image */
+    width: 100%; /* Ensure the image scales proportionally */
+    height: auto; /* Maintain the aspect ratio */
+    object-fit: contain; /* Ensure the image scales properly */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+.healthy-soil-text {
+    flex: 1; /* Allow the text to take up more space */
+    font-size: 22px; /* Set the desired font size */
+    line-height: 1.6; /* Optional: Adjust the line height for better readability */
+    color: #000000; /* Set the text color */
+}
+
+#Healthy-Crops {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Add spacing between the text and the image */
+    background-color: #ffffff; /* Set the desired background color */
+    padding: 50px; /* Optional: Add padding for better spacing */
+}
+
+.healthy-crops-content {
+    display: flex;
+    flex-direction: row; /* Align text and image side by side */
+    gap: 20px; /* Add spacing between the text and the image */
+}
+
+.healthy-crops-text {
+    flex: 1; /* Allow the text to take up more space */
+    font-size: 22px; /* Set the desired font size */
+    line-height: 1.6; /* Optional: Adjust the line height for better readability */
+    color: #000000; /* Set the text color */
+}
+
+.healthy-crops-image {
+    flex: 2; /* Allow the image to take up less space */
+    max-width: 600px; /* Set a maximum width for the image */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image scales properly */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    float: right;
+}
+
+#Clean {
+    background-color: #ffffff; /* Set the desired background color */
+    padding: 50px; /* Optional: Add padding for better spacing */
+}
+
+#Clean p, #Clean ul, #Clean li {
+    font-size: 22px; /* Set the desired font size */
+    line-height: 1.6; /* Optional: Adjust the line height for better readability */
+}
+
+#Carbon-Returned {
+    background-color: #ffffff; /* Set the desired background color */
+    padding: 50px; /* Optional: Add padding for better spacing */
+}
+/* Add other sections as needed */
+
+/* Media queries for mobile compatibility */
+@media (max-width: 768px) {
+    .Projects {
+        padding: 30px;
+    }
+
+    .Projects img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-left: 20px;
+    }
+
+    .Projects h2 {
+        font-size: 24px;
+    }
+
+    .Projects p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Projects {
+        padding: 20px;
+    }
+
+    .Projects h2 {
+        font-size: 20px;
+    }
+
+    .Projects p {
+        font-size: 14px;
+    }
+}
+
+/* Base styles */
+.our-farms {
+    margin-bottom: 20px;
+    padding: 30px;
+    height: auto; /* Change height to auto for better responsiveness */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #588157;
+    color: #dad7cd;
+    border-radius: 30px; /* Adjust the value as needed */
+}
+
+.our-farms img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.our-farms h2 {
+    text-decoration: underline;
+    margin-top: 0;
+}
+
+.our-farms p {
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+/* Media queries for mobile compatibility */
+@media (max-width: 768px) {
+    .our-farms {
+        padding: 30px;
+    }
+
+    .our-farms img {
+        float: none;
+        display: block;
+        margin: 0 auto 20px;
+    }
+
+    .our-farms h2 {
+        font-size: 24px;
+    }
+
+    .our-farms p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .our-farms {
+        padding: 20px;
+    }
+
+    .our-farms h2 {
+        font-size: 20px;
+    }
+
+    .our-farms p {
+        font-size: 14px;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-Us img {
+    max-height: 200px;
+}
+
+.soil-health img {
+    max-height: 330px;
+}
+
+.Projects img {
+    max-height: 280px;
+}
+
+.our-farms img {
+    max-height: 300px;
+}
+
+.about-Us h2 {
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+.soil-health h2 {
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+.Projects h2 {
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+.our-farms h2 {
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+
+/* Contact section styles */
+.contact {
+    padding: 20px;
+    background-color: #d4a373;
+    border-radius: 5px;
+}
+
+.contact h2 {
+    margin-top: 0;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.contact input,
+.contact textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.contact button {
+    padding: 10px 20px;
+    background-color: #52796f;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.contact button:hover {
+    background-color: #344e41;
+}
+
+/* Media queries for mobile compatibility */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links a {
+        padding: 10px;
+    }
+
+    .hero {
+        height: 300px;
+    }
+
+    main img {
+        float: none;
+        margin: 0 auto 20px;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .nav-links a {
+        padding: 8px;
+    }
+
+    .hero {
+        height: 200px;
+    }
+
+    main p {
+        font-size: 16px;
+    }
+
+
+}
+
+.footer {
+    padding: 15px;
+    clear: both;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+
+.footer h2 {
+    font-size: 20px;
+}
