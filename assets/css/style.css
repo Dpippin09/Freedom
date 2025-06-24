@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #f8f0ff;
 }
 
 
@@ -65,8 +65,8 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #ffffff;
-    color: #505050;
+    background-color: #c39bd3;
+    color: #2e0249;
     position: fixed;
     width: 100%; /* Ensures the nav container takes the full width */
     top: -60px; /* Move the nav bar out of view */
@@ -106,13 +106,13 @@ body:hover nav {
 }
 
 .nav-links a:hover {
-    background-color: #797979;
+    background-color: #7b2cbf;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #a39171;
+    background-color: #d8bbff;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -130,7 +130,7 @@ body:hover nav {
 }
 
 .dropdown-content a:hover {
-    background-color: #ccc5b9;
+    background-color: #c39bd3;
 }
 
 .dropdown:hover .dropdown-content {
@@ -138,12 +138,12 @@ body:hover nav {
 }
 
 .nav-links .login-signup {
-    background-color: #386641;
+    background-color: #6a4c93;
     color: #ffffff;
 }
 
 .nav-links .login-signup:hover {
-    background-color: #555;
+    background-color: #4c2a6a;
     color: #ffffff;
 }
 
@@ -214,8 +214,8 @@ section {
     padding: 50px;
     height: auto; /* Change height to auto for better responsiveness */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #588157;
-    color: #dad7cd;
+    background-color: #8e44ad;
+    color: #f3e8ff;
     border-radius: 30px; /* Adjust the value as needed */
 }
 
@@ -230,7 +230,7 @@ section {
 main.about-Us h2 {
     text-decoration: underline;
     margin-top: 0;
-    color: #dad7cd; /* Set the desired color */
+    color: #f3e8ff; /* Set the desired color */
 }
 
 .about-Us p {
@@ -279,8 +279,8 @@ main.about-Us h2 {
     padding: 50px;
     height: auto; /* Change height to auto for better responsiveness */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #588157;
-    color: #dad7cd;
+    background-color: #9b59b6;
+    color: #f8f0ff;
 }
 
 .soil-health img {
@@ -341,8 +341,8 @@ main.about-Us h2 {
     padding: 50px;
     height: auto; /* Change height to auto for better responsiveness */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #f3e8ff;
+    color: #2e0249;
 }
 
 main.Projects {
@@ -402,7 +402,7 @@ main.Projects section {
 }
 
 #Dead-Trees {
-    background-color: #ffffff; /* Set the desired background color */
+    background-color: #e6d5f0; /* Set the desired background color */
     padding: 50px; /* Optional: Add padding for better spacing */
 }
 
@@ -415,7 +415,7 @@ main.Projects section {
 
 .column {
     flex: 1;
-    background-color: #dad7cd; /* Optional: Add a background color */
+    background-color: #ddbef5; /* Optional: Add a background color */
     padding: 20px; /* Add some padding inside the columns */
     border-radius: 10px; /* Optional: Add border radius for rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
@@ -436,7 +436,7 @@ main.Projects section {
 }
 
 #Biochar {
-    background-color: #ffffff; /* Set the desired background color */
+    background-color: #f8f0ff; /* Set the desired background color */
     padding: 50px; /* Optional: Add padding for better spacing */
 }
 
@@ -498,7 +498,7 @@ main.Projects section {
     flex: 1; /* Allow the text to take up more space */
     font-size: 22px; /* Set the desired font size */
     line-height: 1.6; /* Optional: Adjust the line height for better readability */
-    color: #000000; /* Set the text color */
+    color: #2e0249; /* Set the text color */
 }
 
 #Healthy-Crops {
@@ -506,7 +506,7 @@ main.Projects section {
     flex-direction: row; /* Align items in a row */
     align-items: flex-start; /* Align items at the top */
     gap: 20px; /* Add spacing between the text and the image */
-    background-color: #ffffff; /* Set the desired background color */
+    background-color: #f0e8ff; /* Set the desired background color */
     padding: 50px; /* Optional: Add padding for better spacing */
 }
 
@@ -520,7 +520,7 @@ main.Projects section {
     flex: 1; /* Allow the text to take up more space */
     font-size: 22px; /* Set the desired font size */
     line-height: 1.6; /* Optional: Adjust the line height for better readability */
-    color: #000000; /* Set the text color */
+    color: #2e0249; /* Set the text color */
 }
 
 .healthy-crops-image {
@@ -533,7 +533,7 @@ main.Projects section {
 }
 
 #Clean {
-    background-color: #ffffff; /* Set the desired background color */
+    background-color: #f8f0ff; /* Set the desired background color */
     padding: 50px; /* Optional: Add padding for better spacing */
 }
 
@@ -590,8 +590,8 @@ main.Projects section {
     padding: 30px;
     height: auto; /* Change height to auto for better responsiveness */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #588157;
-    color: #dad7cd;
+    background-color: #8e44ad;
+    color: #f3e8ff;
     border-radius: 30px; /* Adjust the value as needed */
 }
 
@@ -709,7 +709,7 @@ main.Projects section {
 /* Contact section styles */
 .contact {
     padding: 20px;
-    background-color: #d4a373;
+    background-color: #8e44ad;
     border-radius: 5px;
 }
 
@@ -738,7 +738,7 @@ main.Projects section {
 
 .contact button {
     padding: 10px 20px;
-    background-color: #52796f;
+    background-color: #6a4c93;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -748,7 +748,7 @@ main.Projects section {
 }
 
 .contact button:hover {
-    background-color: #344e41;
+    background-color: #4c2a6a;
 }
 
 /* Media queries for mobile compatibility */

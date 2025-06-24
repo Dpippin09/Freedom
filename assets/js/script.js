@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.scrollY === 0) {
             nav.style.top = '0'; // Show nav when at the top of the page
         } else {
-            nav.style.top = '-100px'; // Hide nav on scroll
+            nav.style.top = '-170px'; // Hide nav on scroll
         }
     });
 
