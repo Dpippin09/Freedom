@@ -1,0 +1,82 @@
+{
+    "name": "Snatched It - Fashion Price Comparison",
+    "short_name": "Snatched It",
+    "description": "Find the best fashion deals across hundreds of retailers. Compare prices and never miss a sale again!",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#667eea",
+    "theme_color": "#764ba2",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en-US",
+    "categories": ["shopping", "lifestyle", "fashion"],
+    "icons": [
+        {
+            "src": "assets/images/Snatched.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/images/Snatched.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "assets/images/Snatched.jpg",
+            "sizes": "1280x720",
+            "type": "image/jpeg",
+            "platform": "wide"
+        },
+        {
+            "src": "assets/images/Snatched.jpg",
+            "sizes": "720x1280",
+            "type": "image/jpeg",
+            "platform": "narrow"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Best Deals",
+            "short_name": "Deals",
+            "description": "View today's best fashion deals",
+            "url": "/best-deals.html",
+            "icons": [
+                {
+                    "src": "assets/images/Snatched.jpg",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Trending Now",
+            "short_name": "Trending",
+            "description": "See what's trending in fashion",
+            "url": "/trending-now.html",
+            "icons": [
+                {
+                    "src": "assets/images/Snatched.jpg",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Price Alerts",
+            "short_name": "Alerts",
+            "description": "Manage your price alerts",
+            "url": "/login-signup.html",
+            "icons": [
+                {
+                    "src": "assets/images/Snatched.jpg",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "splash_pages": null
+}

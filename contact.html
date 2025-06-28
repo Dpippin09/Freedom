@@ -1,47 +1,310 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-<head>
-    <meta charset="UTF-8" />
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Snatched It - Get help with price comparisons, deal alerts, and fashion shopping questions.">
+    <meta name="theme-color" content="#764ba2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Snatched It">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Contact Us - PLENTERRA</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
+    <title>Contact Us - Snatched It</title>
 </head>
 
 <body>
     <header>
         <nav>
-            <h1 id="welcome">Contact Us</h1>
+            <img src="./assets/images/Snatched.jpg" class="plenterra-logo" alt="Snatched It - Fashion Price Comparison">
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#about-Us">Our Mission</a></li>
-                <li><a href="index.html#Projects">How We Do It</a></li>
-                <li><a href="index.html#our-farms">Results</a></li>
-                <li><a href="#footer">Contact Us</a></li>
+                <li><a href="best-deals.html">Best Deals</a></li>
+                <li><a href="trending-now.html">Trending Now</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
                 <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
             </ul>
         </nav>
+        
+        <section class="hero"></section>
     </header>
 
-    <section class="contact">
-        <h2>Contact Us</h2>
-        <form action="submit_form.php" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    <article class="content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="header-content">
+                <h1>💬 Get in Touch</h1>
+                <p>Have questions about deals, want to suggest a store, or need help finding the best price? We're here to help!</p>
+                <div class="response-stats">
+                    <span class="stat-item">⚡ 24hr Response Time</span>
+                    <span class="stat-item">💬 Live Chat Available</span>
+                    <span class="stat-item">📱 Social Media Support</span>
+                </div>
+            </div>
+        </section>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <!-- Contact Options -->
+        <section class="contact-options">
+            <div class="contact-grid">
+                <!-- Customer Support -->
+                <div class="contact-card">
+                    <div class="contact-icon">🎧</div>
+                    <h3>Customer Support</h3>
+                    <p>Get help with price comparisons, deal alerts, or technical issues</p>
+                    <div class="contact-details">
+                        <span class="contact-item">📞 (555) 555-5555</span>
+                        <span class="contact-item">✉️ support@snatchedit.com</span>
+                        <span class="contact-item">🕒 Mon-Fri 9AM-8PM EST</span>
+                    </div>
+                    <button class="contact-button">Start Live Chat</button>
+                </div>
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+                <!-- Business Partnerships -->
+                <div class="contact-card">
+                    <div class="contact-icon">🤝</div>
+                    <h3>Store Partnerships</h3>
+                    <p>Interested in partnering with us? Let's discuss how we can work together</p>
+                    <div class="contact-details">
+                        <span class="contact-item">📧 partnerships@snatchedit.com</span>
+                        <span class="contact-item">📋 Business inquiries</span>
+                        <span class="contact-item">🏢 Retailer onboarding</span>
+                    </div>
+                    <button class="contact-button">Send Business Inquiry</button>
+                </div>
 
-            <button type="submit">Submit</button>
-        </form>
-    </section>
+                <!-- Press & Media -->
+                <div class="contact-card">
+                    <div class="contact-icon">📰</div>
+                    <h3>Press & Media</h3>
+                    <p>Media inquiries, press releases, and interview requests</p>
+                    <div class="contact-details">
+                        <span class="contact-item">📧 press@snatchedit.com</span>
+                        <span class="contact-item">🎤 Interview requests</span>
+                        <span class="contact-item">📊 Company information</span>
+                    </div>
+                    <button class="contact-button">Media Kit</button>
+                </div>
+
+                <!-- Technical Issues -->
+                <div class="contact-card">
+                    <div class="contact-icon">🔧</div>
+                    <h3>Technical Support</h3>
+                    <p>Website issues, app problems, or data discrepancies</p>
+                    <div class="contact-details">
+                        <span class="contact-item">📧 tech@snatchedit.com</span>
+                        <span class="contact-item">🐛 Bug reports</span>
+                        <span class="contact-item">⚡ Priority response</span>
+                    </div>
+                    <button class="contact-button">Report Issue</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-form-section">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Send Us a Message</h2>
+                    <p>Can't find what you're looking for? Drop us a line and we'll get back to you within 24 hours.</p>
+                </div>
+                
+                <form class="contact-form" action="submit_form.php" method="post">
+                    <div class="form-group">
+                        <label for="inquiry-type">What can we help you with?</label>
+                        <select id="inquiry-type" name="inquiry-type" required>
+                            <option value="">Select inquiry type...</option>
+                            <option value="general">General Question</option>
+                            <option value="deals">Deal/Price Question</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="partnership">Business Partnership</option>
+                            <option value="feedback">Feedback/Suggestion</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" placeholder="Brief description of your inquiry" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Tell us more about how we can help you..." required></textarea>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">📧 Subscribe to our weekly deals newsletter</label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="alerts" name="alerts">
+                        <label for="alerts">🔔 Get notified of flash sales and price drops</label>
+                    </div>
+
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h4>🔍 How do you find the best prices?</h4>
+                    <p>We scan hundreds of retailers in real-time using advanced algorithms to ensure you always see the most current prices and deals.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>🏪 Which stores do you compare?</h4>
+                    <p>We work with over 150 major retailers including Nordstrom, Zara, H&M, ASOS, Nike, and many more. New stores are added regularly.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>💰 Is Snatched It free to use?</h4>
+                    <p>Yes! Our basic price comparison service is completely free. Premium features like advanced alerts are available with our Pro plan.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>📱 Do you have a mobile app?</h4>
+                    <p>Our mobile app is coming soon! For now, our website is fully optimized for mobile browsing.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>🔔 How do price alerts work?</h4>
+                    <p>Set up alerts for specific items and we'll notify you instantly when prices drop or when new deals become available.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Office Location -->
+        <section class="location-section">
+            <div class="location-content">
+                <div class="location-info">
+                    <h2>📍 Our Location</h2>
+                    <div class="address-card">
+                        <h3>Snatched It Headquarters</h3>
+                        <div class="address">
+                            <span>123 Fashion Avenue</span>
+                            <span>Ogden, UT 84401</span>
+                            <span>United States</span>
+                        </div>
+                        <div class="office-hours">
+                            <h4>Office Hours:</h4>
+                            <span>Monday - Friday: 9:00 AM - 6:00 PM</span>
+                            <span>Saturday: 10:00 AM - 4:00 PM</span>
+                            <span>Sunday: Closed</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-placeholder">
+                    <div class="map-content">
+                        <h4>🗺️ Find Us</h4>
+                        <p>Located in the heart of Ogden's tech district</p>
+                        <button class="map-button">Get Directions</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media -->
+        <section class="social-section">
+            <h2>Follow Us for Daily Deals</h2>
+            <p>Stay connected and never miss a great deal!</p>
+            <div class="social-links">
+                <div class="social-card">
+                    <div class="social-icon">📘</div>
+                    <h4>Facebook</h4>
+                    <p>Daily deals and fashion tips</p>
+                    <button class="social-button">Follow Us</button>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">📸</div>
+                    <h4>Instagram</h4>
+                    <p>Style inspiration and flash sales</p>
+                    <button class="social-button">Follow @SnatchedIt</button>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">🐦</div>
+                    <h4>Twitter</h4>
+                    <p>Real-time deal alerts</p>
+                    <button class="social-button">Follow @SnatchedIt</button>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">📱</div>
+                    <h4>TikTok</h4>
+                    <p>Trending fashion finds</p>
+                    <button class="social-button">Follow @SnatchedIt</button>
+                </div>
+            </div>
+        </section>
+    </article>
 
     <footer class="footer" id="footer">
-        <h2>Building a Healthier Planet Together</h2>
-        <p>&copy; 2025 PLENTERRA. All rights reserved.</p>
+        <h2>Building a Smarter Shopping World Together</h2>
+        <p>&copy; Snatched It</p>
+        <div class="contactInfo" id="contactInfo">
+            <li>Phone: (555)5555555</li>
+            <li>Email: hello@snatchedit.com</li>
+            <li>Ogden, UT</li>
+        </div>
     </footer>
+
+    <script src="./assets/js/script.js"></script>
+    <script>
+        // Scroll to top on page load/refresh
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+        
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 50);
+        });
+        
+        window.addEventListener('pageshow', function() {
+            window.scrollTo(0, 0);
+        });
+
+        // Form validation and enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.contact-form');
+            const inquiryType = document.getElementById('inquiry-type');
+            
+            // Auto-fill subject based on inquiry type
+            inquiryType.addEventListener('change', function() {
+                const subject = document.getElementById('subject');
+                const value = this.value;
+                
+                switch(value) {
+                    case 'deals':
+                        subject.placeholder = 'Question about a specific deal or price';
+                        break;
+                    case 'technical':
+                        subject.placeholder = 'Describe the technical issue';
+                        break;
+                    case 'partnership':
+                        subject.placeholder = 'Business partnership inquiry';
+                        break;
+                    case 'feedback':
+                        subject.placeholder = 'Your feedback or suggestion';
+                        break;
+                    default:
+                        subject.placeholder = 'Brief description of your inquiry';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -3,49 +3,227 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./assets/css/login-signup.css">
-    <title>Login/Signup - Plenterra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join Snatched It - Your ultimate fashion price comparison platform. Sign up to track deals, save favorites, and never miss a fashion steal again.">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Login/Sign Up - Snatched It | Fashion Price Comparison</title>
 </head>
 
 <body>
     <header>
-        <nav>
-            <h1 id="welcome">Welcome to Plentarra</h1>
-            <a href="index.html" class="back-button">Back to Main Page</a>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><a href="index.html">Snatched It</a></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="best-deals.html">Best Deals</a></li>
+                <li><a href="trending-now.html">Trending Now</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </nav>
     </header>
-    <section class="hero"></section>
-    <article class="content">
-        <main id="login-signup" class="login-signup">
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Welcome to Snatched It</h1>
+                <p>Join thousands of fashion lovers finding the best deals across the web</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="showLogin()">Login</button>
+                <button class="tab-btn" onclick="showSignup()">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form active">
+                <h2>Welcome Back!</h2>
+                <p class="form-subtitle">Sign in to track your favorite deals and saved items</p>
+                
+                <form action="/submit-login" method="post">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="remember">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="auth-btn">Sign In</button>
+                </form>
+
+                <div class="social-login">
+                    <p>Or continue with</p>
+                    <div class="social-buttons">
+                        <button class="social-btn google">
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn facebook">
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="auth-form">
+                <h2>Create Your Account</h2>
+                <p class="form-subtitle">Join our community and never miss a fashion deal again</p>
+                
+                <form action="/submit-signup" method="post">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" name="firstName" required placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" name="lastName" required placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" required placeholder="Create a password">
+                        <div class="password-requirements">
+                            <small>Must be at least 8 characters with uppercase, lowercase, and number</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" required placeholder="Confirm your password">
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="newsletter" checked>
+                            <span class="checkmark"></span>
+                            Send me deal alerts and fashion updates
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="terms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="auth-btn">Create Account</button>
+                </form>
+
+                <div class="social-login">
+                    <p>Or sign up with</p>
+                    <div class="social-buttons">
+                        <button class="social-btn google">
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn facebook">
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-benefits">
+                <h3>Why Join Snatched It?</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🔍</div>
+                        <h4>Smart Price Tracking</h4>
+                        <p>Get notified when items you love go on sale</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">❤️</div>
+                        <h4>Save Favorites</h4>
+                        <p>Create wishlists and organize your fashion finds</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <h4>Instant Alerts</h4>
+                        <p>Be the first to know about flash sales and deals</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📊</div>
+                        <h4>Price History</h4>
+                        <p>See price trends and make informed decisions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Snatched It</h3>
+                <p>Your ultimate fashion price comparison platform</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="best-deals.html">Best Deals</a></li>
+                    <li><a href="trending-now.html">Trending Now</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Snatched It. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+    <script>
+        // Tab switching functionality
+        function showLogin() {
+            document.getElementById('login-form').classList.add('active');
+            document.getElementById('signup-form').classList.remove('active');
+            document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            document.querySelectorAll('.tab-btn')[1].classList.remove('active');
+        }
+
+        function showSignup() {
+            document.getElementById('signup-form').classList.add('active');
+            document.getElementById('login-form').classList.remove('active');
+            document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            document.querySelectorAll('.tab-btn')[0].classList.remove('active');
+        }
+
+        // Password confirmation validation
+        document.getElementById('confirm-password').addEventListener('input', function() {
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = this.value;
             
-            <form action="/submit-login" method="post">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Login</button>
-                </div>
-            </form>
-            <form action="/submit-signup" method="post">
-                <div class="form-group">
-                    <label for="new-username">Create Username:</label>
-                    <input type="text" id="new-username" name="new-username" required>
-                </div>
-                <div class="form-group">
-                    <label for="new-password">Create Password:</label>
-                    <input type="password" id="new-password" name="new-password" required>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Signup</button>
-                </div>
-            </form>
-        </main>
-    </article>
+            if (password !== confirmPassword) {
+                this.setCustomValidity('Passwords do not match');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+
+        // Auto-scroll to top on page load
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+        });
+    </script>
 </body>
 
 </html>

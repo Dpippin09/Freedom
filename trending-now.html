@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover what's trending in fashion right now - viral items, popular searches, and emerging trends.">
+    <meta name="theme-color" content="#764ba2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Snatched It">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
+    <title>Trending Now - Snatched It</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="./assets/images/Snatched.jpg" class="plenterra-logo" alt="Snatched It - Fashion Price Comparison">
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="best-deals.html">Best Deals</a></li>
+                <li><a href="trending-now.html" class="active">Trending Now</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
+            </ul>
+        </nav>
+        
+        <section class="hero"></section>
+    </header>
+
+    <article class="content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="header-content">
+                <h1>🔥 What's Trending Now</h1>
+                <p>Discover the hottest searches, viral fashion trends, and what everyone's shopping for</p>
+                <div class="trending-stats">
+                    <span class="stat-item">📈 Updated Real-Time</span>
+                    <span class="stat-item">👥 Based on 50K+ Users</span>
+                    <span class="stat-item">🌍 Global Trends</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Categories -->
+        <section class="trending-categories">
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">All Trends</button>
+                <button class="category-btn" data-category="viral">🔥 Viral</button>
+                <button class="category-btn" data-category="rising">📈 Rising</button>
+                <button class="category-btn" data-category="seasonal">🍂 Seasonal</button>
+                <button class="category-btn" data-category="celebrity">⭐ Celebrity</button>
+            </div>
+        </section>
+
+        <!-- Top Trending Search -->
+        <section class="top-trending">
+            <div class="trending-spotlight">
+                <div class="spotlight-badge">#1 Trending Search</div>
+                <div class="spotlight-content">
+                    <div class="spotlight-image">
+                        <img src="./assets/images/dead-trees.png" alt="Oversized Blazers">
+                        <div class="trend-badge">🔥 Hot</div>
+                        <div class="search-volume">+247% searches</div>
+                    </div>
+                    <div class="spotlight-info">
+                        <h2>Oversized Blazers</h2>
+                        <p class="trend-description">The must-have piece this season - perfect for work, casual, or dressed up looks</p>
+                        <div class="trend-metrics">
+                            <div class="metric">
+                                <span class="metric-number">12.3K</span>
+                                <span class="metric-label">Searches today</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-number">89%</span>
+                                <span class="metric-label">Price drop rate</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-number">$67</span>
+                                <span class="metric-label">Avg best price</span>
+                            </div>
+                        </div>
+                        <div class="trending-stores">
+                            <span class="stores-label">Best prices found at:</span>
+                            <div class="store-tags">
+                                <span class="store-tag">Zara</span>
+                                <span class="store-tag">H&M</span>
+                                <span class="store-tag">ASOS</span>
+                            </div>
+                        </div>
+                        <button class="trend-button primary">Find Best Prices</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Searches Grid -->
+        <section class="trending-grid">
+            <h2 class="section-title">Top Trending Searches</h2>
+            
+            <div class="trending-container">
+                <!-- Trending Item 1: Cargo Pants -->
+                <div class="trending-card" data-category="viral">
+                    <div class="trend-rank">#2</div>
+                    <div class="trending-image">
+                        <img src="./assets/images/single-plant.png" alt="Cargo Pants">
+                        <div class="trend-badge viral">🔥 Viral</div>
+                        <div class="trend-growth">+189%</div>
+                    </div>
+                    <div class="trending-info">
+                        <h3>Cargo Pants Revival</h3>
+                        <p class="trend-description">Y2K fashion is back - utility meets style</p>
+                        <div class="trend-stats">
+                            <span class="search-count">8.7K searches</span>
+                            <span class="price-range">$29 - $89</span>
+                        </div>
+                        <div class="trending-features">
+                            <span class="feature-tag">👖 Unisex Style</span>
+                            <span class="feature-tag">📱 TikTok Famous</span>
+                        </div>
+                        <div class="top-stores">
+                            <span class="stores-label">Trending at:</span>
+                            <span class="store-list">Urban Outfitters, Shein, Nike</span>
+                        </div>
+                        <button class="trend-button">Shop Cargo Pants</button>
+                    </div>
+                </div>
+
+                <!-- Trending Item 2: Chunky Sneakers -->
+                <div class="trending-card" data-category="rising">
+                    <div class="trend-rank">#3</div>
+                    <div class="trending-image">
+                        <img src="./assets/images/fertilizer.jpg" alt="Chunky Sneakers">
+                        <div class="trend-badge rising">📈 Rising</div>
+                        <div class="trend-growth">+134%</div>
+                    </div>
+                    <div class="trending-info">
+                        <h3>Chunky Dad Sneakers</h3>
+                        <p class="trend-description">Bold, comfortable, and surprisingly versatile</p>
+                        <div class="trend-stats">
+                            <span class="search-count">6.2K searches</span>
+                            <span class="price-range">$45 - $159</span>
+                        </div>
+                        <div class="trending-features">
+                            <span class="feature-tag">👟 Comfort First</span>
+                            <span class="feature-tag">🎨 Bold Colors</span>
+                        </div>
+                        <div class="top-stores">
+                            <span class="stores-label">Best deals at:</span>
+                            <span class="store-list">Adidas, New Balance, Sketchers</span>
+                        </div>
+                        <button class="trend-button">Find Chunky Sneakers</button>
+                    </div>
+                </div>
+
+                <!-- Trending Item 3: Bucket Hats -->
+                <div class="trending-card" data-category="seasonal">
+                    <div class="trend-rank">#4</div>
+                    <div class="trending-image">
+                        <img src="./assets/images/soilComparison.png" alt="Bucket Hats">
+                        <div class="trend-badge seasonal">🍂 Seasonal</div>
+                        <div class="trend-growth">+98%</div>
+                    </div>
+                    <div class="trending-info">
+                        <h3>Bucket Hat Comeback</h3>
+                        <p class="trend-description">The perfect fall accessory for any outfit</p>
+                        <div class="trend-stats">
+                            <span class="search-count">4.8K searches</span>
+                            <span class="price-range">$12 - $45</span>
+                        </div>
+                        <div class="trending-features">
+                            <span class="feature-tag">☂️ Weather Protection</span>
+                            <span class="feature-tag">🎯 Versatile Style</span>
+                        </div>
+                        <div class="top-stores">
+                            <span class="stores-label">Popular at:</span>
+                            <span class="store-list">Forever 21, Target, Patagonia</span>
+                        </div>
+                        <button class="trend-button">Shop Bucket Hats</button>
+                    </div>
+                </div>
+
+                <!-- Trending Item 4: Leather Jackets -->
+                <div class="trending-card" data-category="celebrity">
+                    <div class="trend-rank">#5</div>
+                    <div class="trending-image">
+                        <img src="./assets/images/carbonRoot.jpg" alt="Leather Jackets">
+                        <div class="trend-badge celebrity">⭐ Celebrity</div>
+                        <div class="trend-growth">+156%</div>
+                    </div>
+                    <div class="trending-info">
+                        <h3>Vintage Leather Jackets</h3>
+                        <p class="trend-description">Seen on celebrities - timeless rebel style</p>
+                        <div class="trend-stats">
+                            <span class="search-count">5.9K searches</span>
+                            <span class="price-range">$89 - $299</span>
+                        </div>
+                        <div class="trending-features">
+                            <span class="feature-tag">🖤 Edgy Style</span>
+                            <span class="feature-tag">⭐ Red Carpet Inspired</span>
+                        </div>
+                        <div class="top-stores">
+                            <span class="stores-label">Best quality at:</span>
+                            <span class="store-list">AllSaints, Zara, Mango</span>
+                        </div>
+                        <button class="trend-button">Find Leather Jackets</button>
+                    </div>
+                </div>
+
+                <!-- Trending Item 5: Wide Leg Jeans -->
+                <div class="trending-card" data-category="viral">
+                    <div class="trend-rank">#6</div>
+                    <div class="trending-image">
+                        <img src="./assets/images/watered-crops.png" alt="Wide Leg Jeans">
+                        <div class="trend-badge viral">🔥 Viral</div>
+                        <div class="trend-growth">+201%</div>
+                    </div>
+                    <div class="trending-info">
+                        <h3>Wide Leg Denim</h3>
+                        <p class="trend-description">Comfort meets style - the jean trend everyone loves</p>
+                        <div class="trend-stats">
+                            <span class="search-count">7.1K searches</span>
+                            <span class="price-range">$39 - $128</span>
+                        </div>
+                        <div class="trending-features">
+                            <span class="feature-tag">👖 Flattering Fit</span>
+                            <span class="feature-tag">💫 Instagram Ready</span>
+                        </div>
+                        <div class="top-stores">
+                            <span class="stores-label">Trending at:</span>
+                            <span class="store-list">Levi's, American Eagle, Gap</span>
+                        </div>
+                        <button class="trend-button">Shop Wide Leg Jeans</button>
+                    </div>
+                </div>
+
+                <!-- Trending Item 6: Platform Boots -->
+                <div class="trending-card" data-category="rising">
+                    <div class="trend-rank">#7</div>
+                    <div class="trending-image">
+                        <img src="./assets/images/watered-plant.png" alt="Platform Boots">
+                        <div class="trend-badge rising">📈 Rising</div>
+                        <div class="trend-growth">+167%</div>
+                    </div>
+                    <div class="trending-info">
+                        <h3>Platform Combat Boots</h3>
+                        <p class="trend-description">Height and attitude - the perfect fall footwear</p>
+                        <div class="trend-stats">
+                            <span class="search-count">3.4K searches</span>
+                            <span class="price-range">$59 - $179</span>
+                        </div>
+                        <div class="trending-features">
+                            <span class="feature-tag">👢 Height Boost</span>
+                            <span class="feature-tag">🔥 Edgy Vibes</span>
+                        </div>
+                        <div class="top-stores">
+                            <span class="stores-label">Best styles at:</span>
+                            <span class="store-list">Dr. Martens, Dolls Kill, ASOS</span>
+                        </div>
+                        <button class="trend-button">Find Platform Boots</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Categories Section -->
+        <section class="category-trends">
+            <h2 class="section-title">Trending by Category</h2>
+            <div class="category-grid">
+                <div class="category-trend-card">
+                    <div class="category-icon">👗</div>
+                    <h3>Women's Fashion</h3>
+                    <div class="category-trends-list">
+                        <span class="trend-item">Maxi Dresses <span class="growth">+78%</span></span>
+                        <span class="trend-item">Cropped Blazers <span class="growth">+65%</span></span>
+                        <span class="trend-item">Statement Earrings <span class="growth">+52%</span></span>
+                    </div>
+                </div>
+                
+                <div class="category-trend-card">
+                    <div class="category-icon">👔</div>
+                    <h3>Men's Fashion</h3>
+                    <div class="category-trends-list">
+                        <span class="trend-item">Oversized Hoodies <span class="growth">+89%</span></span>
+                        <span class="trend-item">Chelsea Boots <span class="growth">+43%</span></span>
+                        <span class="trend-item">Minimalist Watches <span class="growth">+67%</span></span>
+                    </div>
+                </div>
+                
+                <div class="category-trend-card">
+                    <div class="category-icon">👟</div>
+                    <h3>Footwear</h3>
+                    <div class="category-trends-list">
+                        <span class="trend-item">White Sneakers <span class="growth">+123%</span></span>
+                        <span class="trend-item">Knee High Boots <span class="growth">+91%</span></span>
+                        <span class="trend-item">Loafers <span class="growth">+76%</span></span>
+                    </div>
+                </div>
+                
+                <div class="category-trend-card">
+                    <div class="category-icon">👜</div>
+                    <h3>Accessories</h3>
+                    <div class="category-trends-list">
+                        <span class="trend-item">Mini Bags <span class="growth">+145%</span></span>
+                        <span class="trend-item">Hair Scarves <span class="growth">+98%</span></span>
+                        <span class="trend-item">Gold Jewelry <span class="growth">+112%</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trend Predictions -->
+        <section class="trend-predictions">
+            <div class="predictions-content">
+                <h2>🔮 Trend Predictions</h2>
+                <p>Based on search patterns and fashion week insights, here's what we predict will be huge next month:</p>
+                <div class="predictions-grid">
+                    <div class="prediction-card">
+                        <div class="prediction-icon">📈</div>
+                        <h4>Cottagecore Dresses</h4>
+                        <p>Romantic, flowy dresses with floral prints are gaining momentum</p>
+                        <span class="prediction-confidence">85% confidence</span>
+                    </div>
+                    <div class="prediction-card">
+                        <div class="prediction-icon">🔥</div>
+                        <h4>Neon Accessories</h4>
+                        <p>Bright, bold accessories are making a statement comeback</p>
+                        <span class="prediction-confidence">72% confidence</span>
+                    </div>
+                    <div class="prediction-card">
+                        <div class="prediction-icon">⭐</div>
+                        <h4>Sustainable Basics</h4>
+                        <p>Eco-friendly everyday pieces are becoming must-haves</p>
+                        <span class="prediction-confidence">91% confidence</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trend Alerts Signup -->
+        <section class="trend-alerts">
+            <div class="alert-content">
+                <h2>Stay Ahead of the Trends</h2>
+                <p>Get notified when new trends emerge and find the best prices before everyone else</p>
+                <div class="alert-signup">
+                    <input type="email" placeholder="Enter your email for trend alerts" class="email-input">
+                    <button class="alert-button">Get Trend Alerts</button>
+                </div>
+                <div class="alert-benefits">
+                    <span class="benefit">📊 Weekly trend reports</span>
+                    <span class="benefit">⚡ Early trend detection</span>
+                    <span class="benefit">💰 Trend-based deals</span>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <footer class="footer" id="footer">
+        <h2>Building a Smarter Shopping World Together</h2>
+        <p>&copy; Snatched It</p>
+        <div class="contactInfo" id="contactInfo">
+            <li>Phone: (555)5555555</li>
+            <li>Email: hello@snatchedit.com</li>
+            <li>Ogden, UT</li>
+        </div>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+    <script>
+        // Category filtering for trending items
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const trendingCards = document.querySelectorAll('.trending-card');
+
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const category = this.dataset.category;
+
+                    // Filter trending cards
+                    trendingCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Scroll to top on page load/refresh
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+        
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 50);
+        });
+        
+        window.addEventListener('pageshow', function() {
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+
+</html>
