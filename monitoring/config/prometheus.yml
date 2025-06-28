@@ -1,0 +1,65 @@
+# Prometheus Configuration for Freedom Fashion Platform
+# This configures Prometheus to scrape metrics from our application and infrastructure
+
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds
+  evaluation_interval: 15s # Evaluate rules every 15 seconds
+  external_labels:
+    environment: 'production'
+    service: 'freedom-fashion'
+
+# Rules files for alerting
+rule_files:
+  - "alert_rules.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Application metrics
+  - job_name: 'freedom-fashion-app'
+    static_configs:
+      - targets: ['app:3000']
+    metrics_path: '/api/monitoring/metrics'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+    scheme: http
+    params:
+      format: ['prometheus']
+
+  # Health check endpoint
+  - job_name: 'freedom-fashion-health'
+    static_configs:
+      - targets: ['app:3000']
+    metrics_path: '/api/monitoring/health'
+    scrape_interval: 30s
+    scrape_timeout: 5s
+
+  # Node Exporter for system metrics (if running)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 15s
+
+  # Docker metrics (if using Docker)
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['localhost:9323']
+    scrape_interval: 15s
+
+  # Nginx metrics (if using Nginx)
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:9113']
+    scrape_interval: 15s
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# Storage configuration
+storage:
+  tsdb:
+    retention.time: 30d
+    retention.size: 50GB

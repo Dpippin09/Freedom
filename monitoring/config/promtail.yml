@@ -1,0 +1,95 @@
+# Promtail Configuration for Log Shipping
+# Ships logs from the Freedom Fashion application to Loki
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Application logs
+  - job_name: freedom-fashion-app
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: freedom-fashion
+          service: app
+          environment: production
+          __path__: /var/log/freedom/*.log
+    
+    pipeline_stages:
+      # Parse JSON logs
+      - json:
+          expressions:
+            level: level
+            timestamp: timestamp
+            message: message
+            correlationId: correlationId
+            userId: userId
+            method: method
+            url: url
+            statusCode: statusCode
+            duration: duration
+      
+      # Extract timestamp
+      - timestamp:
+          source: timestamp
+          format: RFC3339
+      
+      # Set log level
+      - labels:
+          level:
+          correlationId:
+          service:
+      
+      # Filter sensitive data
+      - replace:
+          expression: '(password|token|secret|key)": "[^"]*"'
+          replace: '$1": "[REDACTED]"'
+
+  # System logs
+  - job_name: system-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: system
+          service: system
+          __path__: /var/log/*.log
+    
+    pipeline_stages:
+      - regex:
+          expression: '^(?P<timestamp>\S+\s+\S+\s+\S+)\s+(?P<hostname>\S+)\s+(?P<service>\S+):\s+(?P<message>.*)$'
+      
+      - timestamp:
+          source: timestamp
+          format: 'Jan 02 15:04:05'
+      
+      - labels:
+          hostname:
+          service:
+
+  # Docker container logs
+  - job_name: docker-logs
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+    
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        target_label: container_name
+      - source_labels: ['__meta_docker_container_log_stream']
+        target_label: stream
+    
+    pipeline_stages:
+      - docker: {}
+      
+      - labels:
+          container_name:
+          stream:

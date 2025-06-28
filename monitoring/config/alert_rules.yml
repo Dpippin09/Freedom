@@ -1,0 +1,142 @@
+# Alerting Rules for Freedom Fashion Platform
+# These rules define when to trigger alerts based on metrics
+
+groups:
+  - name: freedom_fashion_alerts
+    rules:
+      # High Error Rate Alert
+      - alert: HighErrorRate
+        expr: (rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m])) * 100 > 5
+        for: 2m
+        labels:
+          severity: critical
+          service: freedom-fashion
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value }}% for the last 5 minutes"
+
+      # High Response Time Alert
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+        for: 3m
+        labels:
+          severity: warning
+          service: freedom-fashion
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is {{ $value }}s"
+
+      # Service Down Alert
+      - alert: ServiceDown
+        expr: up{job="freedom-fashion-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: freedom-fashion
+        annotations:
+          summary: "Freedom Fashion service is down"
+          description: "The application has been down for more than 1 minute"
+
+      # High Memory Usage Alert
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: freedom-fashion
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value }}% for the last 5 minutes"
+
+      # High CPU Usage Alert
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: freedom-fashion
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}% for the last 5 minutes"
+
+      # Database Connection Issues
+      - alert: DatabaseConnectionIssues
+        expr: rate(database_errors_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+          service: freedom-fashion
+        annotations:
+          summary: "Database connection issues detected"
+          description: "Database error rate is {{ $value }} errors/second"
+
+      # Price Monitoring System Down
+      - alert: PriceMonitoringDown
+        expr: price_monitoring_active == 0
+        for: 5m
+        labels:
+          severity: warning
+          service: freedom-fashion
+        annotations:
+          summary: "Price monitoring system is inactive"
+          description: "The price monitoring system has been inactive for more than 5 minutes"
+
+      # Low Disk Space Alert
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+        for: 5m
+        labels:
+          severity: critical
+          service: freedom-fashion
+        annotations:
+          summary: "Low disk space on root filesystem"
+          description: "Disk space is {{ $value }}% available"
+
+      # API Rate Limit Exceeded
+      - alert: RateLimitExceeded
+        expr: rate(rate_limit_exceeded_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+          service: freedom-fashion
+        annotations:
+          summary: "High rate of rate limit violations"
+          description: "Rate limit exceeded {{ $value }} times per second"
+
+  - name: business_alerts
+    rules:
+      # Low User Activity
+      - alert: LowUserActivity
+        expr: rate(user_events_total[1h]) < 0.1
+        for: 30m
+        labels:
+          severity: warning
+          service: freedom-fashion
+          type: business
+        annotations:
+          summary: "Low user activity detected"
+          description: "User activity is below normal levels: {{ $value }} events per second"
+
+      # Failed Scraping Jobs
+      - alert: HighScrapingFailureRate
+        expr: (rate(scraping_failed_total[10m]) / rate(scraping_attempts_total[10m])) * 100 > 20
+        for: 10m
+        labels:
+          severity: warning
+          service: freedom-fashion
+          type: business
+        annotations:
+          summary: "High scraping failure rate"
+          description: "Scraping failure rate is {{ $value }}% for the last 10 minutes"
+
+      # No Price Updates
+      - alert: NoPriceUpdates
+        expr: time() - price_last_update_timestamp > 3600
+        for: 0m
+        labels:
+          severity: warning
+          service: freedom-fashion
+          type: business
+        annotations:
+          summary: "No price updates received"
+          description: "No price updates have been received for over 1 hour"

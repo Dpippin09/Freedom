@@ -8,6 +8,8 @@ const compression = require('compression');
 const config = require('./config');
 const SecurityManager = require('./middleware/security');
 const HealthCheckManager = require('./middleware/health');
+const { requestLoggingMiddleware, logger, metricsMiddleware } = require('./middleware/logging');
+const { metricsCollectionMiddleware } = require('./middleware/metrics');
 const database = require('./database');
 
 const app = express();
@@ -24,6 +26,13 @@ if (config.get('server.trustProxy')) {
 
 // Security middleware (should be first)
 app.use(security.configureHelmet());
+
+// Request logging and correlation middleware
+app.use(requestLoggingMiddleware);
+
+// Metrics collection middleware
+app.use(metricsMiddleware);
+app.use(metricsCollectionMiddleware);
 
 // Compression middleware
 app.use(compression({

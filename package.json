@@ -29,6 +29,13 @@
     "cloud:check:aws": "bash cloud/aws/deploy-aws.sh check",
     "cloud:check:do": "bash cloud/digitalocean/deploy-do.sh check",
     "cloud:readiness": "bash cloud-readiness-check.sh",
+    "monitoring:start": "bash monitoring/scripts/monitoring-stack.sh start",
+    "monitoring:stop": "bash monitoring/scripts/monitoring-stack.sh stop",
+    "monitoring:restart": "bash monitoring/scripts/monitoring-stack.sh restart",
+    "monitoring:status": "bash monitoring/scripts/monitoring-stack.sh status",
+    "monitoring:health": "bash monitoring/scripts/monitoring-stack.sh health",
+    "monitoring:info": "bash monitoring/scripts/monitoring-stack.sh info",
+    "monitoring:logs": "bash monitoring/scripts/monitoring-stack.sh logs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -51,7 +58,10 @@
     "node-cron": "^3.0.3",
     "nodemon": "^3.1.10",
     "pg": "^8.16.3",
+    "prom-client": "^15.1.3",
     "puppeteer": "^21.11.0",
-    "rate-limiter-flexible": "^5.0.3"
+    "rate-limiter-flexible": "^5.0.3",
+    "winston": "^3.17.0",
+    "winston-cloudwatch": "^3.2.0"
   }
 }

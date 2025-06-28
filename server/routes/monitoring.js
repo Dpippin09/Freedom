@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const PriceMonitor = require('../services/priceMonitor');
+const { getMetricsSummary, logger } = require('../middleware/logging');
+const { getMetricsHandler, getHealthWithMetrics } = require('../middleware/metrics');
 
 // Initialize the price monitor
 const priceMonitor = new PriceMonitor();
@@ -207,6 +209,60 @@ router.put('/config', (req, res) => {
             error: error.message
         });
     }
+});
+
+// GET /api/monitoring/metrics - Get application metrics
+router.get('/metrics', async (req, res) => {
+    const format = req.query.format || req.headers.accept;
+    
+    // If Prometheus format is requested, use Prometheus metrics
+    if (format === 'prometheus' || req.headers.accept?.includes('text/plain')) {
+        return getMetricsHandler(req, res);
+    }
+    
+    // Otherwise, return JSON metrics
+    try {
+        const metrics = getMetricsSummary();
+        const healthStatus = {
+            status: 'healthy',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            memory: process.memoryUsage(),
+            cpu: process.cpuUsage()
+        };
+
+        logger.info('Metrics requested', {
+            endpoint: '/api/monitoring/metrics',
+            requestedBy: req.ip,
+            format: 'json'
+        });
+
+        res.json({
+            success: true,
+            health: healthStatus,
+            metrics,
+            priceMonitoring: {
+                status: priceMonitor.getStatus(),
+                stats: await priceMonitor.getMonitoringStats()
+            }
+        });
+    } catch (error) {
+        logger.error('Failed to get metrics', { error: error.message });
+        res.status(500).json({
+            success: false,
+            message: 'Failed to get application metrics',
+            error: error.message
+        });
+    }
+});
+
+// GET /api/monitoring/prometheus - Dedicated Prometheus metrics endpoint
+router.get('/prometheus', getMetricsHandler);
+
+// GET /api/monitoring/health - Simple health check endpoint for load balancers
+router.get('/health', (req, res) => {
+    const health = getHealthWithMetrics();
+    res.json(health);
 });
 
 // Auto-start monitoring when server starts
