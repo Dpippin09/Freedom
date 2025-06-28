@@ -1,0 +1,28 @@
+{
+  "1751125303315rptmg07kw": {
+    "userId": "1751125303315rptmg07kw",
+    "totalSavings": 0,
+    "alertsCreated": 1,
+    "alertsTriggered": 0,
+    "wishlistItems": 1,
+    "averageSavingsPerAlert": 0,
+    "favoriteCategories": {
+      "shoes": 1
+    },
+    "shoppingPattern": {
+      "mostActiveDay": "Saturday",
+      "mostActiveHour": 9,
+      "averageAlertValue": 49.99
+    },
+    "monthlyGoals": {
+      "savingsTarget": 200,
+      "alertTarget": 5,
+      "currentSavings": 0,
+      "currentAlerts": 1,
+      "setAt": "2025-06-28T15:44:36.677Z"
+    },
+    "priceDropHistory": [],
+    "lastActivity": "2025-06-28T15:44:36.677Z",
+    "createdAt": "2025-06-28T15:44:36.642Z"
+  }
+}

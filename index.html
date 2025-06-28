@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Snatched It - Find Fashion for Less</title>
 </head>
 
@@ -393,9 +394,36 @@
 
     </footer>
 
-    <script src="./assets/js/php.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/api-service.js"></script>
+    <script src="./assets/js/scraping-service.js"></script>
+    <script src="./assets/js/auth-service.js"></script>
+    <script src="./assets/js/auth-ui.js"></script>
+    <script src="./assets/js/price-alert-service.js"></script>
+    <script src="./assets/js/price-alert-ui.js"></script>
+    <script src="./assets/js/price-alert-demo.js"></script>
+    <script src="./assets/js/analytics-service.js"></script>
+    <script src="./assets/js/analytics-ui.js"></script>
+    <script src="./assets/js/charts-service.js"></script>
+    <script src="./assets/js/charts-ui.js"></script>
+    <script src="./assets/js/enhanced-frontend.js"></script>
     <script src="assets/js/main.js"></script>
+    
+    <!-- Initialize Authentication, Price Alerts, Analytics, and Charts -->
+    <script>
+        // Initialize authentication UI when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            window.authUI = new AuthUI();
+            window.priceAlertUI = new PriceAlertUI();
+            window.analyticsUI = new AnalyticsUI();
+            
+            // Initialize charts if Chart.js is loaded
+            if (window.Chart) {
+                window.chartsService = new ChartsService();
+                window.chartsUI = new ChartsUI();
+                window.chartsUI.init();
+            }
+        });
+    </script>
     
     <!-- Scroll to top on page load/refresh -->
     <script>

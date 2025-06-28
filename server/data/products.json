@@ -1,0 +1,186 @@
+[
+  {
+    "id": 1,
+    "name": "Designer Summer Dresses",
+    "category": "clothing",
+    "description": "Elegant flowy dresses from top retailers",
+    "image": "./assets/images/dead-trees.png",
+    "badge": "Price Drop",
+    "price": {
+      "current": 89,
+      "original": 149,
+      "currency": "USD"
+    },
+    "stores": [
+      {"name": "Store A", "price": 89, "url": "https://example.com/store-a"},
+      {"name": "Store B", "price": 95, "url": "https://example.com/store-b"},
+      {"name": "Store C", "price": 99, "url": "https://example.com/store-c"},
+      {"name": "Store D", "price": 105, "url": "https://example.com/store-d"},
+      {"name": "Store E", "price": 149, "url": "https://example.com/store-e"}
+    ],
+    "features": ["🏪 5 Stores", "💰 Save up to 40%"],
+    "keywords": ["dress", "summer", "designer", "elegant", "flowy", "women", "fashion"],
+    "retailerUrls": {
+      "amazon": "https://www.amazon.com/dp/B08XYZ1234",
+      "walmart": "https://www.walmart.com/ip/summer-dress/123456789",
+      "target": "https://www.target.com/p/designer-dress/-/A-54321098"
+    },
+    "rating": 4.5,
+    "reviews": 89,
+    "savings": "40%",
+    "createdAt": "2025-06-28T00:00:00.000Z",
+    "updatedAt": "2025-06-28T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Premium Athletic Sneakers",
+    "category": "shoes",
+    "description": "Compare prices from 8 top retailers",
+    "image": "./assets/images/single-plant.png",
+    "badge": "Best Deal",
+    "price": {
+      "current": 79.99,
+      "original": 120,
+      "currency": "USD"
+    },
+    "stores": [
+      {"name": "Nike", "price": 79.99, "url": "https://nike.com"},
+      {"name": "Adidas", "price": 85, "url": "https://adidas.com"},
+      {"name": "Foot Locker", "price": 89.99, "url": "https://footlocker.com"},
+      {"name": "Dick's", "price": 92, "url": "https://dicks.com"},
+      {"name": "Finish Line", "price": 95, "url": "https://finishline.com"},
+      {"name": "Eastbay", "price": 98, "url": "https://eastbay.com"},
+      {"name": "Champs", "price": 105, "url": "https://champs.com"},
+      {"name": "JD Sports", "price": 120, "url": "https://jdsports.com"}
+    ],
+    "features": ["👟 All-Day Comfort", "⚡ Performance Tech"],
+    "keywords": ["sneakers", "athletic", "premium", "sports", "running", "comfort", "performance"],
+    "retailerUrls": {
+      "amazon": "https://www.amazon.com/dp/B084DWQR21",
+      "walmart": "https://www.walmart.com/ip/athletic-sneakers/987654321",
+      "ebay": "https://www.ebay.com/itm/premium-sneakers/345678901"
+    },
+    "rating": 4.9,
+    "reviews": 127,
+    "savings": "33%",
+    "createdAt": "2025-06-28T00:00:00.000Z",
+    "updatedAt": "2025-06-28T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Luxury Leather Handbags",
+    "category": "accessories",
+    "description": "Luxury bags at the best prices across 6 retailers",
+    "image": "./assets/images/fertilizer.jpg",
+    "badge": "Price Alert",
+    "price": {
+      "current": 249,
+      "original": 299,
+      "currency": "USD"
+    },
+    "stores": [
+      {"name": "Designer Outlet", "price": 249, "url": "https://designeroutlet.com"},
+      {"name": "Luxury Lane", "price": 259, "url": "https://luxurylane.com"},
+      {"name": "Fashion Hub", "price": 275, "url": "https://fashionhub.com"},
+      {"name": "Style Central", "price": 285, "url": "https://stylecentral.com"},
+      {"name": "Premium Bags", "price": 290, "url": "https://premiumbags.com"},
+      {"name": "Elite Fashion", "price": 299, "url": "https://elitefashion.com"}
+    ],
+    "features": ["💰 Best Price: $249", "📈 Avg: $299"],
+    "keywords": ["handbag", "luxury", "leather", "bag", "purse", "accessories", "women"],
+    "retailerUrls": {
+      "amazon": "https://www.amazon.com/dp/B07Q2X1234",
+      "ebay": "https://www.ebay.com/itm/luxury-handbag/234567890",
+      "target": "https://www.target.com/p/leather-handbag/-/A-76543210"
+    },
+    "rating": 4.7,
+    "reviews": 156,
+    "savings": "17%",
+    "createdAt": "2025-06-28T00:00:00.000Z",
+    "updatedAt": "2025-06-28T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Tailored Business Suits",
+    "category": "clothing",
+    "description": "Compare suit prices from premium retailers and save up to $200",
+    "image": "./assets/images/soilComparison.png",
+    "badge": "Hot Deal",
+    "price": {
+      "current": 299,
+      "original": 499,
+      "currency": "USD"
+    },
+    "stores": [
+      {"name": "Men's Wearhouse", "price": 299, "url": "https://menswearhouse.com"},
+      {"name": "Jos. A. Bank", "price": 325, "url": "https://josbank.com"},
+      {"name": "Suit Supply", "price": 350, "url": "https://suitsupply.com"},
+      {"name": "Brooks Brothers", "price": 425, "url": "https://brooksbrothers.com"},
+      {"name": "Hugo Boss", "price": 475, "url": "https://hugoboss.com"},
+      {"name": "Armani", "price": 499, "url": "https://armani.com"}
+    ],
+    "features": ["🤵 Custom Fit", "🎯 Professional Look"],
+    "keywords": ["suit", "business", "tailored", "professional", "men", "formal", "custom"],
+    "rating": 4.6,
+    "reviews": 94,
+    "savings": "40%",
+    "createdAt": "2025-06-28T00:00:00.000Z",
+    "updatedAt": "2025-06-28T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "name": "Athletic Performance Wear",
+    "category": "clothing",
+    "description": "High-tech activewear for peak performance and comfort",
+    "image": "./assets/images/watered-crops.png",
+    "badge": "Performance",
+    "price": {
+      "current": 59,
+      "original": 89,
+      "currency": "USD"
+    },
+    "stores": [
+      {"name": "Under Armour", "price": 59, "url": "https://underarmour.com"},
+      {"name": "Nike", "price": 65, "url": "https://nike.com"},
+      {"name": "Adidas", "price": 69, "url": "https://adidas.com"},
+      {"name": "Lululemon", "price": 75, "url": "https://lululemon.com"},
+      {"name": "Athleta", "price": 79, "url": "https://athleta.com"},
+      {"name": "Patagonia", "price": 89, "url": "https://patagonia.com"}
+    ],
+    "features": ["🏃‍♀️ Moisture Wicking", "🔥 Enhanced Performance"],
+    "keywords": ["athletic", "performance", "activewear", "workout", "fitness", "sports", "moisture"],
+    "rating": 4.8,
+    "reviews": 203,
+    "savings": "34%",
+    "createdAt": "2025-06-28T00:00:00.000Z",
+    "updatedAt": "2025-06-28T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "name": "Luxury Watch Collection",
+    "category": "accessories",
+    "description": "Timeless watches that make a statement of elegance and success",
+    "image": "./assets/images/carbonRoot.jpg",
+    "badge": "Exclusive",
+    "price": {
+      "current": 1299,
+      "original": 1899,
+      "currency": "USD"
+    },
+    "stores": [
+      {"name": "Watch Station", "price": 1299, "url": "https://watchstation.com"},
+      {"name": "Tourneau", "price": 1350, "url": "https://tourneau.com"},
+      {"name": "Crown & Caliber", "price": 1425, "url": "https://crownandcaliber.com"},
+      {"name": "Hodinkee Shop", "price": 1500, "url": "https://hodinkee.com"},
+      {"name": "Bucherer", "price": 1650, "url": "https://bucherer.com"},
+      {"name": "Authorized Dealer", "price": 1899, "url": "https://example.com"}
+    ],
+    "features": ["⌚ Swiss Movement", "💎 Premium Materials"],
+    "keywords": ["watch", "luxury", "timepiece", "swiss", "premium", "elegant", "accessories"],
+    "rating": 4.9,
+    "reviews": 78,
+    "savings": "32%",
+    "createdAt": "2025-06-28T00:00:00.000Z",
+    "updatedAt": "2025-06-28T00:00:00.000Z"
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "1751123599120gadp9i5o8",
+    "email": "john.doe@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "password": "$2b$12$90iWKtjdVseY/DzYnxUcoufJiC72vCm4Fbd/SPlv0WnRtRRegcDkO",
+    "preferences": {
+      "notifications": true,
+      "priceAlerts": true,
+      "currency": "USD",
+      "theme": "light"
+    },
+    "wishlist": [],
+    "priceAlerts": [],
+    "createdAt": "2025-06-28T15:13:19.120Z",
+    "updatedAt": "2025-06-28T15:13:19.120Z",
+    "lastLogin": null,
+    "isActive": true
+  },
+  {
+    "id": "1751123618524cuk7a8wx1",
+    "email": "test@example.com",
+    "firstName": "Test",
+    "lastName": "User",
+    "password": "$2b$12$tCF8xYMF7JjHZT7fVMDcCOqC4mrKX79stXRLdGC86hj7oijPwWObq",
+    "preferences": {
+      "notifications": true,
+      "priceAlerts": true,
+      "currency": "USD",
+      "theme": "light"
+    },
+    "wishlist": [
+      "prod_001"
+    ],
+    "priceAlerts": [],
+    "createdAt": "2025-06-28T15:13:38.524Z",
+    "updatedAt": "2025-06-28T15:14:04.452Z",
+    "lastLogin": "2025-06-28T15:14:04.298Z",
+    "isActive": true
+  },
+  {
+    "id": "1751124453815kloes7ro0",
+    "email": "alert.tester@example.com",
+    "firstName": "Alert",
+    "lastName": "Tester",
+    "password": "$2b$12$gnkypIQngnckS78CVfR.semsJ7mcY11T5rmrn/p1haqPCz11mEtEK",
+    "preferences": {
+      "notifications": true,
+      "priceAlerts": true,
+      "currency": "USD",
+      "theme": "light"
+    },
+    "wishlist": [],
+    "priceAlerts": [],
+    "createdAt": "2025-06-28T15:27:33.815Z",
+    "updatedAt": "2025-06-28T15:27:33.815Z",
+    "lastLogin": null,
+    "isActive": true
+  },
+  {
+    "id": "1751125303315rptmg07kw",
+    "email": "analytics-test@example.com",
+    "firstName": "Analytics",
+    "lastName": "Tester",
+    "password": "$2b$12$C3tY2hDJhAwKYFZ3J2JIAOAfw3m3mn9yIBe1ehCcKAmbqSuFvT0Ii",
+    "preferences": {
+      "notifications": true,
+      "priceAlerts": true,
+      "currency": "USD",
+      "theme": "light"
+    },
+    "wishlist": [],
+    "priceAlerts": [],
+    "createdAt": "2025-06-28T15:41:43.315Z",
+    "updatedAt": "2025-06-28T15:44:36.615Z",
+    "lastLogin": "2025-06-28T15:44:36.614Z",
+    "isActive": true
+  }
+]
