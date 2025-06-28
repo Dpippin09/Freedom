@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: freedom-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: freedom_fashion_dev
+      POSTGRES_USER: freedom_dev
+      POSTGRES_PASSWORD: dev_password
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./server/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    ports:
+      - "5433:5432"
+    networks:
+      - freedom-dev-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: freedom-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    networks:
+      - freedom-dev-network
+
+  # Freedom Fashion Application (Development)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: development
+    container_name: freedom-app-dev
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      NODE_ENV: development
+      
+      # Server Configuration
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: 3000
+      
+      # Database Configuration
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: freedom_fashion_dev
+      DATABASE_USER: freedom_dev
+      DATABASE_PASSWORD: dev_password
+      DATABASE_SSL: false
+      DATABASE_ENABLE_LOGGING: true
+      
+      # Redis Configuration
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      
+      # Development Settings
+      DEBUG: true
+      ENABLE_CORS: true
+      CORS_ORIGIN: "*"
+      
+      # Security (development values)
+      JWT_SECRET: dev_jwt_secret_not_for_production
+      SESSION_SECRET: dev_session_secret_not_for_production
+      
+    ports:
+      - "3000:3000"
+      - "9229:9229"  # Node.js debugging port
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - dev_data:/app/data
+      - dev_logs:/app/logs
+    networks:
+      - freedom-dev-network
+    command: npm run dev
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  dev_data:
+    driver: local
+  dev_logs:
+    driver: local
+
+networks:
+  freedom-dev-network:
+    driver: bridge

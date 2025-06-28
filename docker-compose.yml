@@ -1,0 +1,145 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: freedom-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: freedom_fashion
+      POSTGRES_USER: freedom_user
+      POSTGRES_PASSWORD: freedom_secure_password_2024
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./server/database/seeds:/docker-entrypoint-initdb.d/seeds
+    ports:
+      - "5432:5432"
+    networks:
+      - freedom-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U freedom_user -d freedom_fashion"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis Cache (for future use)
+  redis:
+    image: redis:7-alpine
+    container_name: freedom-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass redis_secure_password_2024
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - freedom-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Freedom Fashion Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: freedom-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      
+      # Server Configuration
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: 3000
+      
+      # Database Configuration
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: freedom_fashion
+      DATABASE_USER: freedom_user
+      DATABASE_PASSWORD: freedom_secure_password_2024
+      DATABASE_SSL: false
+      
+      # Redis Configuration
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: redis_secure_password_2024
+      
+      # Security
+      JWT_SECRET: your_super_secure_jwt_secret_change_in_production
+      SESSION_SECRET: your_super_secure_session_secret_change_in_production
+      
+      # Features
+      ENABLE_SCRAPING: true
+      ENABLE_ANALYTICS: true
+      ENABLE_NOTIFICATIONS: true
+      ENABLE_PRICE_ALERTS: true
+      
+      # External APIs (add your keys)
+      # OPENAI_API_KEY: your_openai_api_key
+      # STRIPE_SECRET_KEY: your_stripe_secret_key
+      
+    ports:
+      - "3000:3000"
+    volumes:
+      - app_data:/app/data
+      - app_logs:/app/logs
+      - app_uploads:/app/uploads
+    networks:
+      - freedom-network
+    healthcheck:
+      test: ["CMD", "node", "health-check.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: freedom-nginx
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - freedom-network
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  app_data:
+    driver: local
+  app_logs:
+    driver: local
+  app_uploads:
+    driver: local
+  nginx_logs:
+    driver: local
+
+networks:
+  freedom-network:
+    driver: bridge

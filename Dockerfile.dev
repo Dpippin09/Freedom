@@ -1,0 +1,57 @@
+# Multi-stage Dockerfile for development and production
+
+# Development stage
+FROM node:18-alpine as development
+
+WORKDIR /app
+
+# Install development dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Create directories
+RUN mkdir -p data logs uploads
+
+# Expose ports (app + debugger)
+EXPOSE 3000 9229
+
+# Start with nodemon for development
+CMD ["npm", "run", "dev"]
+
+# Production stage
+FROM node:18-alpine as production
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm ci --only=production && npm cache clean --force
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S freedom -u 1001
+
+# Copy application code
+COPY . .
+
+# Create necessary directories and set permissions
+RUN mkdir -p data logs uploads && \
+    chown -R freedom:nodejs /app
+
+# Switch to non-root user
+USER freedom
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD node health-check.js || exit 1
+
+# Start application
+CMD ["npm", "start"]
