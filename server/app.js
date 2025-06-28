@@ -8,10 +8,14 @@ const compression = require('compression');
 const config = require('./config');
 const SecurityManager = require('./middleware/security');
 const HealthCheckManager = require('./middleware/health');
+const database = require('./database');
 
 const app = express();
 const security = new SecurityManager();
 const healthCheck = new HealthCheckManager();
+
+// Global database reference for app
+app.locals.database = database;
 
 // Trust proxy if behind load balancer/reverse proxy
 if (config.get('server.trustProxy')) {

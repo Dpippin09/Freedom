@@ -2,12 +2,21 @@
   "name": "freedom",
   "version": "1.0.0",
   "description": "this is a site that I built to help shoppers have an easier experience finding exactly what they're looking for.",
-  "main": "server/app.js",
+  "main": "server/startup.js",
   "scripts": {
-    "start": "node server/app.js",
-    "dev": "nodemon server/app.js",
+    "start": "node server/startup.js",
+    "dev": "nodemon server/startup.js",
     "validate-config": "node validate-config.js",
     "deploy": "bash deploy.sh",
+    "db": "node scripts/db-cli.js",
+    "db:migrate": "node scripts/db-cli.js migrate",
+    "db:rollback": "node scripts/db-cli.js rollback",
+    "db:seed": "node scripts/db-cli.js seed",
+    "db:status": "node scripts/db-cli.js status",
+    "db:health": "node scripts/db-cli.js health",
+    "db:migrate-data": "node scripts/db-cli.js migrate-data",
+    "db:migration-status": "node scripts/db-cli.js migration-status",
+    "db:reset": "node scripts/db-cli.js reset",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -29,6 +38,7 @@
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^3.0.3",
     "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
     "puppeteer": "^21.11.0",
     "rate-limiter-flexible": "^5.0.3"
   }

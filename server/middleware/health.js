@@ -222,52 +222,41 @@ class HealthCheckManager {
     }
 
     async checkDatabase() {
-        // Since we're using file-based storage, check file accessibility
         try {
-            const dataDir = this.config.get('storage.dataDirectory');
+            // Import database here to avoid circular dependency
+            const database = require('../database');
             
-            // Check critical data files
-            const files = [
-                'users.json',
-                'products.json', 
-                'notifications.json',
-                'analytics.json'
-            ];
-            
-            const fileStatus = {};
-            
-            for (const file of files) {
-                const filePath = path.join(dataDir, file);
-                try {
-                    await fs.access(filePath, fs.constants.R_OK | fs.constants.W_OK);
-                    const stats = await fs.stat(filePath);
-                    fileStatus[file] = {
-                        status: 'accessible',
-                        size: stats.size,
-                        lastModified: stats.mtime
-                    };
-                } catch (error) {
-                    fileStatus[file] = {
-                        status: 'inaccessible',
-                        error: error.message
-                    };
-                }
+            if (!database.isInitialized) {
+                return {
+                    status: 'warning',
+                    message: 'Database not initialized',
+                    usingFileStorage: true
+                };
             }
-            
-            const inaccessibleFiles = Object.values(fileStatus)
-                .filter(status => status.status === 'inaccessible').length;
-            
+
+            const health = await database.getHealth();
             return {
-                status: inaccessibleFiles === 0 ? 'healthy' : 'degraded',
-                type: 'file-based',
-                files: fileStatus,
-                dataDirectory: dataDir
+                status: health.status,
+                connection: health.connection ? {
+                    status: health.connection.status,
+                    database: health.connection.database?.database_name,
+                    user: health.connection.database?.current_user,
+                    size: health.connection.size,
+                    activeConnections: health.connection.activeConnections,
+                    pool: health.connection.pool
+                } : null,
+                models: health.models ? {
+                    status: health.models.status,
+                    counts: health.models.models
+                } : null,
+                timestamp: health.timestamp
             };
         } catch (error) {
             return {
                 status: 'unhealthy',
-                type: 'file-based',
-                error: error.message
+                error: 'Database health check failed',
+                details: error.message,
+                fallbackToFileStorage: true
             };
         }
     }
