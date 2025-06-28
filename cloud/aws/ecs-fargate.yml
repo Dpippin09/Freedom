@@ -1,0 +1,90 @@
+# AWS ECS Fargate Deployment for Freedom Fashion Platform
+
+version: '3.8'
+
+# This file defines the ECS service configuration for AWS Fargate deployment
+# It will be used with AWS CLI and CloudFormation to deploy the containerized application
+
+services:
+  # Freedom Fashion Application
+  freedom-app:
+    # Image will be built and pushed to ECR
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/freedom-fashion:latest
+    
+    # Fargate requires specific CPU and memory configurations
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 1024M
+    
+    # Environment variables for production
+    environment:
+      NODE_ENV: production
+      
+      # Server Configuration
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: 3000
+      
+      # Database Configuration (RDS)
+      DATABASE_HOST: ${RDS_ENDPOINT}
+      DATABASE_PORT: 5432
+      DATABASE_NAME: freedom_fashion
+      DATABASE_USER: ${RDS_USERNAME}
+      DATABASE_PASSWORD: ${RDS_PASSWORD}
+      DATABASE_SSL: true
+      DATABASE_CONNECTION_POOL: 20
+      
+      # Redis Configuration (ElastiCache)
+      REDIS_HOST: ${ELASTICACHE_ENDPOINT}
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_SSL: true
+      
+      # Security (from AWS Secrets Manager)
+      JWT_SECRET: ${JWT_SECRET}
+      SESSION_SECRET: ${SESSION_SECRET}
+      
+      # AWS Specific
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${S3_BUCKET_NAME}
+      
+      # Features
+      ENABLE_SCRAPING: true
+      ENABLE_ANALYTICS: true
+      ENABLE_NOTIFICATIONS: true
+      ENABLE_PRICE_ALERTS: true
+      ENABLE_SSL: true
+      
+      # Monitoring
+      ENABLE_CLOUDWATCH: true
+      LOG_LEVEL: info
+    
+    # Health check configuration
+    healthcheck:
+      test: ["CMD", "node", "health-check.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    # Logging configuration for CloudWatch
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: /ecs/freedom-fashion
+        awslogs-region: ${AWS_REGION}
+        awslogs-stream-prefix: app
+    
+    # Port mapping
+    ports:
+      - "3000:3000"
+    
+    # Security groups will be attached via CloudFormation
+    # No need to specify networks here as ECS handles this
+
+# Note: This file is used as a template for ECS task definition
+# The actual deployment uses CloudFormation templates

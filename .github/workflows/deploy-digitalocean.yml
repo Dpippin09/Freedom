@@ -1,0 +1,378 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches: [ main, production ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - staging
+        - production
+
+env:
+  APP_NAME: freedom-fashion
+  DO_REGION: nyc1
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: freedom_fashion_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Create test environment file
+      run: |
+        cat > .env << EOF
+        NODE_ENV=test
+        DATABASE_HOST=localhost
+        DATABASE_PORT=5432
+        DATABASE_NAME=freedom_fashion_test
+        DATABASE_USER=postgres
+        DATABASE_PASSWORD=test_password
+        DATABASE_SSL=false
+        REDIS_HOST=localhost
+        REDIS_PORT=6379
+        JWT_SECRET=test_jwt_secret
+        SESSION_SECRET=test_session_secret
+        ENABLE_SCRAPING=false
+        ENABLE_ANALYTICS=true
+        ENABLE_NOTIFICATIONS=false
+        ENABLE_PRICE_ALERTS=false
+        EOF
+
+    - name: Run database migrations
+      run: npm run db:migrate
+
+    - name: Run tests
+      run: |
+        # Add your test commands here
+        npm run validate-config
+        node test-database.js
+        echo "✅ All tests passed"
+
+    - name: Validate Docker configuration
+      run: |
+        npm run docker:validate
+        echo "✅ Docker configuration validated"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.event_name == 'workflow_dispatch'
+    
+    environment: ${{ github.ref == 'refs/heads/production' && 'production' || 'staging' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+    - name: Set deployment environment
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/production" ] || [ "${{ github.event.inputs.environment }}" == "production" ]; then
+          echo "ENVIRONMENT=production" >> $GITHUB_ENV
+          echo "APP_SUFFIX=" >> $GITHUB_ENV
+        else
+          echo "ENVIRONMENT=staging" >> $GITHUB_ENV
+          echo "APP_SUFFIX=-staging" >> $GITHUB_ENV
+        fi
+
+    - name: Create app specification
+      env:
+        GITHUB_REPO: ${{ github.repository }}
+        DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+      run: |
+        cd cloud/digitalocean
+        
+        # Generate secrets if not provided
+        JWT_SECRET=${JWT_SECRET:-$(openssl rand -hex 32)}
+        SESSION_SECRET=${SESSION_SECRET:-$(openssl rand -hex 32)}
+        
+        cat > app-spec-ci.yml << EOF
+        name: ${{ env.APP_NAME }}${{ env.APP_SUFFIX }}
+        region: ${{ env.DO_REGION }}
+
+        services:
+        - name: ${{ env.APP_NAME }}-app
+          source_dir: /
+          github:
+            repo: $GITHUB_REPO
+            branch: ${{ github.ref_name }}
+            deploy_on_push: true
+          
+          build_command: npm ci --only=production
+          run_command: npm start
+          
+          environment_slug: node-js
+          instance_count: 1
+          instance_size_slug: basic-xxs
+          
+          envs:
+          - key: NODE_ENV
+            value: ${{ env.ENVIRONMENT }}
+          - key: SERVER_HOST
+            value: 0.0.0.0
+          - key: SERVER_PORT
+            value: "3000"
+          
+          # Database connection
+          - key: DATABASE_HOST
+            value: \${{${{ env.APP_NAME }}-db.HOSTNAME}}
+          - key: DATABASE_PORT
+            value: \${{${{ env.APP_NAME }}-db.PORT}}
+          - key: DATABASE_NAME
+            value: \${{${{ env.APP_NAME }}-db.DATABASE}}
+          - key: DATABASE_USER
+            value: \${{${{ env.APP_NAME }}-db.USERNAME}}
+          - key: DATABASE_PASSWORD
+            value: \${{${{ env.APP_NAME }}-db.PASSWORD}}
+          - key: DATABASE_SSL
+            value: "true"
+          
+          # Redis connection
+          - key: REDIS_HOST
+            value: \${{${{ env.APP_NAME }}-redis.HOSTNAME}}
+          - key: REDIS_PORT
+            value: \${{${{ env.APP_NAME }}-redis.PORT}}
+          - key: REDIS_PASSWORD
+            value: \${{${{ env.APP_NAME }}-redis.PASSWORD}}
+          
+          # Security secrets
+          - key: JWT_SECRET
+            value: $JWT_SECRET
+          - key: SESSION_SECRET
+            value: $SESSION_SECRET
+          
+          # Features
+          - key: ENABLE_SCRAPING
+            value: "true"
+          - key: ENABLE_ANALYTICS
+            value: "true"
+          - key: ENABLE_NOTIFICATIONS
+            value: "true"
+          - key: ENABLE_PRICE_ALERTS
+            value: "true"
+          - key: ENABLE_SSL
+            value: "true"
+          
+          health_check:
+            http_path: /health/quick
+            initial_delay_seconds: 60
+            period_seconds: 30
+            timeout_seconds: 10
+            success_threshold: 1
+            failure_threshold: 3
+          
+          http_port: 3000
+          
+          routes:
+          - path: /
+
+        databases:
+        - name: ${{ env.APP_NAME }}-db
+          engine: PG
+          version: "15"
+          size: db-s-1vcpu-1gb
+          num_nodes: 1
+
+        - name: ${{ env.APP_NAME }}-redis
+          engine: REDIS
+          version: "7"
+          size: db-s-1vcpu-1gb
+          num_nodes: 1
+        EOF
+        
+        # Add domain configuration if provided
+        if [ -n "$DOMAIN_NAME" ] && [ "${{ env.ENVIRONMENT }}" == "production" ]; then
+          cat >> app-spec-ci.yml << EOF
+
+        domains:
+        - domain: $DOMAIN_NAME
+          type: PRIMARY
+          wildcard: false
+        EOF
+        fi
+
+    - name: Check if app exists
+      id: check-app
+      run: |
+        cd cloud/digitalocean
+        APP_ID=$(doctl apps list --format ID,Spec.Name --no-header | grep "${{ env.APP_NAME }}${{ env.APP_SUFFIX }}" | awk '{print $1}' || echo "")
+        echo "APP_ID=$APP_ID" >> $GITHUB_OUTPUT
+        if [ -n "$APP_ID" ]; then
+          echo "EXISTS=true" >> $GITHUB_OUTPUT
+        else
+          echo "EXISTS=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Create new app
+      if: steps.check-app.outputs.EXISTS == 'false'
+      run: |
+        cd cloud/digitalocean
+        echo "Creating new app..."
+        APP_ID=$(doctl apps create app-spec-ci.yml --format ID --no-header)
+        echo "APP_ID=$APP_ID" >> $GITHUB_ENV
+        echo "Created app with ID: $APP_ID"
+
+    - name: Update existing app
+      if: steps.check-app.outputs.EXISTS == 'true'
+      run: |
+        cd cloud/digitalocean
+        APP_ID="${{ steps.check-app.outputs.APP_ID }}"
+        echo "APP_ID=$APP_ID" >> $GITHUB_ENV
+        echo "Updating existing app: $APP_ID"
+        doctl apps update $APP_ID --spec app-spec-ci.yml
+
+    - name: Wait for deployment
+      run: |
+        echo "Waiting for deployment to complete..."
+        
+        # Wait for deployment with timeout
+        TIMEOUT=1200  # 20 minutes
+        ELAPSED=0
+        
+        while [ $ELAPSED -lt $TIMEOUT ]; do
+          PHASE=$(doctl apps get $APP_ID --format Phase --no-header)
+          
+          case $PHASE in
+            "ACTIVE")
+              echo "✅ Deployment completed successfully"
+              break
+              ;;
+            "ERROR"|"SUPERSEDED")
+              echo "❌ Deployment failed with phase: $PHASE"
+              doctl apps logs $APP_ID --type deploy
+              exit 1
+              ;;
+            *)
+              echo "⏳ Deployment in progress... (Phase: $PHASE, Elapsed: ${ELAPSED}s)"
+              sleep 30
+              ELAPSED=$((ELAPSED + 30))
+              ;;
+          esac
+        done
+        
+        if [ $ELAPSED -ge $TIMEOUT ]; then
+          echo "❌ Deployment timed out after $TIMEOUT seconds"
+          exit 1
+        fi
+
+    - name: Get deployment information
+      run: |
+        # Get app URL
+        APP_URL=$(doctl apps get $APP_ID --format DefaultIngress --no-header)
+        echo "APP_URL=https://$APP_URL" >> $GITHUB_ENV
+        
+        echo "🎉 Deployment completed!"
+        echo "App ID: $APP_ID"
+        echo "App URL: https://$APP_URL"
+        echo "Environment: ${{ env.ENVIRONMENT }}"
+
+    - name: Run health checks
+      run: |
+        echo "Running health checks..."
+        sleep 30
+        
+        # Health check
+        if curl -s -f "$APP_URL/health/quick" >/dev/null; then
+          echo "✅ Health check passed"
+          curl -s "$APP_URL/health/detailed" | jq . || echo "Health check response received"
+        else
+          echo "⚠️ Health check failed"
+          echo "This may be normal during initial deployment"
+          doctl apps logs $APP_ID --type run --tail 50
+        fi
+
+    - name: Notify deployment success
+      if: success()
+      run: |
+        echo "🎉 Freedom Fashion Platform deployed successfully!"
+        echo "Environment: ${{ env.ENVIRONMENT }}"
+        echo "App URL: $APP_URL"
+        
+        # Save deployment info
+        cat > deployment-info-${{ env.ENVIRONMENT }}.txt << EOF
+        Freedom Fashion - DigitalOcean Deployment
+        ==========================================
+        Environment: ${{ env.ENVIRONMENT }}
+        App ID: $APP_ID
+        App URL: $APP_URL
+        GitHub SHA: ${{ github.sha }}
+        Deployed: $(date)
+        Branch: ${{ github.ref_name }}
+        EOF
+
+    - name: Upload deployment artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: deployment-info-${{ env.ENVIRONMENT }}
+        path: deployment-info-${{ env.ENVIRONMENT }}.txt
+
+  notify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Notify deployment result
+      run: |
+        if [ "${{ needs.deploy.result }}" == "success" ]; then
+          echo "✅ Deployment to ${{ github.ref_name }} completed successfully!"
+        else
+          echo "❌ Deployment to ${{ github.ref_name }} failed!"
+        fi
+        
+        # Add Slack/Discord/Teams notification here if desired
+        # Example for Slack:
+        # if [ -n "${{ secrets.SLACK_WEBHOOK_URL }}" ]; then
+        #   STATUS_EMOJI="${{ needs.deploy.result == 'success' && '✅' || '❌' }}"
+        #   curl -X POST -H 'Content-type: application/json' \
+        #     --data "{\"text\":\"$STATUS_EMOJI Freedom Fashion deployment to ${{ github.ref_name }}: ${{ needs.deploy.result }}\"}" \
+        #     ${{ secrets.SLACK_WEBHOOK_URL }}
+        # fi

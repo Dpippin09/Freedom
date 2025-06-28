@@ -1,0 +1,157 @@
+# DigitalOcean App Platform Specification
+# This file defines the deployment configuration for DigitalOcean App Platform
+
+name: freedom-fashion
+region: nyc1
+
+services:
+- name: freedom-app
+  source_dir: /
+  github:
+    repo: your-username/freedom-fashion
+    branch: main
+    deploy_on_push: true
+  
+  # Build configuration
+  build_command: npm ci --only=production
+  
+  # Runtime configuration
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  
+  # Environment variables
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: SERVER_HOST
+    value: 0.0.0.0
+  - key: SERVER_PORT
+    value: "3000"
+  
+  # Database connection (will be populated by DigitalOcean)
+  - key: DATABASE_HOST
+    scope: RUN_TIME
+    type: SECRET
+  - key: DATABASE_PORT
+    value: "25060"
+  - key: DATABASE_NAME
+    value: freedom_fashion
+  - key: DATABASE_USER
+    scope: RUN_TIME
+    type: SECRET
+  - key: DATABASE_PASSWORD
+    scope: RUN_TIME
+    type: SECRET
+  - key: DATABASE_SSL
+    value: "true"
+  
+  # Redis connection (will be populated by DigitalOcean)
+  - key: REDIS_HOST
+    scope: RUN_TIME
+    type: SECRET
+  - key: REDIS_PORT
+    value: "25061"
+  - key: REDIS_PASSWORD
+    scope: RUN_TIME
+    type: SECRET
+  
+  # Security secrets
+  - key: JWT_SECRET
+    scope: RUN_TIME
+    type: SECRET
+  - key: SESSION_SECRET
+    scope: RUN_TIME
+    type: SECRET
+  
+  # Features
+  - key: ENABLE_SCRAPING
+    value: "true"
+  - key: ENABLE_ANALYTICS
+    value: "true"
+  - key: ENABLE_NOTIFICATIONS
+    value: "true"
+  - key: ENABLE_PRICE_ALERTS
+    value: "true"
+  - key: ENABLE_SSL
+    value: "true"
+  
+  # DigitalOcean specific
+  - key: DO_SPACES_ENDPOINT
+    value: "nyc3.digitaloceanspaces.com"
+  - key: DO_SPACES_BUCKET
+    value: "freedom-fashion-storage"
+  
+  # Health check
+  health_check:
+    http_path: /health/quick
+    initial_delay_seconds: 60
+    period_seconds: 30
+    timeout_seconds: 10
+    success_threshold: 1
+    failure_threshold: 3
+  
+  # HTTP configuration
+  http_port: 3000
+  
+  # Routes
+  routes:
+  - path: /
+  
+  # Resource limits
+  instance_size_slug: basic-xxs  # 1 vCPU, 512 MB RAM
+  
+  # Auto-scaling (optional)
+  autoscaling:
+    min_instance_count: 1
+    max_instance_count: 3
+    metrics:
+      cpu:
+        percent: 80
+
+databases:
+- name: freedom-db
+  engine: PG
+  version: "15"
+  size: db-s-1vcpu-1gb
+  num_nodes: 1
+  production: true
+
+- name: freedom-redis
+  engine: REDIS
+  version: "7"
+  size: db-s-1vcpu-1gb
+  num_nodes: 1
+  production: true
+
+# Static site for assets (optional)
+static_sites:
+- name: freedom-assets
+  source_dir: /assets
+  routes:
+  - path: /assets
+
+# Domain configuration (update with your domain)
+domains:
+- domain: your-domain.com
+  type: PRIMARY
+  wildcard: false
+  zone: your-domain.com
+
+# Alerts
+alerts:
+- rule: CPU_UTILIZATION
+  disabled: false
+  
+- rule: MEM_UTILIZATION  
+  disabled: false
+  
+- rule: RESTART_COUNT
+  disabled: false
+
+# Features
+features:
+- buildpack-stack=ubuntu-22
+
+# Region and availability
+region: nyc1

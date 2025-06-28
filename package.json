@@ -24,6 +24,11 @@
     "docker:clean": "docker system prune -f && docker volume prune -f",
     "docker:setup": "bash docker-setup.sh",
     "docker:validate": "bash validate-docker.sh",
+    "cloud:deploy:aws": "bash cloud/aws/deploy-aws.sh",
+    "cloud:deploy:do": "bash cloud/digitalocean/deploy-do.sh",
+    "cloud:check:aws": "bash cloud/aws/deploy-aws.sh check",
+    "cloud:check:do": "bash cloud/digitalocean/deploy-do.sh check",
+    "cloud:readiness": "bash cloud-readiness-check.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
