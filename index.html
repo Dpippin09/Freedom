@@ -2,35 +2,23 @@
 <html lang="en-us">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Snatched It - Fashion Finds</title>
+    <title>Snatched It - Find Fashion for Less</title>
 </head>
 
 <body>
-    <header>
-
-        <nav>
-            <img src="./assets/images/Snatched.jpg" class="plenterra-logo" alt="plenterra-logo">
-            <!-- <h1 id="welcome">Welcome to PLENTERRA</h1> -->            <ul class="nav-links" id="nav-links">
-                <!-- <li><a href="#">Home</a></li> -->
-                <li><a href="#about-Us">Our Story</a></li>
-                <!-- <li class="dropdown">
-                    <a href="#Projects">How We Do It</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#Dead-Trees">1. Dead Trees</a></li>
-                        <li><a href="#Biochar">2. Boichar</a></li>
-                        <li><a href="#Fertilizer">3. Fertilizer</a></li>
-                        <li><a href="#Healthy-Soil">4. Healthy Soil</a></li>
-                        <li><a href="#Healthy-Crops">5. Healthy Crops</a></li>
-                        <li><a href="#Clean">6. Clean Water/Air</a></li>
-                        <li><a href="#Carbon-Returned">7. Carbon Returned</a></li>
-                    </ul>
-                    <li><a href="#soil-health">Healthy Soil</a></li> -->
-                    <!-- <li><a href="#our-farms">Results</a></li>  -->
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
-                </ul></nav>
+    <header>        <nav>
+            <img src="./assets/images/Snatched.jpg" class="plenterra-logo" alt="Snatched It - Fashion Price Comparison">
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about-Us">How It Works</a></li>
+                <li><a href="#deals">Best Deals</a></li>
+                <li><a href="#trending">Trending Now</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
+            </ul>
+        </nav>
            
             <!-- Search Bar Section -->
             
@@ -39,18 +27,17 @@
             <!-- Search and Filter Section -->
             <div class="search-container">
                 <div class="search-bar">
-                    <input type="text" placeholder="Search for clothing, shoes, accessories..." class="search-input" id="searchInput">
+                    <input type="text" placeholder="Search any fashion item and find the best price..." class="search-input" id="searchInput">
                     <button type="button" class="search-button" id="searchButton">
                         <span class="search-icon">🔍</span>
                     </button>
                 </div>
-                  <!-- Filter Tabs -->
-                <div class="filter-tabs">
+                  <!-- Filter Tabs -->                <div class="filter-tabs">
                     <button class="filter-tab active" data-filter="all">All Categories</button>
                     <button class="filter-tab" data-filter="clothing">Clothing</button>
                     <button class="filter-tab" data-filter="shoes">Shoes</button>
                     <button class="filter-tab" data-filter="accessories">Accessories</button>
-                    <button class="filter-tab" data-filter="new">New Arrivals</button>
+                    <button class="filter-tab" data-filter="deals">Best Deals</button>
                 </div>
             </div>
 
@@ -62,46 +49,44 @@
                     <button class="cta-button">Get Started</button>
                 </div>
                 <img src="./assets/images/farming-image.jpg" class="mission-image" alt="sustainable farming" />
-            </section> -->            <!-- Products Grid -->
-            <section class="products-grid">
-                <h2 class="section-title">Shop the Latest</h2>
+            </section> -->            <!-- Products Grid -->            <section class="products-grid">
+                <h2 class="section-title">Trending Searches & Best Deals</h2>
                 
-                <div class="products-container">
-                    <!-- Product Card 1: Designer Dresses -->
+                <div class="products-container">                    <!-- Product Card 1: Designer Dresses -->
                     <div class="product-card" data-category="clothing">
                         <div class="product-image">
                             <img src="./assets/images/dead-trees.png" alt="Designer Dress Collection">
-                            <div class="product-badge">New Arrival</div>
+                            <div class="product-badge">Price Drop</div>
                         </div>
                         <div class="product-info">
                             <h3>Designer Summer Dresses</h3>
-                            <p class="product-description">Elegant flowy dresses perfect for any summer occasion</p>
+                            <p class="product-description">Elegant flowy dresses from top retailers</p>
                             <div class="product-features">
-                                <span class="feature-tag">👗 Multiple Styles</span>
-                                <span class="feature-tag">🌟 Premium Quality</span>
+                                <span class="feature-tag">� 5 Stores</span>
+                                <span class="feature-tag">💰 Save up to 40%</span>
                             </div>
                             <div class="product-stats">
                                 <div class="stat">
-                                    <span class="stat-number">50+</span>
-                                    <span class="stat-label">Styles Available</span>
+                                    <span class="stat-number">$89</span>
+                                    <span class="stat-label">Best Price</span>
                                 </div>
                                 <div class="stat">
-                                    <span class="stat-number">XS-3XL</span>
-                                    <span class="stat-label">Size Range</span>
+                                    <span class="stat-number">$149</span>
+                                    <span class="stat-label">Avg Price</span>
                                 </div>
                             </div>
-                            <button class="product-button">View Collection</button>
+                            <button class="product-button">Compare Prices</button>
                         </div>
                     </div>
 
                     <!-- Product Card 2: Premium Sneakers -->                    <div class="product-card" data-category="shoes">
                         <div class="product-image">
                             <img src="./assets/images/single-plant.png" alt="Premium Sneakers">
-                            <div class="product-badge">Best Seller</div>
+                            <div class="product-badge">Best Deal</div>
                         </div>
                         <div class="product-info">
                             <h3>Premium Athletic Sneakers</h3>
-                            <p class="product-description">High-performance sneakers for comfort and style all day long</p>
+                            <p class="product-description">Compare prices from 8 top retailers</p>
                             <div class="product-features">
                                 <span class="feature-tag">� All-Day Comfort</span>
                                 <span class="feature-tag">⚡ Performance Tech</span>
@@ -110,38 +95,40 @@
                                 <span class="stars">⭐⭐⭐⭐⭐</span>
                                 <span class="rating-text">4.9/5 (127 reviews)</span>
                             </div>
-                            <button class="product-button">Add to Cart</button>
+                            <div class="price-comparison">
+                                <span class="lowest-price">From $79.99</span>
+                                <span class="price-range">3 stores have deals</span>
+                            </div>
+                            <button class="product-button">Find Best Price</button>
                         </div>
                     </div>
 
                     <!-- Product Card 3: Luxury Handbags -->                    <div class="product-card" data-category="accessories">
                         <div class="product-image">
                             <img src="./assets/images/fertilizer.jpg" alt="Luxury Handbags">
-                            <div class="product-badge">Designer</div>
+                            <div class="product-badge">Price Alert</div>
                         </div>
                         <div class="product-info">
                             <h3>Luxury Leather Handbags</h3>
-                            <p class="product-description">Handcrafted designer bags for the modern woman</p>
-                            <div class="product-features">
-                                <span class="feature-tag">👜 Handcrafted</span>
-                                <span class="feature-tag">✨ Genuine Leather</span>
+                            <p class="product-description">Luxury bags at the best prices across 6 retailers</p>
+                            <div class="product-features">                                <span class="feature-tag">� Best Price: $249</span>
+                                <span class="feature-tag">📈 Avg: $299</span>
                             </div>
-                            <div class="product-price">
-                                <span class="price">$299.99</span>
-                                <span class="price-unit">Free Shipping</span>
+                            <div class="product-price">                                <span class="price">From $249</span>
+                                <span class="price-unit">6 stores compared</span>
                             </div>
-                            <button class="product-button">Shop Now</button>
+                            <button class="product-button">Compare Stores</button>
                         </div>
                     </div>
 
                     <!-- Product Card 4: Men's Suits -->                    <div class="product-card" data-category="clothing">
                         <div class="product-image">
                             <img src="./assets/images/soilComparison.png" alt="Men's Suits">
-                            <div class="product-badge">Premium</div>
+                            <div class="product-badge">Hot Deal</div>
                         </div>
                         <div class="product-info">
                             <h3>Tailored Business Suits</h3>
-                            <p class="product-description">Professional suits tailored to perfection for the modern gentleman</p>
+                            <p class="product-description">Compare suit prices from premium retailers and save up to $200</p>
                             <div class="product-features">
                                 <span class="feature-tag">🤵 Custom Fit</span>
                                 <span class="feature-tag">🎯 Professional Look</span>
@@ -149,7 +136,7 @@
                             <div class="product-timeline">
                                 <span class="timeline-badge">Tailored in 5-7 days</span>
                             </div>
-                            <button class="product-button">Get Fitted</button>
+                            <button class="product-button">Find Best Deal</button>
                         </div>
                     </div>
 
@@ -192,32 +179,30 @@
                         </div>
                     </div>
                 </div>
-            </section>            <!-- Success Stories Section -->
-            <section class="success-stories">
-                <h2 class="section-title">Customer Reviews</h2>
+            </section>            <!-- Success Stories Section -->            <section class="success-stories">
+                <h2 class="section-title">Success Stories</h2>
                 <div class="stories-container">
                     <div class="story-card">
-                        <img src="./assets/images/farmers.jpg" alt="Happy Customer" class="story-image">
+                        <img src="./assets/images/farmers.jpg" alt="Happy Shopper" class="story-image">
                         <div class="story-content">
                             <h4>Sarah M.</h4>
-                            <p>"Found the perfect dress for my wedding! Amazing quality and fast shipping"</p>
+                            <p>"Saved $89 on my dream dress! Found the exact same one for 40% less than the first store I checked."</p>
                             <div class="story-metrics">
-                                <span class="metric">⭐⭐⭐⭐⭐ 5 Stars</span>
-                                <span class="metric">Verified Purchase</span>
+                                <span class="metric">💰 $89 Saved</span>
+                                <span class="metric">🔍 Compared 5 Stores</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Call to Action Section -->
-            <section class="cta-section">
+            <!-- Call to Action Section -->            <section class="cta-section">
                 <div class="cta-content">
-                    <h2>Ready to Upgrade Your Wardrobe?</h2>
-                    <p>Join thousands of fashion lovers who shop with us for the latest trends</p>
+                    <h2>Ready to Start Saving on Fashion?</h2>
+                    <p>Join thousands of smart shoppers finding the best deals across hundreds of stores</p>
                     <div class="cta-buttons">
-                        <button class="cta-primary">Shop Now</button>
-                        <button class="cta-secondary">View Lookbook</button>
+                        <button class="cta-primary">Start Comparing Prices</button>
+                        <button class="cta-secondary">Set Price Alerts</button>
                     </div>
                 </div>
             </section>
@@ -372,18 +357,17 @@
         </main>
         <main id="our-customers" class="our-farms">
             <img src="./assets/images/farmers.jpg" class="float-right"
-                alt="A team working together to create amazing fashion looks" />
-            <h2>Our Customers and Community</h2>
+                alt="A team working together to create amazing fashion looks" />            <h2>Our Customers and Community</h2>
             <p>
-                Our journey at Snatched It is driven by the belief that great style is directly linked to 
-                confidence and self-expression. We are helping fashion lovers discover their unique style and turn 
-                wardrobe challenges into stunning fashion solutions.
-                The benefits extend far beyond just clothing. Our community thrives as fashion-forward individuals, style 
-                influencers and personal shoppers create inspiring looks. Our customers become more confident, expressing their 
-                personality through carefully curated outfits while building versatile wardrobes that reflect their authentic selves.
-                We help people of all styles transition to a more intentional approach to fashion that enhances confidence, 
-                improves self-expression, and celebrates individual beauty - all while ensuring great value.
-                At Snatched It, we're transforming fashion challenges into style opportunities.
+                Our journey at Snatched It is driven by the belief that everyone deserves great fashion at the best possible price. 
+                We are helping smart shoppers discover amazing deals and save money on the items they love by comparing prices 
+                across hundreds of retailers in real-time.
+                The benefits extend far beyond just savings. Our community thrives as savvy shoppers, deal hunters and bargain 
+                finders share the best discoveries. Our users become more confident buyers, making informed purchasing decisions 
+                with comprehensive price comparisons and deal alerts that help them shop smarter.
+                We help people of all budgets find exactly what they're looking for at prices that work for them, turning 
+                expensive wish lists into affordable reality - all while ensuring the best value.
+                At Snatched It, we're transforming the way people shop by making every purchase a smart purchase.
             </p>
         </main> 
 
@@ -393,7 +377,7 @@
 
 
 
-    <footer class="footer" id="footer">        <h2>Building a More Stylish World Together</h2>
+    <footer class="footer" id="footer">        <h2>Building a Smarter Shopping World Together</h2>
         <p>
             &copy; Snatched It
         </p>
@@ -407,6 +391,25 @@
     <script src="./assets/js/php.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="assets/js/main.js"></script>
+    
+    <!-- Scroll to top on page load/refresh -->
+    <script>
+        // Ensure page starts at top when loaded or refreshed
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+        
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 50);
+        });
+        
+        // Also handle page show event for back/forward navigation
+        window.addEventListener('pageshow', function() {
+            window.scrollTo(0, 0);
+        });
+    </script>
 </body>
 
 </html>
