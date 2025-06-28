@@ -808,3 +808,598 @@ main.Projects section {
 .footer h2 {
     font-size: 20px;
 }
+
+/* Search Bar Styles */
+.search-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(195, 155, 211, 0.95);
+    padding: 80px 20px 20px;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    transform: translateY(-100%);
+}
+
+body:hover .search-container {
+    transform: translateY(0);
+}
+
+.search-bar {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    background: transparent;
+    color: #2e0249;
+}
+
+.search-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.search-button {
+    background: #6a4c93;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    background: #4c2a6a;
+}
+
+.search-icon {
+    font-size: 18px;
+    color: white;
+}
+
+/* Alternative static search bar (uncomment if you want it always visible) */
+/*
+.search-container {
+    background-color: rgba(195, 155, 211, 0.95);
+    padding: 20px;
+    position: relative;
+    z-index: 998;
+    margin-top: 60px;
+}
+*/
+
+/* Media queries for search bar */
+@media (max-width: 768px) {
+    .search-container {
+        padding: 80px 15px 15px;
+    }
+    
+    .search-bar {
+        max-width: 90%;
+    }
+    
+    .search-input {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    .search-button {
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-container {
+        padding: 80px 10px 10px;
+    }
+    
+    .search-input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .search-button {
+        padding: 10px 12px;
+    }
+    
+    .search-icon {
+        font-size: 16px;
+    }
+}
+
+/* Shopping App Styles */
+
+/* Reset search container positioning */
+.search-container {
+    position: static;
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin: 0;
+    transform: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-container .search-bar {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    background: #fff;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #6c757d;
+}
+
+.filter-tab.active,
+.filter-tab:hover {
+    background: #6a4c93;
+    color: white;
+    border-color: #6a4c93;
+}
+
+/* Mission Banner */
+.mission-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 40px;
+    background: linear-gradient(135deg, #8e44ad 0%, #6a4c93 100%);
+    color: white;
+    margin: 0;
+    min-height: 400px;
+}
+
+.mission-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.mission-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.mission-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background: #fff;
+    color: #6a4c93;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.mission-image {
+    max-width: 400px;
+    height: auto;
+    border-radius: 20px;
+    margin-left: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Products Grid */
+.products-grid {
+    padding: 60px 40px;
+    background: #f8f9fa;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: #2e0249;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Product Cards */
+.product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.product-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #28a745;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.product-badge:nth-of-type(2) {
+    background: #ff6b35;
+}
+
+.product-info {
+    padding: 25px;
+}
+
+.product-info h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2e0249;
+}
+
+.product-description {
+    color: #6c757d;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.product-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.feature-tag {
+    background: #f8f9fa;
+    color: #6a4c93;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid #e9ecef;
+}
+
+/* Product Stats */
+.product-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6a4c93;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Product Rating */
+.product-rating {
+    margin-bottom: 15px;
+}
+
+.stars {
+    color: #ffc107;
+    margin-right: 10px;
+}
+
+.rating-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Product Price */
+.product-price {
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.price-unit {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Product Timeline */
+.timeline-badge {
+    background: #17a2b8;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Product Benefits */
+.product-benefits {
+    margin-bottom: 15px;
+}
+
+.benefit {
+    background: #d4edda;
+    color: #155724;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* Product Potential */
+.potential-earnings {
+    background: #fff3cd;
+    color: #856404;
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Product Button */
+.product-button {
+    width: 100%;
+    background: #6a4c93;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-button:hover {
+    background: #4c2a6a;
+    transform: translateY(-2px);
+}
+
+/* Success Stories */
+.success-stories {
+    padding: 60px 40px;
+    background: white;
+}
+
+.stories-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.story-card {
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.story-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.story-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.story-content h4 {
+    margin-bottom: 10px;
+    color: #2e0249;
+}
+
+.story-content p {
+    color: #6c757d;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.story-metrics {
+    display: flex;
+    gap: 15px;
+}
+
+.metric {
+    background: #6a4c93;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Call to Action Section */
+.cta-section {
+    background: linear-gradient(135deg, #2e0249 0%, #6a4c93 100%);
+    color: white;
+    padding: 80px 40px;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cta-primary {
+    background: white;
+    color: #6a4c93;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-primary:hover,
+.cta-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.cta-secondary:hover {
+    background: white;
+    color: #6a4c93;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mission-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .mission-image {
+        margin-left: 0;
+        margin-top: 30px;
+        max-width: 300px;
+    }
+    
+    .mission-content h1 {
+        font-size: 2rem;
+    }
+    
+    .products-grid,
+    .success-stories,
+    .cta-section {
+        padding: 40px 20px;
+    }
+    
+    .products-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .filter-tabs {
+        gap: 5px;
+    }
+    
+    .filter-tab {
+        padding: 6px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .story-card {
+        flex-direction: column;
+    }
+    
+    .story-image {
+        width: 100%;
+        height: 200px;
+    }
+}
