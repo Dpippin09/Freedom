@@ -39,9 +39,9 @@ p {
 }
 /* Base styles */
 .hero {
-     height: 800px;
+     height: 300px;
     width: 100%;
-    
+    margin-top: 80px; /* Add top margin to account for fixed navbar */
     background-image: url("../images/fashion-hero.jpg");
     background-size: cover;
     background-position: center; 
@@ -56,16 +56,16 @@ p {
     color: white;
     z-index: 2;
     max-width: 600px;
-    padding: 40px 20px;
+    padding: 30px 20px;
     background: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     backdrop-filter: blur(5px);
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
@@ -75,14 +75,33 @@ p {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
+/* Page-specific hero sections */
+.best-deals-hero {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    margin-top: 80px;
+}
+
+.trending-hero {
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    margin-top: 80px;
+}
+
+.best-deals-content, 
+.trending-content {
+    margin-top: 0;
+}
+
 /* Media queries for mobile compatibility */
 @media (max-width: 768px) {
-    .hero {
-        height: 500px; /* Adjust the height for tablets */
+    .hero,
+    .best-deals-hero,
+    .trending-hero {
+        height: 250px; /* Adjust the height for tablets */
+        margin-top: 70px; /* Slightly less margin for tablets */
     }
     
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .hero-content p {
@@ -91,8 +110,11 @@ p {
 }
 
 @media (max-width: 480px) {
-    .hero {
-        height: 300px; /* Adjust the height for mobile phones */
+    .hero,
+    .best-deals-hero,
+    .trending-hero {
+        height: 200px; /* Adjust the height for mobile phones */
+        margin-top: 60px; /* Less margin for mobile */
     }
     
     .hero-content {
@@ -100,8 +122,8 @@ p {
     }
     
     .hero-content h1 {
-        font-size: 2rem;
-        margin-bottom: 15px;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
     }
     
     .hero-content p {
@@ -114,8 +136,9 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #764ba2;
+    background-color: transparent;
     color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     position: fixed;
     width: 100%; /* Ensures the nav container takes the full width */
     top: -60px; /* Move the nav bar out of view */
@@ -149,13 +172,19 @@ body:hover nav {
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     font-size: 18px;
-    
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .nav-links a:hover {
-    background-color: #667eea;
+    background-color: rgba(102, 126, 234, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .dropdown-content {
@@ -219,6 +248,13 @@ p {
     display: block; /* Make the image a block element */
     margin: 0; /* Remove auto margin to stop centering */
     float: left; /* Float the logo to the left */
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.7));
+    transition: all 0.3s ease;
+}
+
+.company-logo:hover {
+    filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.9));
+    transform: scale(1.05);
 }
 
 
