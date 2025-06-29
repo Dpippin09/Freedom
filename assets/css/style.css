@@ -42,9 +42,37 @@ p {
      height: 800px;
     width: 100%;
     
-    background-image: url("../images/farmerOpening.png");
+    background-image: url("../images/fashion-hero.jpg");
     background-size: cover;
     background-position: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+    z-index: 2;
+    max-width: 600px;
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 /* Media queries for mobile compatibility */
@@ -52,11 +80,32 @@ p {
     .hero {
         height: 500px; /* Adjust the height for tablets */
     }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
 }
 
 @media (max-width: 480px) {
     .hero {
         height: 300px; /* Adjust the height for mobile phones */
+    }
+    
+    .hero-content {
+        padding: 20px 15px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
     }
 }
 nav {
@@ -161,7 +210,7 @@ p {
     line-height: 1.75; /* Optional: Adjust the line height for better readability */
 }
 
-.plenterra-logo {
+.company-logo {
     width: 100%; /* Adjust the width as needed */
     max-width: 150px; /* Set a maximum width */
     height: auto; /* Maintain aspect ratio */
@@ -584,7 +633,29 @@ main.Projects section {
     }
 }
 
-/* Base styles */
+/* Responsive improvements for Products Grid Section */
+@media (max-width: 768px) {
+    .products-grid {
+        padding: 40px 20px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        padding: 30px 15px;
+    }
+    
+    .section-title {
+        font-size: 1.7rem;
+        margin-bottom: 25px;
+    }
+}
+
 .our-farms {
     margin-bottom: 20px;
     padding: 30px;
@@ -1040,10 +1111,11 @@ body:hover .search-container {
 
 .products-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Product Cards */
@@ -1054,6 +1126,9 @@ body:hover .search-container {
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
 }
 
 .product-card:hover {
@@ -1091,46 +1166,54 @@ body:hover .search-container {
 
 .product-info {
     padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .product-info h3 {
     font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     color: #333;
 }
 
 .product-description {
     color: #6c757d;
-    margin-bottom: 15px;
+    margin-bottom: 0;
     line-height: 1.6;
+    flex-shrink: 0;
 }
 
 .product-features {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .feature-tag {
     background: #f8f9fa;
     color: #6a4c93;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 12px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 /* Product Stats */
 .product-stats {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 0;
+    padding: 15px 0;
 }
 
 .stat {
     text-align: center;
+    flex: 1;
 }
 
 .stat-number {
@@ -1147,7 +1230,8 @@ body:hover .search-container {
 
 /* Product Rating */
 .product-rating {
-    margin-bottom: 15px;
+    margin-bottom: 0;
+    padding: 10px 0;
 }
 
 .stars {
@@ -1162,7 +1246,8 @@ body:hover .search-container {
 
 /* Product Price */
 .product-price {
-    margin-bottom: 15px;
+    margin-bottom: 0;
+    padding: 10px 0;
 }
 
 .price {
@@ -1176,32 +1261,60 @@ body:hover .search-container {
     font-size: 0.9rem;
 }
 
+.price-comparison {
+    padding: 10px 0;
+    margin-bottom: 0;
+}
+
+.lowest-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #28a745;
+    display: block;
+}
+
+.price-range {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
 /* Product Timeline */
+.product-timeline {
+    padding: 10px 0;
+    margin-bottom: 0;
+}
+
 .timeline-badge {
     background: #17a2b8;
     color: white;
-    padding: 5px 12px;
+    padding: 6px 12px;
     border-radius: 12px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
 }
 
 /* Product Benefits */
 .product-benefits {
-    margin-bottom: 15px;
+    margin-bottom: 0;
+    padding: 10px 0;
 }
 
 .benefit {
     background: #d4edda;
     color: #155724;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 8px;
-    font-size: 0.8rem;
-    margin-bottom: 5px;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
     font-weight: 500;
 }
 
 /* Product Potential */
+.product-potential {
+    padding: 10px 0;
+    margin-bottom: 0;
+}
+
 .potential-earnings {
     background: #fff3cd;
     color: #856404;
@@ -1218,12 +1331,14 @@ body:hover .search-container {
     background: #6a4c93;
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 15px 20px;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-top: auto;
+    min-height: 50px;
 }
 
 .product-button:hover {
@@ -1350,6 +1465,73 @@ body:hover .search-container {
     color: #764ba2;
 }
 
+/* Responsive Design for Product Cards */
+@media (max-width: 768px) {
+    .products-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .product-card {
+        min-height: 450px;
+    }
+    
+    .product-info {
+        padding: 20px;
+        gap: 12px;
+    }
+    
+    .product-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .feature-tag {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    
+    .product-button {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .product-card {
+        min-height: 400px;
+    }
+    
+    .product-info {
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .product-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .feature-tag {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .product-button {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}
+
 /* Mobile App Compatibility */
 
 /* Mobile Navigation Improvements */
@@ -1379,7 +1561,7 @@ body:hover .search-container {
         font-size: 0.9rem;
     }
     
-    .plenterra-logo {
+    .company-logo {
         max-height: 40px;
         width: auto;
     }
