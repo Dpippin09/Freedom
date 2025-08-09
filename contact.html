@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact Snatched It - Get help with price comparisons, deal alerts, and fashion shopping questions.">
+    <meta name="description" content="Contact Aced - Get help with price comparisons, deal alerts, and fashion shopping questions.">
     <meta name="theme-color" content="#764ba2">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Snatched It">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta name="apple-mobile-web-app-title" content="Aced">
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
     <link rel="stylesheet" href="./assets/css/contact.css">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
-    <title>Contact Us - Snatched It</title>
+    <title>Contact Us - Aced</title>
 </head>
 
 <body>
     <header>
         <nav>
-            <img src="./assets/images/Snatched.jpg" class="company-logo" alt="Snatched It - Fashion Price Comparison">
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="best-deals.html">Best Deals</a></li>
                 <li><a href="trending-now.html">Trending Now</a></li>
                 <li><a href="contact.html" class="active">Contact Us</a></li>
+                <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
                 <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
             </ul>
         </nav>
+        <div class="nav-overlay" id="nav-overlay"></div>
     </header>
 
     <article class="content contact-content">
@@ -53,7 +60,7 @@
                     <p>Get help with price comparisons, deal alerts, or technical issues</p>
                     <div class="contact-details">
                         <span class="contact-item">📞 (555) 555-5555</span>
-                        <span class="contact-item">✉️ support@snatchedit.com</span>
+                        <span class="contact-item">✉️ support@aced.com</span>
                         <span class="contact-item">🕒 Mon-Fri 9AM-8PM EST</span>
                     </div>
                     <button class="contact-button">Start Live Chat</button>
@@ -65,7 +72,7 @@
                     <h3>Store Partnerships</h3>
                     <p>Interested in partnering with us? Let's discuss how we can work together</p>
                     <div class="contact-details">
-                        <span class="contact-item">📧 partnerships@snatchedit.com</span>
+                        <span class="contact-item">📧 partnerships@aced.com</span>
                         <span class="contact-item">📋 Business inquiries</span>
                         <span class="contact-item">🏢 Retailer onboarding</span>
                     </div>
@@ -78,7 +85,7 @@
                     <h3>Press & Media</h3>
                     <p>Media inquiries, press releases, and interview requests</p>
                     <div class="contact-details">
-                        <span class="contact-item">📧 press@snatchedit.com</span>
+                        <span class="contact-item">📧 press@aced.com</span>
                         <span class="contact-item">🎤 Interview requests</span>
                         <span class="contact-item">📊 Company information</span>
                     </div>
@@ -91,7 +98,7 @@
                     <h3>Technical Support</h3>
                     <p>Website issues, app problems, or data discrepancies</p>
                     <div class="contact-details">
-                        <span class="contact-item">📧 tech@snatchedit.com</span>
+                        <span class="contact-item">📧 tech@aced.com</span>
                         <span class="contact-item">🐛 Bug reports</span>
                         <span class="contact-item">⚡ Priority response</span>
                     </div>
@@ -171,7 +178,7 @@
                     <p>We work with over 150 major retailers including Nordstrom, Zara, H&M, ASOS, Nike, and many more. New stores are added regularly.</p>
                 </div>
                 <div class="faq-item">
-                    <h4>💰 Is Snatched It free to use?</h4>
+                    <h4>💰 Is Aced free to use?</h4>
                     <p>Yes! Our basic price comparison service is completely free. Premium features like advanced alerts are available with our Pro plan.</p>
                 </div>
                 <div class="faq-item">
@@ -191,7 +198,7 @@
                 <div class="location-info">
                     <h2>📍 Our Location</h2>
                     <div class="address-card">
-                        <h3>Snatched It Headquarters</h3>
+                        <h3>Aced Headquarters</h3>
                         <div class="address">
                             <span>123 Fashion Avenue</span>
                             <span>Ogden, UT 84401</span>
@@ -230,19 +237,19 @@
                     <div class="social-icon">📸</div>
                     <h4>Instagram</h4>
                     <p>Style inspiration and flash sales</p>
-                    <button class="social-button">Follow @SnatchedIt</button>
+                    <button class="social-button">Follow @Aced</button>
                 </div>
                 <div class="social-card">
                     <div class="social-icon">🐦</div>
                     <h4>Twitter</h4>
                     <p>Real-time deal alerts</p>
-                    <button class="social-button">Follow @SnatchedIt</button>
+                    <button class="social-button">Follow @Aced</button>
                 </div>
                 <div class="social-card">
                     <div class="social-icon">📱</div>
                     <h4>TikTok</h4>
                     <p>Trending fashion finds</p>
-                    <button class="social-button">Follow @SnatchedIt</button>
+                    <button class="social-button">Follow @Aced</button>
                 </div>
             </div>
         </section>
@@ -250,11 +257,11 @@
 
     <footer class="footer" id="footer">
         <h2>Building a Smarter Shopping World Together</h2>
-        <p>&copy; Snatched It</p>
+        <p>&copy; Aced</p>
         <div class="contactInfo" id="contactInfo">
             <ul>
                 <li>Phone: (555)5555555</li>
-                <li>Email: hello@snatchedit.com</li>
+                <li>Email: hello@aced.com</li>
                 <li>Ogden, UT</li>
             </ul>
         </div>
@@ -302,6 +309,35 @@
                         break;
                     default:
                         subject.placeholder = 'Brief description of your inquiry';
+                }
+            });
+            
+            // Hamburger Menu Functionality
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const navLinks = document.getElementById('nav-links');
+            const navOverlay = document.getElementById('nav-overlay');
+            
+            function toggleMenu() {
+                hamburgerMenu.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                navOverlay.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+            }
+            
+            hamburgerMenu.addEventListener('click', toggleMenu);
+            navOverlay.addEventListener('click', toggleMenu);
+            
+            // Close menu when clicking on nav links
+            navLinks.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    toggleMenu();
+                }
+            });
+            
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    toggleMenu();
                 }
             });
         });

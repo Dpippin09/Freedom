@@ -487,3 +487,293 @@ if (window.innerWidth <= 768) {
         imageObserver.observe(img);
     });
 }
+
+// ========================================
+// FEEDBACK MODAL FUNCTIONALITY
+// ========================================
+
+let currentRating = 0;
+
+function openFeedbackModal() {
+    // Create modal HTML if it doesn't exist
+    if (!document.getElementById('feedbackModal')) {
+        const modalHTML = `
+            <div id="feedbackModal" class="feedback-modal">
+                <div class="feedback-content">
+                    <button class="feedback-close" onclick="closeFeedbackModal()">&times;</button>
+                    <div class="feedback-header">
+                        <h2>Share Your Feedback</h2>
+                        <p>Help us improve your experience. Your thoughts matter to us!</p>
+                    </div>
+                    <form class="feedback-form" onsubmit="submitFeedback(event)">
+                        <div class="feedback-group">
+                            <label for="feedbackName">Your Name (Optional)</label>
+                            <input type="text" id="feedbackName" class="feedback-input" placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="feedback-group">
+                            <label for="feedbackEmail">Email (Optional)</label>
+                            <input type="email" id="feedbackEmail" class="feedback-input" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="feedback-group">
+                            <label for="feedbackType">Feedback Type</label>
+                            <select id="feedbackType" class="feedback-select" required>
+                                <option value="">Select feedback type</option>
+                                <option value="bug">Bug Report</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="improvement">Suggestion for Improvement</option>
+                                <option value="complaint">Complaint</option>
+                                <option value="compliment">Compliment</option>
+                                <option value="general">General Feedback</option>
+                            </select>
+                        </div>
+                        
+                        <div class="feedback-group">
+                            <label>Rate Your Experience</label>
+                            <div class="feedback-rating">
+                                <span class="rating-star" data-rating="1">★</span>
+                                <span class="rating-star" data-rating="2">★</span>
+                                <span class="rating-star" data-rating="3">★</span>
+                                <span class="rating-star" data-rating="4">★</span>
+                                <span class="rating-star" data-rating="5">★</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feedback-group">
+                            <label for="feedbackMessage">Your Feedback</label>
+                            <textarea id="feedbackMessage" class="feedback-textarea" 
+                                     placeholder="Please share your thoughts, suggestions, or report any issues you've encountered..."
+                                     required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="feedback-submit">Send Feedback</button>
+                    </form>
+                </div>
+            </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Add event listeners for rating stars
+        const stars = document.querySelectorAll('.rating-star');
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                currentRating = parseInt(this.dataset.rating);
+                updateStarRating(currentRating);
+            });
+            
+            star.addEventListener('mouseover', function() {
+                const hoverRating = parseInt(this.dataset.rating);
+                updateStarRating(hoverRating, true);
+            });
+        });
+        
+        // Reset stars on mouse leave
+        document.querySelector('.feedback-rating').addEventListener('mouseleave', function() {
+            updateStarRating(currentRating);
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('feedbackModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFeedbackModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('feedbackModal').classList.contains('active')) {
+                closeFeedbackModal();
+            }
+        });
+    }
+    
+    // Show modal
+    document.getElementById('feedbackModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Focus on first input
+    setTimeout(() => {
+        document.getElementById('feedbackName').focus();
+    }, 300);
+}
+
+function closeFeedbackModal() {
+    const modal = document.getElementById('feedbackModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Reset form after animation completes
+        setTimeout(() => {
+            resetFeedbackForm();
+        }, 300);
+    }
+}
+
+function updateStarRating(rating, isHover = false) {
+    const stars = document.querySelectorAll('.rating-star');
+    stars.forEach((star, index) => {
+        if (index < rating) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+function resetFeedbackForm() {
+    const form = document.querySelector('.feedback-form');
+    if (form) {
+        form.reset();
+        currentRating = 0;
+        updateStarRating(0);
+    }
+}
+
+function submitFeedback(event) {
+    event.preventDefault();
+    
+    // Get form data
+    const formData = {
+        name: document.getElementById('feedbackName').value.trim(),
+        email: document.getElementById('feedbackEmail').value.trim(),
+        type: document.getElementById('feedbackType').value,
+        rating: currentRating,
+        message: document.getElementById('feedbackMessage').value.trim(),
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        url: window.location.href
+    };
+    
+    // Validate required fields
+    if (!formData.type) {
+        alert('Please select a feedback type.');
+        document.getElementById('feedbackType').focus();
+        return;
+    }
+    
+    if (!formData.message) {
+        alert('Please enter your feedback message.');
+        document.getElementById('feedbackMessage').focus();
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = document.querySelector('.feedback-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Simulate API call (replace with actual endpoint)
+    setTimeout(() => {
+        try {
+            // Store feedback locally for demo (replace with actual API call)
+            const existingFeedback = JSON.parse(localStorage.getItem('siteFeedback') || '[]');
+            existingFeedback.push(formData);
+            localStorage.setItem('siteFeedback', JSON.stringify(existingFeedback));
+            
+            // Show success message
+            const successHTML = `
+                <div class="feedback-success" style="text-align: center; padding: 40px;">
+                    <div style="font-size: 3rem; color: var(--accent-lavender); margin-bottom: 20px;">✓</div>
+                    <h3 style="color: var(--primary-dark); margin-bottom: 10px;">Thank You!</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">
+                        Your feedback has been received and is valuable to us. 
+                        ${formData.email ? 'We\'ll get back to you soon!' : ''}
+                    </p>
+                    <button onclick="closeFeedbackModal()" class="feedback-submit" style="margin-top: 10px;">
+                        Close
+                    </button>
+                </div>
+            `;
+            
+            document.querySelector('.feedback-content').innerHTML = successHTML;
+            
+            // Auto-close after 3 seconds
+            setTimeout(() => {
+                closeFeedbackModal();
+            }, 3000);
+            
+            console.log('Feedback submitted:', formData);
+            
+        } catch (error) {
+            console.error('Error submitting feedback:', error);
+            alert('Sorry, there was an error submitting your feedback. Please try again.');
+            
+            // Reset button state
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    }, 1000);
+}
+
+// Analytics for feedback (optional)
+function trackFeedbackEvent(action, category = 'feedback') {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+            'event_category': category,
+            'event_label': window.location.pathname
+        });
+    }
+    
+    // Console log for debugging
+    console.log(`Feedback Event: ${action} on ${window.location.pathname}`);
+}
+
+// Track when feedback modal is opened
+document.addEventListener('click', function(e) {
+    if (e.target.getAttribute('onclick') === 'openFeedbackModal()') {
+        trackFeedbackEvent('modal_opened');
+    }
+});
+
+// Show feedback button tooltip on mobile
+if (window.innerWidth <= 768) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const feedbackLinks = document.querySelectorAll('a[onclick="openFeedbackModal()"]');
+        feedbackLinks.forEach(link => {
+            link.style.position = 'relative';
+            
+            link.addEventListener('touchstart', function() {
+                // Create tooltip
+                const tooltip = document.createElement('div');
+                tooltip.textContent = 'Share your thoughts with us!';
+                tooltip.style.cssText = `
+                    position: absolute;
+                    top: -35px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: var(--primary-dark);
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    font-size: 12px;
+                    white-space: nowrap;
+                    z-index: 1000;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                `;
+                
+                this.appendChild(tooltip);
+                
+                setTimeout(() => {
+                    tooltip.style.opacity = '1';
+                }, 10);
+                
+                // Remove tooltip after delay
+                setTimeout(() => {
+                    if (tooltip.parentNode) {
+                        tooltip.style.opacity = '0';
+                        setTimeout(() => {
+                            if (tooltip.parentNode) {
+                                tooltip.remove();
+                            }
+                        }, 300);
+                    }
+                }, 2000);
+            });
+        });
+    });
+}

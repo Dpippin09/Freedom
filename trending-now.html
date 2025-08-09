@@ -8,27 +8,32 @@
     <meta name="theme-color" content="#764ba2">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Snatched It">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta name="apple-mobile-web-app-title" content="Aced">
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
     <link rel="stylesheet" href="./assets/css/trending.css">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
-    <title>Trending Now - Snatched It</title>
+    <title>Trending Now - Aced</title>
 </head>
 
 <body>
     <header>
         <nav>
-            <img src="./assets/images/Snatched.jpg" class="company-logo" alt="Snatched It - Fashion Price Comparison">
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="best-deals.html">Best Deals</a></li>
                 <li><a href="trending-now.html" class="active">Trending Now</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
                 <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
             </ul>
         </nav>
-    </header>
+        <div class="nav-overlay" id="nav-overlay"></div>
 
     <article class="content trending-content">
         <!-- Page Header -->
@@ -359,11 +364,11 @@
 
     <footer class="footer" id="footer">
         <h2>Building a Smarter Shopping World Together</h2>
-        <p>&copy; Snatched It</p>
+        <p>&copy; Aced</p>
         <div class="contactInfo" id="contactInfo">
             <ul>
                 <li>Phone: (555)5555555</li>
-                <li>Email: hello@snatchedit.com</li>
+                <li>Email: hello@aced.com</li>
                 <li>Ogden, UT</li>
             </ul>
         </div>
@@ -410,6 +415,35 @@
         
         window.addEventListener('pageshow', function() {
             window.scrollTo(0, 0);
+        });
+        
+        // Hamburger Menu Functionality
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navOverlay = document.getElementById('nav-overlay');
+        
+        function toggleMenu() {
+            hamburgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        
+        hamburgerMenu.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking on nav links
+        navLinks.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                toggleMenu();
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
         });
     </script>
 </body>

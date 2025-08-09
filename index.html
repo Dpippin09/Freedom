@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Find the best fashion deals across hundreds of retailers. Compare prices, track trends, and never miss a sale again!">
     <meta name="theme-color" content="#764ba2">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Snatched It">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta name="apple-mobile-web-app-title" content="Aced">
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Snatched It - Find Fashion for Less</title>
+    <title>Aced - Find Fashion for Less</title>
 </head>
 
 <body>
-    <header>        <nav>
-            <img src="./assets/images/Snatched.jpg" class="company-logo" alt="Snatched It - Fashion Price Comparison">            <ul class="nav-links" id="nav-links">
-                <!-- <li><a href="#about-Us">How It Works</a></li> -->
+    <header>
+        <nav>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
                 <li><a href="best-deals.html">Best Deals</a></li>
                 <li><a href="trending-now.html">Trending Now</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
                 <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
             </ul>
         </nav>
+        <div class="nav-overlay" id="nav-overlay"></div>
            
             <!-- Search Bar Section -->
             
             <section class="hero">
                 <div class="hero-content">
-                    <h1>Find Fashion for Less</h1>
-                    <p>Compare prices across hundreds of retailers and never miss a deal again!</p>
+                    <h1>Aced</h1>
+                    <p>Find Fashion for Less - Compare prices across hundreds of retailers and never miss a deal again!</p>
                 </div>
             </section>
         </header>        <article class="content">
@@ -153,7 +162,7 @@
 
                     <!-- Product Card 5: Athletic Wear -->                    <div class="product-card" data-category="clothing">
                         <div class="product-image">
-                            <img src="./assets/images/athleticClothes (1).png" alt="Athletic Wear">
+                            <img src="./assets/images/athleticClothes.png" alt="Athletic Wear">
                             <div class="product-badge">Performance</div>
                         </div>
                         <div class="product-info">
@@ -190,30 +199,15 @@
                         </div>
                     </div>
                 </div>
-            </section>            <!-- Success Stories Section -->            <section class="success-stories">
-                <h2 class="section-title">Success Stories</h2>
-                <div class="stories-container">
-                    <div class="story-card">
-                        <img src="./assets/images/farmers.jpg" alt="Happy Shopper" class="story-image">
-                        <div class="story-content">
-                            <h4>Sarah M.</h4>
-                            <p>"Saved $89 on my dream dress! Found the exact same one for 40% less than the first store I checked."</p>
-                            <div class="story-metrics">
-                                <span class="metric">💰 $89 Saved</span>
-                                <span class="metric">🔍 Compared 5 Stores</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <!-- Call to Action Section -->            <section class="cta-section">
                 <div class="cta-content">
-                    <h2>Ready to Start Saving on Fashion?</h2>
-                    <p>Join thousands of smart shoppers finding the best deals across hundreds of stores</p>
+                    <h2>Elevate Your Style with Aced</h2>
+                    <p>Join the exclusive community of fashion enthusiasts who choose premium quality and timeless elegance</p>
                     <div class="cta-buttons">
-                        <button class="cta-primary">Start Comparing Prices</button>
-                        <button class="cta-secondary">Set Price Alerts</button>
+                        <button class="cta-primary">Explore Collections</button>
+                        <button class="cta-secondary">Book Styling Session</button>
                     </div>
                 </div>
             </section>
@@ -277,7 +271,7 @@
                 <h3>Personal Styling:</h3>
                 <div class="fertilizer-content">
                     <p>
-                        Snatched It elevates your style by pairing premium pieces with expert styling advice. Combined with our 
+                        Aced elevates your style by pairing premium pieces with expert styling advice. Combined with our 
                         personalized styling service, we transform your look in just a few sessions instead of years of fashion trial and error. Our process starts with detailed style analysis for each individual client, then based on the 
                         results we custom curate a wardrobe and styling plan designed to enhance your specific body type, lifestyle, and personal preferences.
                     </p>
@@ -370,7 +364,7 @@
             <img src="./assets/images/farmers.jpg" class="float-right"
                 alt="A team working together to create amazing fashion looks" />            <h2>Our Customers and Community</h2>
             <p>
-                Our journey at Snatched It is driven by the belief that everyone deserves great fashion at the best possible price. 
+                Our journey at Aced is driven by the belief that everyone deserves great fashion at the best possible price. 
                 We are helping smart shoppers discover amazing deals and save money on the items they love by comparing prices 
                 across hundreds of retailers in real-time.
                 The benefits extend far beyond just savings. Our community thrives as savvy shoppers, deal hunters and bargain 
@@ -378,7 +372,7 @@
                 with comprehensive price comparisons and deal alerts that help them shop smarter.
                 We help people of all budgets find exactly what they're looking for at prices that work for them, turning 
                 expensive wish lists into affordable reality - all while ensuring the best value.
-                At Snatched It, we're transforming the way people shop by making every purchase a smart purchase.
+                At Aced, we're transforming the way people shop by making every purchase a smart purchase.
             </p>
         </main> 
 
@@ -388,16 +382,62 @@
 
 
 
-    <footer class="footer" id="footer">        <h2>Building a Smarter Shopping World Together</h2>
+    <footer class="footer" id="footer">
+        <h2>Building a Smarter Shopping World Together</h2>
         <p>
-            &copy; Snatched It
+            &copy; Aced
         </p>
-        <class="contactInfo" id="contactInfo">
+        <ul class="contactInfo" id="contactInfo">
             <li>Phone: (555)5555555</li>
-            <li>Email: hello@snatchedit.com</li>
+            <li>Email: hello@aced.com</li>
             <li>Ogden, UT</li>
-
+        </ul>
     </footer>
+
+    <!-- Feedback Modal -->
+    <div class="feedback-modal" id="feedback-modal">
+        <div class="feedback-content">
+            <button class="feedback-close" id="feedback-close">&times;</button>
+            <div class="feedback-header">
+                <h2>Share Your Feedback</h2>
+                <p>Help us improve your shopping experience</p>
+            </div>
+            <form class="feedback-form" id="feedback-form">
+                <div class="feedback-group">
+                    <label for="feedback-name">Name</label>
+                    <input type="text" id="feedback-name" class="feedback-input" required>
+                </div>
+                <div class="feedback-group">
+                    <label for="feedback-email">Email</label>
+                    <input type="email" id="feedback-email" class="feedback-input" required>
+                </div>
+                <div class="feedback-group">
+                    <label for="feedback-type">Feedback Type</label>
+                    <select id="feedback-type" class="feedback-select" required>
+                        <option value="">Select type...</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="feature">Feature Request</option>
+                        <option value="general">General Feedback</option>
+                    </select>
+                </div>
+                <div class="feedback-group">
+                    <label for="feedback-rating">Rating</label>
+                    <div class="feedback-rating" id="feedback-rating">
+                        <span class="rating-star" data-rating="1">★</span>
+                        <span class="rating-star" data-rating="2">★</span>
+                        <span class="rating-star" data-rating="3">★</span>
+                        <span class="rating-star" data-rating="4">★</span>
+                        <span class="rating-star" data-rating="5">★</span>
+                    </div>
+                </div>
+                <div class="feedback-group">
+                    <label for="feedback-message">Message</label>
+                    <textarea id="feedback-message" class="feedback-textarea" required></textarea>
+                </div>
+                <button type="submit" class="feedback-submit">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
 
     <script src="./assets/js/api-service.js"></script>
     <script src="./assets/js/scraping-service.js"></script>
@@ -446,6 +486,107 @@
         // Also handle page show event for back/forward navigation
         window.addEventListener('pageshow', function() {
             window.scrollTo(0, 0);
+        });
+        
+        // Hamburger Menu Functionality
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navOverlay = document.getElementById('nav-overlay');
+        
+        function toggleMenu() {
+            hamburgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        
+        hamburgerMenu.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking on nav links
+        navLinks.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                toggleMenu();
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+        
+        // Feedback Modal Functionality
+        function openFeedbackModal() {
+            document.getElementById('feedback-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeFeedbackModal() {
+            document.getElementById('feedback-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Initialize feedback modal
+        const feedbackModal = document.getElementById('feedback-modal');
+        const feedbackClose = document.getElementById('feedback-close');
+        const feedbackForm = document.getElementById('feedback-form');
+        const ratingStars = document.querySelectorAll('.rating-star');
+        let selectedRating = 0;
+        
+        feedbackClose.addEventListener('click', closeFeedbackModal);
+        
+        feedbackModal.addEventListener('click', function(e) {
+            if (e.target === feedbackModal) {
+                closeFeedbackModal();
+            }
+        });
+        
+        // Star rating functionality
+        ratingStars.forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.rating);
+                updateStarDisplay();
+            });
+            
+            star.addEventListener('mouseenter', function() {
+                const hoverRating = parseInt(this.dataset.rating);
+                updateStarDisplay(hoverRating);
+            });
+        });
+        
+        document.getElementById('feedback-rating').addEventListener('mouseleave', function() {
+            updateStarDisplay();
+        });
+        
+        function updateStarDisplay(hoverRating = null) {
+            const rating = hoverRating || selectedRating;
+            ratingStars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+        
+        // Form submission
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would normally send the feedback to your server
+            alert('Thank you for your feedback! We appreciate your input.');
+            closeFeedbackModal();
+            feedbackForm.reset();
+            selectedRating = 0;
+            updateStarDisplay();
+        });
+        
+        // Escape key closes modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && feedbackModal.classList.contains('active')) {
+                closeFeedbackModal();
+            }
         });
     </script>
 </body>

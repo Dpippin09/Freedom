@@ -4,30 +4,36 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join Snatched It - Your ultimate fashion price comparison platform. Sign up to track deals, save favorites, and never miss a fashion steal again.">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Login/Sign Up - Snatched It | Fashion Price Comparison</title>
+    <meta name="description" content="Join Aced - Your ultimate fashion price comparison platform. Sign up to track deals, save favorites, and never miss a fashion steal again.">
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
+    <link rel="stylesheet" href="./assets/css/auth-sleek.css">
+    <title>Login/Sign Up - Aced | Fashion Price Comparison</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar">
-            <div class="nav-brand">
-                <h1><a href="index.html">Snatched It</a></h1>
-            </div>
-            <ul class="nav-links">
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="best-deals.html">Best Deals</a></li>
                 <li><a href="trending-now.html">Trending Now</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
+                <li><a href="login-signup.html" class="login-signup active">Login/Signup</a></li>
             </ul>
         </nav>
+        <div class="nav-overlay" id="nav-overlay"></div>
     </header>
 
     <main class="auth-main">
         <div class="auth-container">
             <div class="auth-header">
-                <h1>Welcome to Snatched It</h1>
+                <h1>Welcome to Aced</h1>
                 <p>Join thousands of fashion lovers finding the best deals across the web</p>
             </div>
 
@@ -134,7 +140,7 @@
             </div>
 
             <div class="auth-benefits">
-                <h3>Why Join Snatched It?</h3>
+                <h3>Why Join Aced?</h3>
                 <div class="benefits-grid">
                     <div class="benefit-item">
                         <div class="benefit-icon">🔍</div>
@@ -164,7 +170,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Snatched It</h3>
+                <h3>Aced</h3>
                 <p>Your ultimate fashion price comparison platform</p>
             </div>
             <div class="footer-section">
@@ -186,7 +192,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Snatched It. All rights reserved.</p>
+            <p>&copy; 2024 Aced. All rights reserved.</p>
         </div>
     </footer>
 
@@ -222,6 +228,35 @@
         // Auto-scroll to top on page load
         window.addEventListener('load', function() {
             window.scrollTo(0, 0);
+        });
+        
+        // Hamburger Menu Functionality
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navOverlay = document.getElementById('nav-overlay');
+        
+        function toggleMenu() {
+            hamburgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        
+        hamburgerMenu.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking on nav links
+        navLinks.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                toggleMenu();
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
         });
     </script>
 </body>
