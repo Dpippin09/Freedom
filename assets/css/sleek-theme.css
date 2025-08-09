@@ -150,19 +150,17 @@ h1 {
     display: inline-block;
     padding: 0 4rem;
     
-    /* Elegant gradient with more sophistication */
+    /* Elegant gradient with more sophistication - darker for better contrast */
     background: linear-gradient(135deg, 
-        #2d2438 0%, 
-        #b8a9d9 15%, 
-        #d4c7e8 35%, 
-        #9d8bc9 55%, 
-        #c9b4d4 75%, 
-        #2d2438 100%);
+        #1a1427 0%, 
+        #8a7bb5 15%, 
+        #9d8bc9 35%, 
+        #7a6ba3 55%, 
+        #a589bf 75%, 
+        #1a1427 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-size: 400% 400%;
-    animation: elegantShimmer 6s ease-in-out infinite;
     
     /* Elegant text shadow for depth */
     filter: drop-shadow(0 8px 32px rgba(184, 169, 217, 0.4))
@@ -232,6 +230,30 @@ h1 {
     100% { 
         background-position: 0% 50%; 
         transform: scale(1); 
+    }
+}
+
+/* Subtle text shimmer animation for subtitle */
+@keyframes subtleTextShimmer {
+    0% { 
+        background-position: 0% 50%; 
+        opacity: 0.85;
+    }
+    25% { 
+        background-position: 30% 30%; 
+        opacity: 0.95;
+    }
+    50% { 
+        background-position: 100% 50%; 
+        opacity: 0.9;
+    }
+    75% { 
+        background-position: 70% 70%; 
+        opacity: 1;
+    }
+    100% { 
+        background-position: 0% 50%; 
+        opacity: 0.85;
     }
 }
 
@@ -652,6 +674,10 @@ nav:hover {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    
+    /* Animated blending wave background */
+    background-size: 400% 400%;
+    animation: waveBlend 12s ease-in-out infinite;
 }
 
 .hero::before {
@@ -662,10 +688,30 @@ nav:hover {
     width: 100%;
     height: 100%;
     background-image: 
-        radial-gradient(circle at 15% 30%, rgba(184, 169, 217, 0.08) 0%, transparent 60%),
-        radial-gradient(circle at 85% 70%, rgba(212, 199, 232, 0.06) 0%, transparent 60%),
-        radial-gradient(circle at 50% 50%, rgba(201, 180, 212, 0.04) 0%, transparent 70%);
-    animation: elegantFloat 25s ease-in-out infinite;
+        radial-gradient(circle at 20% 20%, rgba(184, 169, 217, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(212, 199, 232, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 60% 40%, rgba(201, 180, 212, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 30% 70%, rgba(184, 169, 217, 0.15) 0%, transparent 70%),
+        radial-gradient(circle at 90% 30%, rgba(157, 139, 201, 0.2) 0%, transparent 50%);
+    background-size: 300% 300%, 250% 250%, 400% 400%, 350% 350%, 200% 200%;
+    animation: waveFlow 20s ease-in-out infinite, colorShift 15s linear infinite;
+    opacity: 0.7;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, rgba(184, 169, 217, 0.1) 0%, transparent 30%, rgba(212, 199, 232, 0.08) 60%, transparent 100%),
+        linear-gradient(-45deg, transparent 0%, rgba(201, 180, 212, 0.06) 30%, transparent 70%, rgba(157, 139, 201, 0.1) 100%);
+    background-size: 200% 200%, 300% 300%;
+    animation: waveSweep 18s ease-in-out infinite reverse;
+    opacity: 0.6;
+    z-index: 1;
 }
 
 @keyframes elegantFloat {
@@ -673,6 +719,97 @@ nav:hover {
     25% { transform: translateY(-8px) rotate(0.5deg) scale(1.02); }
     50% { transform: translateY(4px) rotate(-0.3deg) scale(0.98); }
     75% { transform: translateY(-6px) rotate(0.2deg) scale(1.01); }
+}
+
+/* Animated blending wave background */
+@keyframes waveBlend {
+    0% { 
+        background-position: 0% 0%;
+        background-size: 400% 400%;
+    }
+    25% { 
+        background-position: 100% 50%;
+        background-size: 350% 350%;
+    }
+    50% { 
+        background-position: 50% 100%;
+        background-size: 450% 450%;
+    }
+    75% { 
+        background-position: 0% 50%;
+        background-size: 300% 300%;
+    }
+    100% { 
+        background-position: 0% 0%;
+        background-size: 400% 400%;
+    }
+}
+
+/* Flowing wave patterns */
+@keyframes waveFlow {
+    0% { 
+        background-position: 0% 0%, 100% 100%, 50% 50%, 25% 75%, 75% 25%;
+        transform: rotate(0deg) scale(1);
+    }
+    25% { 
+        background-position: 50% 25%, 25% 75%, 75% 25%, 100% 0%, 0% 100%;
+        transform: rotate(2deg) scale(1.05);
+    }
+    50% { 
+        background-position: 100% 50%, 0% 50%, 25% 75%, 75% 25%, 50% 50%;
+        transform: rotate(-1deg) scale(0.95);
+    }
+    75% { 
+        background-position: 75% 75%, 50% 25%, 0% 100%, 100% 0%, 25% 75%;
+        transform: rotate(3deg) scale(1.1);
+    }
+    100% { 
+        background-position: 0% 0%, 100% 100%, 50% 50%, 25% 75%, 75% 25%;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+/* Color shifting animation */
+@keyframes colorShift {
+    0% { 
+        filter: hue-rotate(0deg) brightness(1) saturate(1);
+    }
+    25% { 
+        filter: hue-rotate(5deg) brightness(1.1) saturate(1.1);
+    }
+    50% { 
+        filter: hue-rotate(10deg) brightness(0.95) saturate(1.2);
+    }
+    75% { 
+        filter: hue-rotate(-5deg) brightness(1.05) saturate(0.9);
+    }
+    100% { 
+        filter: hue-rotate(0deg) brightness(1) saturate(1);
+    }
+}
+
+/* Sweeping wave animation */
+@keyframes waveSweep {
+    0% { 
+        background-position: -200% -200%, 300% 300%;
+        transform: rotate(0deg);
+    }
+    25% { 
+        background-position: -100% 0%, 200% 100%;
+        transform: rotate(1deg);
+    }
+    50% { 
+        background-position: 0% 100%, 100% 0%;
+        transform: rotate(-0.5deg);
+    }
+    75% { 
+        background-position: 100% 200%, 0% -100%;
+        transform: rotate(1.5deg);
+    }
+    100% { 
+        background-position: 200% 300%, -100% -200%;
+        transform: rotate(0deg);
+    }
 }
 
 .hero-content {
@@ -713,6 +850,31 @@ nav:hover {
     letter-spacing: 0.03em;
     text-shadow: 0 2px 15px rgba(184, 169, 217, 0.2);
     line-height: 1.6;
+    
+    /* Elegant artistic styling to match the title */
+    font-family: 'Playfair Display', 'Cormorant Garamond', 'Georgia', serif;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Subtle gradient effect */
+    background: linear-gradient(135deg, 
+        var(--text-muted) 0%, 
+        var(--accent-deep-lavender) 30%, 
+        var(--text-muted) 70%, 
+        var(--charcoal) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: subtleTextShimmer 8s ease-in-out infinite;
+    
+    /* Enhanced text shadow for depth */
+    filter: drop-shadow(0 4px 12px rgba(184, 169, 217, 0.15))
+            drop-shadow(0 2px 6px rgba(212, 199, 232, 0.1));
 }
 
 /* ========================================
@@ -1180,6 +1342,62 @@ section {
 }
 
 /* ========================================
+   OUR CUSTOMERS SECTION
+   ======================================== */
+
+.our-farms {
+    background: var(--cream-white);
+    padding: var(--spacing-4xl) var(--spacing-2xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.our-farms .float-right {
+    flex: 0 0 300px;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+    order: 2;
+}
+
+.our-farms h2,
+.our-farms p {
+    flex: 1;
+}
+
+.our-farms h2 {
+    color: var(--primary-dark);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    margin-bottom: var(--spacing-lg);
+}
+
+.our-farms p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .our-farms {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-xl);
+    }
+    
+    .our-farms .float-right {
+        order: 1;
+        width: 250px;
+        height: 250px;
+        flex: none;
+    }
+}
+
+/* ========================================
    RESPONSIVE DESIGN
    ======================================== */
 
@@ -1323,6 +1541,8 @@ section {
     .hero-content p {
         font-size: 1.1rem;
         padding: 0 var(--spacing-sm);
+        letter-spacing: 0.01em;
+        line-height: 1.5;
     }
     
     .search-bar {
