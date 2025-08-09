@@ -141,7 +141,7 @@ h1 {
 
 /* Special styling for the "Aced" brand name */
 .hero-content h1 {
-    font-size: clamp(3.5rem, 9vw, 7rem);
+    font-size: clamp(7rem, 18vw, 14rem);
     font-weight: 200;
     letter-spacing: -0.05em;
     line-height: 0.9;
@@ -1228,7 +1228,7 @@ section {
     
     /* Adjust "Aced" title for mobile */
     .hero-content h1 {
-        font-size: clamp(2.8rem, 8vw, 5rem);
+        font-size: clamp(5.6rem, 16vw, 10rem);
         padding: 0 2.5rem;
         letter-spacing: -0.03em;
     }
@@ -1300,7 +1300,7 @@ section {
     
     /* Mobile-specific "Aced" title adjustments */
     .hero-content h1 {
-        font-size: clamp(2.2rem, 7vw, 4rem);
+        font-size: clamp(4.4rem, 14vw, 8rem);
         padding: 0 2rem;
         letter-spacing: -0.02em;
         margin-bottom: var(--spacing-md);
