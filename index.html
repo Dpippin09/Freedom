@@ -361,8 +361,7 @@
             </section>
         </main>
         <main id="our-customers" class="our-farms">
-            <img src="./assets/images/handbag.png" class="float-right"
-                alt="Happy customers enjoying their fashion finds and deals" />            <h2>Our Customers and Community</h2>
+            <h2>Our Customers and Community</h2>
             <p>
                 Our journey at Aced is driven by the belief that everyone deserves great fashion at the best possible price. 
                 We are helping smart shoppers discover amazing deals and save money on the items they love by comparing prices 
@@ -452,6 +451,146 @@
     <script src="./assets/js/charts-ui.js"></script>
     <script src="./assets/js/enhanced-frontend.js"></script>
     <script src="assets/js/main.js"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('Aced: Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('Aced: Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        let installButton;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('Aced: Install prompt triggered');
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            
+            // Create and show install button
+            showInstallButton();
+        });
+
+        function showInstallButton() {
+            // Create install button if it doesn't exist
+            if (!document.getElementById('install-button')) {
+                installButton = document.createElement('button');
+                installButton.id = 'install-button';
+                installButton.textContent = '📱 Install Aced App';
+                installButton.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #b8a9d9 0%, #d4c7e8 100%);
+                    color: white;
+                    border: none;
+                    padding: 12px 20px;
+                    border-radius: 25px;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
+                    z-index: 1000;
+                    transition: all 0.3s ease;
+                    animation: installPulse 2s infinite;
+                `;
+                
+                installButton.addEventListener('click', installApp);
+                document.body.appendChild(installButton);
+                
+                // Add install button hover effects
+                installButton.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 6px 20px rgba(184, 169, 217, 0.4)';
+                });
+                
+                installButton.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 16px rgba(184, 169, 217, 0.3)';
+                });
+            }
+        }
+
+        function installApp() {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Aced: User accepted the install prompt');
+                        // Hide the install button
+                        if (installButton) {
+                            installButton.style.display = 'none';
+                        }
+                    } else {
+                        console.log('Aced: User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        // Handle successful app installation
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('Aced: App was installed successfully');
+            // Hide install button
+            if (installButton) {
+                installButton.style.display = 'none';
+            }
+            
+            // Show thank you message
+            const thankYou = document.createElement('div');
+            thankYou.innerHTML = '✨ Welcome to Aced! App installed successfully.';
+            thankYou.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #b8a9d9 0%, #d4c7e8 100%);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                font-weight: 600;
+                z-index: 1001;
+                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
+            `;
+            document.body.appendChild(thankYou);
+            
+            // Remove thank you message after 3 seconds
+            setTimeout(() => {
+                if (thankYou.parentNode) {
+                    thankYou.parentNode.removeChild(thankYou);
+                }
+            }, 3000);
+        });
+    </script>
+
+    <!-- Add CSS for install button animation -->
+    <style>
+        @keyframes installPulse {
+            0% {
+                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.6), 0 0 0 10px rgba(184, 169, 217, 0.1);
+            }
+            100% {
+                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
+            }
+        }
+    </style>
     
     <!-- Initialize Authentication, Price Alerts, Analytics, and Charts -->
     <script>

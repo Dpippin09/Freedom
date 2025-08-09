@@ -1,15 +1,15 @@
 {
-    "name": "Snatched It - Fashion Price Comparison",
-    "short_name": "Snatched It",
-    "description": "Find the best fashion deals across hundreds of retailers. Compare prices and never miss a sale again!",
+    "name": "Aced - AI Fashion Styling",
+    "short_name": "Aced",
+    "description": "AI-powered fashion matching and price comparison. Find perfect outfit combinations and never miss a deal!",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#667eea",
-    "theme_color": "#764ba2",
+    "background_color": "#faf8f3",
+    "theme_color": "#b8a9d9",
     "orientation": "portrait-primary",
     "scope": "/",
     "lang": "en-US",
-    "categories": ["shopping", "lifestyle", "fashion"],
+    "categories": ["shopping", "lifestyle", "fashion", "ai"],
     "icons": [
         {
             "src": "assets/images/Snatched.jpg",

@@ -1,5 +1,5 @@
-// Service Worker for Snatched It PWA
-const CACHE_NAME = 'snatched-it-v1';
+// Service Worker for Aced Fashion PWA
+const CACHE_NAME = 'aced-fashion-v1.0.0';
 const urlsToCache = [
     '/',
     '/index.html',
@@ -7,10 +7,18 @@ const urlsToCache = [
     '/trending-now.html',
     '/contact.html',
     '/login-signup.html',
-    '/assets/css/style.css',
+    '/assets/css/sleek-theme.css',
     '/assets/js/script.js',
     '/assets/js/main.js',
-    '/assets/images/Snatched.jpg'
+    '/assets/images/Snatched.jpg',
+    '/assets/images/handbag.png',
+    '/assets/images/athleticClothes.png',
+    '/assets/images/athleticShoes.png',
+    '/assets/images/suit.png',
+    '/assets/images/suits.png',
+    '/assets/images/summerDresses.png',
+    '/assets/images/watches.png',
+    '/manifest.json'
 ];
 
 // Install event - cache resources
@@ -18,8 +26,11 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(function(cache) {
-                console.log('Opened cache');
+                console.log('Aced: App resources cached successfully');
                 return cache.addAll(urlsToCache);
+            })
+            .catch(function(error) {
+                console.log('Aced: Cache installation failed:', error);
             })
     );
 });
@@ -81,7 +92,7 @@ self.addEventListener('push', function(event) {
     };
     
     event.waitUntil(
-        self.registration.showNotification('Snatched It - New Deals!', options)
+        self.registration.showNotification('Aced - Fashion Deals!', options)
     );
 });
 
