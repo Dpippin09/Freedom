@@ -10,6 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Aced">
     <link rel="stylesheet" href="./assets/css/sleek-theme.css">
+    <link rel="stylesheet" href="./assets/css/ai-recommendations.css">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -31,6 +32,12 @@
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
                 <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link" id="cart-link">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <div class="nav-overlay" id="nav-overlay"></div>
@@ -95,7 +102,10 @@
                                     <span class="stat-label">Avg Price</span>
                                 </div>
                             </div>
-                            <button class="product-button">Compare Prices</button>
+                            <div class="product-actions">
+                                <button class="compare-btn">Compare Prices</button>
+                                <button class="add-to-cart-btn" data-product-id="1" data-product-name="Designer Summer Dresses" data-product-price="89.99" data-product-image="./assets/images/summerDresses.png" data-product-category="clothing">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -119,7 +129,10 @@
                                 <span class="lowest-price">From $79.99</span>
                                 <span class="price-range">3 stores have deals</span>
                             </div>
-                            <button class="product-button">Find Best Price</button>
+                            <div class="product-actions">
+                                <button class="compare-btn">Find Best Price</button>
+                                <button class="add-to-cart-btn" data-product-id="2" data-product-name="Premium Athletic Sneakers" data-product-price="79.99" data-product-image="./assets/images/athleticShoes.png" data-product-category="shoes">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -137,7 +150,10 @@
                             <div class="product-price">                                <span class="price">From $249</span>
                                 <span class="price-unit">6 stores compared</span>
                             </div>
-                            <button class="product-button">Compare Stores</button>
+                            <div class="product-actions">
+                                <button class="compare-btn">Compare Stores</button>
+                                <button class="add-to-cart-btn" data-product-id="3" data-product-name="Luxury Leather Handbags" data-product-price="249.00" data-product-image="./assets/images/handbag.png" data-product-category="accessories">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -156,7 +172,10 @@
                             <div class="product-timeline">
                                 <span class="timeline-badge">Tailored in 5-7 days</span>
                             </div>
-                            <button class="product-button">Find Best Deal</button>
+                            <div class="product-actions">
+                                <button class="compare-btn">Find Best Deal</button>
+                                <button class="add-to-cart-btn" data-product-id="4" data-product-name="Men's Professional Suits" data-product-price="199.99" data-product-image="./assets/images/suit.png" data-product-category="clothing">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -176,7 +195,10 @@
                                 <div class="benefit">UV Protection</div>
                                 <div class="benefit">Anti-Odor Technology</div>
                             </div>
-                            <button class="product-button">Shop Athletic</button>
+                            <div class="product-actions">
+                                <button class="compare-btn">Shop Athletic</button>
+                                <button class="add-to-cart-btn" data-product-id="5" data-product-name="Athletic Performance Wear" data-product-price="59.99" data-product-image="./assets/images/summerDresses.png" data-product-category="clothing">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
 
@@ -195,7 +217,10 @@
                             <div class="product-potential">
                                 <span class="potential-earnings">Starting at $1,299</span>
                             </div>
-                            <button class="product-button">View Collection</button>
+                            <div class="product-actions">
+                                <button class="compare-btn">View Collection</button>
+                                <button class="add-to-cart-btn" data-product-id="6" data-product-name="Luxury Watches" data-product-price="399.99" data-product-image="./assets/images/watches.png" data-product-category="accessories">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -450,6 +475,7 @@
     <script src="./assets/js/charts-service.js"></script>
     <script src="./assets/js/charts-ui.js"></script>
     <script src="./assets/js/enhanced-frontend.js"></script>
+    <script src="./assets/js/ai-fashion-matcher-demographic.js"></script>
     <script src="assets/js/main.js"></script>
     
     <!-- PWA Service Worker Registration -->
@@ -592,10 +618,11 @@
         }
     </style>
     
-    <!-- Initialize Authentication, Price Alerts, Analytics, and Charts -->
+    <!-- Initialize Authentication, Price Alerts, Analytics, Charts, and AI -->
     <script>
-        // Initialize authentication UI when DOM is ready
+        // Initialize all systems when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
+            // Existing systems
             window.authUI = new AuthUI();
             window.priceAlertUI = new PriceAlertUI();
             window.analyticsUI = new AnalyticsUI();
@@ -605,6 +632,17 @@
                 window.chartsService = new ChartsService();
                 window.chartsUI = new ChartsUI();
                 window.chartsUI.init();
+            }
+
+            // Initialize AI Fashion Matching System
+            if (window.aiFashionMatcher) {
+                window.aiFashionMatcher.initializeUI();
+                console.log('🤖 AI Fashion Matching System initialized');
+                
+                // Add AI enhancement indicators to product cards
+                document.querySelectorAll('.product-card').forEach(card => {
+                    card.classList.add('ai-enhanced');
+                });
             }
         });
     </script>
@@ -727,7 +765,56 @@
                 closeFeedbackModal();
             }
         });
+
+        // Cart count update functionality
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('aced_cart') || '[]');
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCountEl = document.getElementById('cart-count');
+            
+            if (cartCountEl) {
+                cartCountEl.textContent = cartCount;
+                cartCountEl.classList.toggle('has-items', cartCount > 0);
+            }
+        }
+
+        // Update cart count on page load
+        updateCartCount();
+
+        // Listen for storage events (cart updates from other pages)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'aced_cart') {
+                updateCartCount();
+            }
+        });
+
+        // Listen for custom cart update events
+        window.addEventListener('cartUpdated', updateCartCount);
+
+        // Add to Cart button functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart-btn')) {
+                const button = e.target;
+                const item = {
+                    id: parseInt(button.dataset.productId),
+                    name: button.dataset.productName,
+                    price: parseFloat(button.dataset.productPrice),
+                    image: button.dataset.productImage,
+                    category: button.dataset.productCategory,
+                    size: 'M', // Default size
+                    color: 'Standard' // Default color
+                };
+                
+                // Add to cart using CheckoutManager
+                if (window.CheckoutManager) {
+                    CheckoutManager.addToCart(item);
+                }
+            }
+        });
     </script>
+    
+    <!-- Cart Functionality -->
+    <script src="./assets/js/checkout.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure checkout for your fashion purchases - complete your order with confidence.">
+    <meta name="theme-color" content="#764ba2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Aced">
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
+    <link rel="stylesheet" href="./assets/css/ai-recommendations.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
+    <title>Checkout - Aced</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="best-deals.html">Best Deals</a></li>
+                <li><a href="trending-now.html">Trending Now</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login-signup.html" class="auth-button">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="checkout-main">
+        <!-- Checkout Hero Section -->
+        <section class="checkout-hero">
+            <div class="container">
+                <h1>Secure Checkout</h1>
+                <p>Complete your fashion finds with confidence</p>
+                <div class="security-badges">
+                    <span class="security-badge">🔒 SSL Secured</span>
+                    <span class="security-badge">💳 Multiple Payment Options</span>
+                    <span class="security-badge">🚚 Fast & Free Shipping</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Content -->
+        <section class="checkout-content">
+            <div class="container">
+                <div class="checkout-layout">
+                    
+                    <!-- Order Summary Sidebar -->
+                    <aside class="order-summary">
+                        <div class="order-summary-card">
+                            <h2>Order Summary</h2>
+                            <div class="cart-items" id="cart-items">
+                                <!-- Cart items will be populated by JavaScript -->
+                                <div class="cart-item">
+                                    <img src="./assets/images/Snatched.jpg" alt="Designer Summer Dress" class="item-image">
+                                    <div class="item-details">
+                                        <h3>Designer Summer Dress</h3>
+                                        <p class="item-size">Size: M</p>
+                                        <p class="item-color">Color: Lavender</p>
+                                        <div class="quantity-controls">
+                                            <button class="qty-btn" data-action="decrease">-</button>
+                                            <span class="quantity">1</span>
+                                            <button class="qty-btn" data-action="increase">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="item-price">
+                                        <span class="price">$89.99</span>
+                                        <button class="remove-item" aria-label="Remove item">×</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="order-totals">
+                                <div class="total-row">
+                                    <span>Subtotal:</span>
+                                    <span class="subtotal">$89.99</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Shipping:</span>
+                                    <span class="shipping">FREE</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Tax:</span>
+                                    <span class="tax">$7.20</span>
+                                </div>
+                                <div class="total-row total-final">
+                                    <span>Total:</span>
+                                    <span class="final-total">$97.19</span>
+                                </div>
+                            </div>
+
+                            <div class="promo-code">
+                                <input type="text" placeholder="Enter promo code" class="promo-input">
+                                <button class="apply-promo">Apply</button>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Checkout Form -->
+                    <div class="checkout-form-section">
+                        <form class="checkout-form" id="checkout-form">
+                            
+                            <!-- Customer Information -->
+                            <div class="form-section">
+                                <h2>Contact Information</h2>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" required placeholder="Email address" class="form-input">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="text" id="firstName" name="firstName" required placeholder="First name" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="lastName" name="lastName" required placeholder="Last name" class="form-input">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="phone" name="phone" placeholder="Phone number (optional)" class="form-input">
+                                </div>
+                            </div>
+
+                            <!-- Shipping Address -->
+                            <div class="form-section">
+                                <h2>Shipping Address</h2>
+                                <div class="form-group">
+                                    <input type="text" id="address" name="address" required placeholder="Street address" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, etc. (optional)" class="form-input">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="text" id="city" name="city" required placeholder="City" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="state" name="state" required class="form-select">
+                                            <option value="">Select state</option>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="CA">California</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="GA">Georgia</option>
+                                            <!-- Add all other states -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="zip" name="zip" required placeholder="ZIP code" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shipping Method -->
+                            <div class="form-section">
+                                <h2>Shipping Method</h2>
+                                <div class="shipping-options">
+                                    <label class="shipping-option selected">
+                                        <input type="radio" name="shipping" value="free" checked>
+                                        <div class="option-content">
+                                            <div class="option-details">
+                                                <span class="option-name">Free Standard Shipping</span>
+                                                <span class="option-time">5-7 business days</span>
+                                            </div>
+                                            <span class="option-price">FREE</span>
+                                        </div>
+                                    </label>
+                                    <label class="shipping-option">
+                                        <input type="radio" name="shipping" value="express">
+                                        <div class="option-content">
+                                            <div class="option-details">
+                                                <span class="option-name">Express Shipping</span>
+                                                <span class="option-time">2-3 business days</span>
+                                            </div>
+                                            <span class="option-price">$9.99</span>
+                                        </div>
+                                    </label>
+                                    <label class="shipping-option">
+                                        <input type="radio" name="shipping" value="overnight">
+                                        <div class="option-content">
+                                            <div class="option-details">
+                                                <span class="option-name">Overnight Shipping</span>
+                                                <span class="option-time">Next business day</span>
+                                            </div>
+                                            <span class="option-price">$19.99</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Payment Information -->
+                            <div class="form-section">
+                                <h2>Payment Information</h2>
+                                
+                                <!-- Payment Methods -->
+                                <div class="payment-methods">
+                                    <label class="payment-method selected">
+                                        <input type="radio" name="paymentMethod" value="card" checked>
+                                        <span class="payment-icon">💳</span>
+                                        <span>Credit/Debit Card</span>
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="radio" name="paymentMethod" value="paypal">
+                                        <span class="payment-icon">🟦</span>
+                                        <span>PayPal</span>
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="radio" name="paymentMethod" value="apple">
+                                        <span class="payment-icon">🍎</span>
+                                        <span>Apple Pay</span>
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="radio" name="paymentMethod" value="google">
+                                        <span class="payment-icon">🟢</span>
+                                        <span>Google Pay</span>
+                                    </label>
+                                </div>
+
+                                <!-- Card Details -->
+                                <div class="card-details" id="card-details">
+                                    <div class="form-group">
+                                        <input type="text" id="cardNumber" name="cardNumber" placeholder="Card number" class="form-input card-number">
+                                        <div class="card-icons">
+                                            <span class="card-icon visa">Visa</span>
+                                            <span class="card-icon mastercard">MC</span>
+                                            <span class="card-icon amex">Amex</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" id="cardCvv" name="cardCvv" placeholder="CVV" class="form-input">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="cardName" name="cardName" placeholder="Name on card" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Billing Address -->
+                            <div class="form-section">
+                                <div class="billing-same-as-shipping">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="sameAsShipping" checked>
+                                        <span class="checkmark"></span>
+                                        Billing address same as shipping address
+                                    </label>
+                                </div>
+                                
+                                <div class="billing-address-fields" id="billingFields" style="display: none;">
+                                    <h3>Billing Address</h3>
+                                    <div class="form-group">
+                                        <input type="text" id="billingAddress" name="billingAddress" placeholder="Street address" class="form-input">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <input type="text" id="billingCity" name="billingCity" placeholder="City" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="billingState" name="billingState" class="form-select">
+                                                <option value="">Select state</option>
+                                                <!-- Add states -->
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" id="billingZip" name="billingZip" placeholder="ZIP code" class="form-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="complete-order-btn" id="completeOrderBtn">
+                                <span class="btn-text">Complete Order</span>
+                                <span class="btn-total">$97.19</span>
+                            </button>
+                        </form>
+
+                        <!-- Trust Badges -->
+                        <div class="trust-badges">
+                            <div class="trust-badge">
+                                <span class="badge-icon">🔐</span>
+                                <div class="badge-text">
+                                    <strong>Secure Checkout</strong>
+                                    <span>256-bit SSL encryption</span>
+                                </div>
+                            </div>
+                            <div class="trust-badge">
+                                <span class="badge-icon">↩️</span>
+                                <div class="badge-text">
+                                    <strong>Easy Returns</strong>
+                                    <span>30-day return policy</span>
+                                </div>
+                            </div>
+                            <div class="trust-badge">
+                                <span class="badge-icon">🚚</span>
+                                <div class="badge-text">
+                                    <strong>Fast Shipping</strong>
+                                    <span>Free on orders $50+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Aced</h3>
+                <p>Your AI-powered fashion companion for finding the best deals on trending styles.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="best-deals.html">Best Deals</a></li>
+                    <li><a href="trending-now.html">Trending Now</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#returns">Returns & Exchanges</a></li>
+                    <li><a href="#shipping">Shipping Info</a></li>
+                    <li><a href="#size-guide">Size Guide</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="TikTok">🎵</a>
+                    <a href="#" aria-label="Pinterest">📌</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aced. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/checkout.js"></script>
+    <script src="./assets/js/ai-fashion-matcher.js"></script>
+</body>
+
+</html>

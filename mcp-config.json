@@ -1,0 +1,347 @@
+{
+  "mcpServers": {
+    "fashion-ai-server": {
+      "command": "node",
+      "args": ["./mcp-servers/fashion-ai-server/index.js"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "FASHION_DB_URL": "${FASHION_DB_URL}",
+        "TARGET_DEMOGRAPHIC": "women-18-45",
+        "STYLE_FOCUS": "work-life-balance,comfort,versatility"
+      },
+      "demographicConfig": {
+        "primaryAgeRange": "18-45",
+        "targetGender": "women", 
+        "lifestyleFocus": ["career-focused", "wellness-conscious", "tech-savvy", "style-aware"],
+        "priorityFactors": {
+          "comfort": 0.3,
+          "versatility": 0.25,
+          "professional_appropriate": 0.25,
+          "style_forward": 0.2
+        }
+      },
+      "tools": [
+        {
+          "name": "match_items",
+          "description": "Find fashion items that match or complement a base item for women 18-45",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "base_item": {
+                "type": "object",
+                "description": "The item to find matches for"
+              },
+              "demographic_context": {
+                "type": "object",
+                "description": "Demographic targeting context for young adult and middle-aged women",
+                "properties": {
+                  "age_range": { "type": "string", "default": "18-45" },
+                  "lifestyle_priorities": { 
+                    "type": "array", 
+                    "items": { "type": "string" },
+                    "default": ["comfort", "versatility", "work-appropriate"] 
+                  },
+                  "occasion_focus": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "default": ["work", "weekend", "social", "wellness"]
+                  }
+                }
+              },
+              "match_types": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Types of matches optimized for demographic (complementary, work-appropriate, weekend-versatile)"
+              }
+            },
+            "required": ["base_item"]
+          }
+        },
+        {
+          "name": "style_analysis", 
+          "description": "Analyze style characteristics with demographic-specific insights for women 18-45",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "description": "Array of fashion items to analyze"
+              },
+              "demographic_lens": {
+                "type": "object",
+                "description": "Demographic analysis framework",
+                "properties": {
+                  "work_life_balance": { "type": "boolean", "default": true },
+                  "comfort_priority": { "type": "number", "default": 0.8 },
+                  "versatility_importance": { "type": "number", "default": 0.9 },
+                  "age_appropriateness": { "type": "string", "default": "18-45" }
+                }
+              },
+              "analysis_depth": {
+                "type": "string",
+                "enum": ["basic", "detailed", "comprehensive", "demographic-focused"]
+              }
+            }
+          }
+        },
+        {
+          "name": "outfit_completion",
+          "description": "Suggest items to complete outfits for busy, style-conscious women",
+          "inputSchema": {
+            "type": "object", 
+            "properties": {
+              "current_items": {
+                "type": "array",
+                "description": "Items currently in the outfit"
+              },
+              "lifestyle_context": {
+                "type": "object",
+                "description": "Lifestyle context for women 18-45",
+                "properties": {
+                  "work_day": { "type": "boolean" },
+                  "transition_needed": { "type": "boolean", "description": "Day-to-night transition" },
+                  "comfort_priority": { "type": "number" },
+                  "professional_level": { "type": "string", "enum": ["casual", "business-casual", "professional", "executive"] }
+                }
+              },
+              "occasion": {
+                "type": "string",
+                "description": "Occasion optimized for target demographic"
+              },
+              "weather": {
+                "type": "object",
+                "description": "Weather conditions affecting comfort and practicality"
+              }
+            }
+          }
+        },
+        {
+          "name": "demographic_preferences",
+          "description": "Analyze and predict preferences specific to women 18-45",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "user_profile": {
+                "type": "object",
+                "description": "User profile with demographic indicators"
+              },
+              "purchase_history": {
+                "type": "array", 
+                "description": "Previous purchases with demographic analysis"
+              },
+              "lifestyle_indicators": {
+                "type": "object",
+                "properties": {
+                  "career_stage": { "type": "string" },
+                  "wellness_focus": { "type": "boolean" },
+                  "social_media_active": { "type": "boolean" },
+                  "work_flexibility": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    
+    "image-analysis-server": {
+      "command": "python",
+      "args": ["./mcp-servers/image-analysis-server/main.py"],
+      "env": {
+        "COMPUTER_VISION_KEY": "${COMPUTER_VISION_KEY}",
+        "COMPUTER_VISION_ENDPOINT": "${COMPUTER_VISION_ENDPOINT}"
+      },
+      "tools": [
+        {
+          "name": "extract_features",
+          "description": "Extract visual features from fashion item images",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "object",
+                "description": "Fashion item with image URL"
+              },
+              "analysis_type": {
+                "type": "string",
+                "enum": ["basic", "detailed", "comprehensive"]
+              }
+            }
+          }
+        },
+        {
+          "name": "color_analysis",
+          "description": "Analyze color palette and harmony in fashion items",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "images": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Array of image URLs"
+              }
+            }
+          }
+        },
+        {
+          "name": "pattern_detection",
+          "description": "Detect patterns, textures, and fabric types",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "image_url": {
+                "type": "string",
+                "description": "URL of the fashion item image"
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "trend-data-server": {
+      "command": "node",
+      "args": ["./mcp-servers/trend-data-server/index.js"],
+      "env": {
+        "FASHION_API_KEY": "${FASHION_API_KEY}",
+        "TRENDS_DB_CONNECTION": "${TRENDS_DB_CONNECTION}"
+      },
+      "tools": [
+        {
+          "name": "get_trends",
+          "description": "Get current fashion trends for categories and regions",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "description": "Fashion category (clothing, shoes, accessories)"
+              },
+              "season": {
+                "type": "string",
+                "enum": ["Spring", "Summer", "Fall", "Winter"]
+              },
+              "region": {
+                "type": "string",
+                "description": "Geographic region for trends"
+              }
+            }
+          }
+        },
+        {
+          "name": "predict_popularity",
+          "description": "Predict popularity trends for fashion items",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "description": "Fashion items to analyze"
+              },
+              "timeframe": {
+                "type": "string",
+                "enum": ["1month", "3months", "6months", "1year"]
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "user-profile-server": {
+      "command": "node", 
+      "args": ["./mcp-servers/user-profile-server/index.js"],
+      "env": {
+        "USER_DB_CONNECTION": "${USER_DB_CONNECTION}",
+        "ML_MODEL_ENDPOINT": "${ML_MODEL_ENDPOINT}"
+      },
+      "tools": [
+        {
+          "name": "update_preferences",
+          "description": "Update user style preferences based on interactions",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string",
+                "description": "Unique user identifier"
+              },
+              "purchase": {
+                "type": "object",
+                "description": "Purchase data"
+              },
+              "interaction_context": {
+                "type": "object",
+                "description": "Context of user interaction"
+              }
+            }
+          }
+        },
+        {
+          "name": "predict_preferences",
+          "description": "Predict user preferences for new items",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "candidate_items": {
+                "type": "array",
+                "description": "Items to score for user preference"
+              },
+              "user_history": {
+                "type": "array",
+                "description": "User's purchase and interaction history"
+              }
+            }
+          }
+        },
+        {
+          "name": "style_clustering",
+          "description": "Group users by similar style preferences",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string"
+              },
+              "find_similar": {
+                "type": "boolean",
+                "description": "Whether to find users with similar styles"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+
+  "clientConfig": {
+    "reconnectAttempts": 3,
+    "timeoutMs": 30000,
+    "enableLogging": true,
+    "fallbackMode": "local",
+    "batchRequests": true,
+    "caching": {
+      "enabled": true,
+      "ttlMs": 300000,
+      "maxEntries": 1000
+    }
+  },
+
+  "deployment": {
+    "development": {
+      "mcpServerPath": "./mcp-servers",
+      "autoStart": true,
+      "enableHotReload": true
+    },
+    "production": {
+      "mcpServerPath": "/app/mcp-servers",
+      "healthCheckInterval": 60000,
+      "loadBalancing": true,
+      "scaling": {
+        "minInstances": 1,
+        "maxInstances": 5,
+        "cpuThreshold": 70
+      }
+    }
+  }
+}

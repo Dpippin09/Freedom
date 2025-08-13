@@ -1,0 +1,17 @@
+{
+  "name": "fashion-ai-server",
+  "version": "0.1.0",
+  "description": "MCP server for AI-powered fashion matching and style analysis",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --inspect index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0"
+  },
+  "keywords": ["mcp", "fashion", "ai", "style", "recommendations"],
+  "author": "Aced Fashion AI Team",
+  "license": "MIT"
+}

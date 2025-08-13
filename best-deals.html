@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Aced">
     <link rel="stylesheet" href="./assets/css/sleek-theme.css">
-    <link rel="stylesheet" href="./assets/css/deals.css">
+    <link rel="stylesheet" href="./assets/css/ai-recommendations.css">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
     <title>Best Deals - Aced</title>
@@ -36,240 +36,270 @@
         <div class="nav-overlay" id="nav-overlay"></div>
     </header>
 
+    <!-- Hero Section matching home page -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Best Deals</h1>
+            <p>Handpicked deals with the biggest savings across fashion retailers - Compare prices and never miss a sale!</p>
+        </div>
+    </section>
+
     <article class="content best-deals-content">
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="header-content">
-                <h1>🔥 Best Deals Right Now</h1>
-                <p>Handpicked deals with the biggest savings across fashion retailers</p>
-                <div class="deal-stats">
-                    <span class="stat-item">💰 Average Savings: 45%</span>
-                    <span class="stat-item">🏪 150+ Stores Compared</span>
-                    <span class="stat-item">⏰ Updated Every Hour</span>
+        <!-- Deal Statistics Banner -->
+        <section class="stats-banner">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <span class="stat-number">45%</span>
+                    <span class="stat-label">Average Savings</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Stores Compared</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Price Monitoring</span>
                 </div>
             </div>
         </section>
 
         <!-- Deal Categories -->
-        <section class="deal-categories">
-            <div class="category-filters">
-                <button class="category-btn active" data-category="all">All Deals</button>
-                <button class="category-btn" data-category="flash">⚡ Flash Deals</button>
-                <button class="category-btn" data-category="price-drop">📉 Price Drops</button>
-                <button class="category-btn" data-category="clearance">🎯 Clearance</button>
-                <button class="category-btn" data-category="limited">⏰ Limited Time</button>
+        <section class="filter-section">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">All Deals</button>
+                <button class="filter-tab" data-category="flash">⚡ Flash Deals</button>
+                <button class="filter-tab" data-category="price-drop">📉 Price Drops</button>
+                <button class="filter-tab" data-category="clearance">🎯 Clearance</button>
+                <button class="filter-tab" data-category="limited">⏰ Limited Time</button>
             </div>
         </section>
 
         <!-- Featured Deal of the Day -->
-        <section class="deal-of-day">
-            <div class="deal-container">
-                <div class="deal-badge">Deal of the Day</div>
-                <div class="deal-content">
-                    <div class="deal-image">
-                        <img src="./assets/images/dead-trees.png" alt="Designer Winter Coats">
-                        <div class="savings-badge">Save 60%</div>
+        <section class="featured-deal-section">
+            <h2 class="section-title">🔥 Deal of the Day</h2>
+            <div class="featured-deal-card">
+                <div class="product-image">
+                    <img src="./assets/images/dead-trees.png" alt="Designer Winter Coats">
+                    <div class="product-badge featured">Deal of the Day</div>
+                    <div class="discount-badge">Save 60%</div>
+                </div>
+                <div class="product-info">
+                    <h3>Designer Winter Coats Collection</h3>
+                    <p class="product-description">Premium winter coats from luxury brands. Limited quantities available.</p>
+                    <div class="product-features">
+                        <span class="feature-tag">🏪 Nordstrom Rack</span>
+                        <span class="feature-tag">💰 You Save $180</span>
+                        <span class="feature-tag">⏰ 23h 45m left</span>
                     </div>
-                    <div class="deal-info">
-                        <h2>Designer Winter Coats Collection</h2>
-                        <p class="deal-description">Premium winter coats from luxury brands. Limited quantities available.</p>
-                        <div class="price-breakdown">
-                            <div class="price-comparison">
-                                <span class="original-price">$299</span>
-                                <span class="deal-price">$119</span>
-                                <span class="savings">You Save $180</span>
-                            </div>
-                            <div class="store-info">
-                                <span class="best-store">Best Price: Nordstrom Rack</span>
-                                <span class="stores-compared">8 stores compared</span>
-                            </div>
+                    <div class="product-stats">
+                        <div class="stat">
+                            <span class="stat-number">$119</span>
+                            <span class="stat-label">Deal Price</span>
                         </div>
-                        <div class="deal-timer">
-                            <span class="timer-label">Deal ends in:</span>
-                            <span class="timer">23h 45m</span>
+                        <div class="stat">
+                            <span class="stat-number">$299</span>
+                            <span class="stat-label">Original Price</span>
                         </div>
-                        <button class="deal-button primary">Shop This Deal</button>
                     </div>
+                    <button class="product-button featured">Shop This Deal</button>
                 </div>
             </div>
         </section>
 
         <!-- Best Deals Grid -->
-        <section class="deals-grid">
+        <section class="products-grid">
             <h2 class="section-title">Today's Hottest Deals</h2>
             
-            <div class="deals-container">
+            <div class="products-container deals-grid">
                 <!-- Deal Card 1: Flash Sale Shoes -->
-                <div class="deal-card" data-category="flash">
-                    <div class="deal-image">
+                <div class="product-card deal-card" data-category="flash">
+                    <div class="product-image">
                         <img src="./assets/images/single-plant.png" alt="Nike Running Shoes">
-                        <div class="deal-badge flash">⚡ Flash Sale</div>
+                        <div class="product-badge flash">⚡ Flash Sale</div>
                         <div class="discount-badge">55% OFF</div>
                     </div>
-                    <div class="deal-info">
+                    <div class="product-info">
                         <h3>Nike Air Max Collection</h3>
-                        <p class="deal-description">Limited time flash sale on premium running shoes</p>
-                        <div class="price-info">
-                            <span class="current-price">$67</span>
-                            <span class="original-price">$149</span>
-                        </div>
-                        <div class="deal-features">
-                            <span class="feature-tag">🏃‍♂️ Free Shipping</span>
+                        <p class="product-description">Limited time flash sale on premium running shoes</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🏃‍♂️ Nike.com</span>
                             <span class="feature-tag">⏰ 6 hours left</span>
+                            <span class="feature-tag">🚚 Free Shipping</span>
                         </div>
-                        <div class="store-comparison">
-                            <span class="best-store">Nike.com</span>
-                            <span class="vs-others">vs $89 elsewhere</span>
+                        <div class="product-stats">
+                            <div class="stat">
+                                <span class="stat-number">$67</span>
+                                <span class="stat-label">Deal Price</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">$149</span>
+                                <span class="stat-label">Was Price</span>
+                            </div>
                         </div>
-                        <button class="deal-button">Grab Deal</button>
+                        <button class="product-button">Grab Deal</button>
                     </div>
                 </div>
 
                 <!-- Deal Card 2: Price Drop Dresses -->
-                <div class="deal-card" data-category="price-drop">
-                    <div class="deal-image">
+                <div class="product-card deal-card" data-category="price-drop">
+                    <div class="product-image">
                         <img src="./assets/images/fertilizer.jpg" alt="Summer Dresses">
-                        <div class="deal-badge price-drop">📉 Price Drop</div>
+                        <div class="product-badge price-drop">📉 Price Drop</div>
                         <div class="discount-badge">40% OFF</div>
                     </div>
-                    <div class="deal-info">
+                    <div class="product-info">
                         <h3>Zara Summer Dress Sale</h3>
-                        <p class="deal-description">Fresh price drops on trending summer styles</p>
-                        <div class="price-info">
-                            <span class="current-price">$39</span>
-                            <span class="original-price">$65</span>
-                        </div>
-                        <div class="deal-features">
-                            <span class="feature-tag">🌸 Trendy Styles</span>
+                        <p class="product-description">Fresh price drops on trending summer styles</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🌸 Zara Online</span>
                             <span class="feature-tag">📦 Free Returns</span>
+                            <span class="feature-tag">💫 Trendy Styles</span>
                         </div>
-                        <div class="store-comparison">
-                            <span class="best-store">Zara Online</span>
-                            <span class="vs-others">vs $52 at H&M</span>
+                        <div class="product-stats">
+                            <div class="stat">
+                                <span class="stat-number">$39</span>
+                                <span class="stat-label">Deal Price</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">$65</span>
+                                <span class="stat-label">Was Price</span>
+                            </div>
                         </div>
-                        <button class="deal-button">Shop Now</button>
+                        <button class="product-button">Shop Now</button>
                     </div>
                 </div>
 
                 <!-- Deal Card 3: Clearance Accessories -->
-                <div class="deal-card" data-category="clearance">
-                    <div class="deal-image">
+                <div class="product-card deal-card" data-category="clearance">
+                    <div class="product-image">
                         <img src="./assets/images/soilComparison.png" alt="Designer Bags">
-                        <div class="deal-badge clearance">🎯 Clearance</div>
+                        <div class="product-badge clearance">🎯 Clearance</div>
                         <div class="discount-badge">70% OFF</div>
                     </div>
-                    <div class="deal-info">
+                    <div class="product-info">
                         <h3>Designer Handbag Clearance</h3>
-                        <p class="deal-description">End of season clearance on luxury handbags</p>
-                        <div class="price-info">
-                            <span class="current-price">$199</span>
-                            <span class="original-price">$650</span>
-                        </div>
-                        <div class="deal-features">
-                            <span class="feature-tag">👜 Authentic Designer</span>
+                        <p class="product-description">End of season clearance on luxury handbags</p>
+                        <div class="product-features">
+                            <span class="feature-tag">👜 TheOutnet</span>
                             <span class="feature-tag">🎁 Gift Ready</span>
+                            <span class="feature-tag">✨ Authentic</span>
                         </div>
-                        <div class="store-comparison">
-                            <span class="best-store">TheOutnet</span>
-                            <span class="vs-others">vs $320 at Saks</span>
+                        <div class="product-stats">
+                            <div class="stat">
+                                <span class="stat-number">$199</span>
+                                <span class="stat-label">Deal Price</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">$650</span>
+                                <span class="stat-label">Was Price</span>
+                            </div>
                         </div>
-                        <button class="deal-button">View Deal</button>
+                        <button class="product-button">View Deal</button>
                     </div>
                 </div>
 
                 <!-- Deal Card 4: Limited Time Watches -->
-                <div class="deal-card" data-category="limited">
-                    <div class="deal-image">
+                <div class="product-card deal-card" data-category="limited">
+                    <div class="product-image">
                         <img src="./assets/images/carbonRoot.jpg" alt="Luxury Watches">
-                        <div class="deal-badge limited">⏰ Limited Time</div>
+                        <div class="product-badge limited">⏰ Limited Time</div>
                         <div class="discount-badge">35% OFF</div>
                     </div>
-                    <div class="deal-info">
+                    <div class="product-info">
                         <h3>Fossil Watch Weekend Sale</h3>
-                        <p class="deal-description">Weekend only pricing on premium timepieces</p>
-                        <div class="price-info">
-                            <span class="current-price">$129</span>
-                            <span class="original-price">$199</span>
-                        </div>
-                        <div class="deal-features">
-                            <span class="feature-tag">⌚ Swiss Movement</span>
+                        <p class="product-description">Weekend only pricing on premium timepieces</p>
+                        <div class="product-features">
+                            <span class="feature-tag">⌚ Fossil.com</span>
                             <span class="feature-tag">🛡️ 2 Year Warranty</span>
+                            <span class="feature-tag">💎 Swiss Movement</span>
                         </div>
-                        <div class="store-comparison">
-                            <span class="best-store">Fossil.com</span>
-                            <span class="vs-others">vs $159 at Amazon</span>
+                        <div class="product-stats">
+                            <div class="stat">
+                                <span class="stat-number">$129</span>
+                                <span class="stat-label">Deal Price</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">$199</span>
+                                <span class="stat-label">Was Price</span>
+                            </div>
                         </div>
-                        <button class="deal-button">Get Deal</button>
+                        <button class="product-button">Get Deal</button>
                     </div>
                 </div>
 
                 <!-- Deal Card 5: Athletic Wear -->
-                <div class="deal-card" data-category="flash">
-                    <div class="deal-image">
+                <div class="product-card deal-card" data-category="flash">
+                    <div class="product-image">
                         <img src="./assets/images/watered-crops.png" alt="Athletic Wear">
-                        <div class="deal-badge flash">⚡ Flash Sale</div>
+                        <div class="product-badge flash">⚡ Flash Sale</div>
                         <div class="discount-badge">50% OFF</div>
                     </div>
-                    <div class="deal-info">
+                    <div class="product-info">
                         <h3>Lululemon Flash Sale</h3>
-                        <p class="deal-description">Limited quantities on bestselling athletic wear</p>
-                        <div class="price-info">
-                            <span class="current-price">$49</span>
-                            <span class="original-price">$98</span>
-                        </div>
-                        <div class="deal-features">
-                            <span class="feature-tag">🏃‍♀️ Moisture Wicking</span>
+                        <p class="product-description">Limited quantities on bestselling athletic wear</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🏃‍♀️ Lululemon</span>
                             <span class="feature-tag">💪 Performance Fabric</span>
+                            <span class="feature-tag">💦 Moisture Wicking</span>
                         </div>
-                        <div class="store-comparison">
-                            <span class="best-store">Lululemon</span>
-                            <span class="vs-others">vs $78 at REI</span>
+                        <div class="product-stats">
+                            <div class="stat">
+                                <span class="stat-number">$49</span>
+                                <span class="stat-label">Deal Price</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">$98</span>
+                                <span class="stat-label">Was Price</span>
+                            </div>
                         </div>
-                        <button class="deal-button">Shop Flash Sale</button>
+                        <button class="product-button">Shop Flash Sale</button>
                     </div>
                 </div>
 
                 <!-- Deal Card 6: Men's Suits -->
-                <div class="deal-card" data-category="price-drop">
-                    <div class="deal-image">
+                <div class="product-card deal-card" data-category="price-drop">
+                    <div class="product-image">
                         <img src="./assets/images/watered-plant.png" alt="Men's Suits">
-                        <div class="deal-badge price-drop">📉 Price Drop</div>
+                        <div class="product-badge price-drop">📉 Price Drop</div>
                         <div class="discount-badge">45% OFF</div>
                     </div>
-                    <div class="deal-info">
+                    <div class="product-info">
                         <h3>Men's Warehouse Suit Sale</h3>
-                        <p class="deal-description">Professional suits at unbeatable prices</p>
-                        <div class="price-info">
-                            <span class="current-price">$199</span>
-                            <span class="original-price">$360</span>
+                        <p class="product-description">Professional suits at unbeatable prices</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🤵 Men's Wearhouse</span>
+                            <span class="feature-tag">👔 Custom Tailoring</span>
+                            <span class="feature-tag">💼 Complete Look</span>
                         </div>
-                        <div class="deal-features">
-                            <span class="feature-tag">🤵 Custom Tailoring</span>
-                            <span class="feature-tag">👔 Complete Look</span>
+                        <div class="product-stats">
+                            <div class="stat">
+                                <span class="stat-number">$199</span>
+                                <span class="stat-label">Deal Price</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">$360</span>
+                                <span class="stat-label">Was Price</span>
+                            </div>
                         </div>
-                        <div class="store-comparison">
-                            <span class="best-store">Men's Wearhouse</span>
-                            <span class="vs-others">vs $279 at Jos. A Bank</span>
-                        </div>
-                        <button class="deal-button">Find Your Size</button>
+                        <button class="product-button">Find Your Size</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Deal Alert Signup -->
-        <section class="deal-alerts">
-            <div class="alert-content">
+        <section class="newsletter-section deal-alerts-section">
+            <div class="newsletter-content">
                 <h2>Never Miss a Deal Again</h2>
                 <p>Get instant notifications when your favorite items go on sale</p>
-                <div class="alert-signup">
-                    <input type="email" placeholder="Enter your email for deal alerts" class="email-input">
-                    <button class="alert-button">Set Price Alerts</button>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email for deal alerts" class="newsletter-input">
+                    <button class="newsletter-button">Set Price Alerts</button>
                 </div>
-                <div class="alert-benefits">
-                    <span class="benefit">📱 Instant notifications</span>
-                    <span class="benefit">🎯 Personalized deals</span>
-                    <span class="benefit">⚡ Flash sale early access</span>
+                <div class="newsletter-features alert-benefits">
+                    <span class="feature-item">📱 Instant notifications</span>
+                    <span class="feature-item">🎯 Personalized deals</span>
+                    <span class="feature-item">⚡ Flash sale early access</span>
                 </div>
             </div>
         </section>
@@ -291,7 +321,7 @@
     <script>
         // Category filtering for deals
         document.addEventListener('DOMContentLoaded', function() {
-            const categoryBtns = document.querySelectorAll('.category-btn');
+            const categoryBtns = document.querySelectorAll('.filter-tab');
             const dealCards = document.querySelectorAll('.deal-card');
 
             categoryBtns.forEach(btn => {

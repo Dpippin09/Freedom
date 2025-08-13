@@ -23,12 +23,22 @@ const server = http.createServer((req, res) => {
     // Special handling for service worker
     if (req.url === '/sw.js') {
         res.setHeader('Content-Type', 'application/javascript');
-        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
     }
     
     // Special handling for manifest
     if (req.url === '/manifest.json') {
         res.setHeader('Content-Type', 'application/manifest+json');
+    }
+    
+    // Force no cache for CSS and JS files to ensure updates are seen
+    if (ext === '.css' || ext === '.js' || ext === '.html') {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+        res.setHeader('Last-Modified', new Date().toUTCString());
     }
     
     // If no extension and file doesn't exist, try adding .html
@@ -44,7 +54,7 @@ const server = http.createServer((req, res) => {
             const contentType = mimeTypes[ext] || 'text/plain';
             res.writeHead(200, { 
                 'Content-Type': contentType,
-                'Cache-Control': req.url === '/sw.js' ? 'no-cache' : 'public, max-age=3600'
+                'Cache-Control': (ext === '.css' || ext === '.js') ? 'no-cache, no-store, must-revalidate' : 'public, max-age=3600'
             });
             res.end(data);
         }

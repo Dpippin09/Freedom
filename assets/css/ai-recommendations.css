@@ -1,0 +1,359 @@
+/* AI Fashion Recommendations Styles */
+.ai-recommendations-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.ai-recommendations-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ai-recommendations-modal .modal-content {
+    background: linear-gradient(135deg, #faf8f3 0%, #f5f2ed 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 900px;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(184, 169, 217, 0.3);
+    border: 1px solid rgba(184, 169, 217, 0.2);
+    position: relative;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.ai-recommendations-modal.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.ai-recommendations-modal .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #8b7ab8;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.ai-recommendations-modal .modal-close:hover {
+    background: rgba(184, 169, 217, 0.1);
+    transform: rotate(90deg);
+}
+
+.ai-recommendations-modal .modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(184, 169, 217, 0.2);
+}
+
+.ai-recommendations-modal .modal-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8b7ab8 0%, #a593c2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.ai-recommendations-modal .modal-header p {
+    color: #8b7ab8;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.recommendation-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(184, 169, 217, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.recommendation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(184, 169, 217, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.recommendation-card:hover::before {
+    left: 100%;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(184, 169, 217, 0.2);
+}
+
+.recommendation-image {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(135deg, #e8dff5 0%, #d4c7e8 100%);
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: rgba(139, 122, 184, 0.5);
+}
+
+.ai-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.recommendation-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #5a4b7a;
+    margin-bottom: 0.5rem;
+}
+
+.match-reason {
+    color: #8b7ab8;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.recommendation-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+}
+
+.trend-score {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.price-range {
+    color: #8b7ab8;
+    font-weight: 600;
+}
+
+.rec-button {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #b8a9d9 0%, #d4c7e8 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.rec-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(184, 169, 217, 0.4);
+}
+
+.style-insights {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(184, 169, 217, 0.2);
+}
+
+.style-insights h3 {
+    font-family: 'Playfair Display', serif;
+    color: #5a4b7a;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.insights-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.insight {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #b8a9d9;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.insight strong {
+    color: #5a4b7a;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* AI Enhancement Indicators */
+.product-card.ai-enhanced {
+    position: relative;
+}
+
+.product-card.ai-enhanced::after {
+    content: '🤖 AI Enhanced';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* AI Loading States */
+.ai-loading {
+    position: relative;
+}
+
+.ai-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(184, 169, 217, 0.3), transparent);
+    animation: aiLoadingShimmer 1.5s infinite;
+}
+
+@keyframes aiLoadingShimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ai-recommendations-modal .modal-content {
+        padding: 1.5rem;
+        width: 95vw;
+        height: 90vh;
+    }
+    
+    .recommendations-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ai-recommendations-modal .modal-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Style Profile Dashboard Styles */
+.style-profile-dashboard {
+    background: linear-gradient(135deg, #faf8f3 0%, #f5f2ed 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(184, 169, 217, 0.2);
+    box-shadow: 0 10px 30px rgba(184, 169, 217, 0.1);
+}
+
+.style-profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.style-profile-header h2 {
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, #8b7ab8 0%, #a593c2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.profile-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.metric-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(184, 169, 217, 0.2);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(184, 169, 217, 0.2);
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #5a4b7a;
+    display: block;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #8b7ab8;
+    margin-top: 0.5rem;
+}

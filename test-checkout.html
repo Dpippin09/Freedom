@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout System Test - Aced Fashion</title>
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
+</head>
+<body>
+    <div class="container" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
+        <h1>🛍️ How to Access Checkout</h1>
+        
+        <div style="background: var(--accent-lavender); color: white; padding: 2rem; border-radius: var(--radius-lg); margin: 2rem 0; text-align: center;">
+            <h2>Two Ways to Access Checkout:</h2>
+            <div style="display: flex; gap: 2rem; margin-top: 1rem; justify-content: center; flex-wrap: wrap;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-md); flex: 1; min-width: 250px;">
+                    <h3>🛒 Navigation Cart Icon</h3>
+                    <p>Click the cart icon in the top navigation (shows item count)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius-md); flex: 1; min-width: 250px;">
+                    <h3>🔗 Direct Link</h3>
+                    <p>Visit <code>checkout.html</code> directly</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: var(--cream-white); padding: 2rem; border-radius: var(--radius-lg); margin: 2rem 0;">
+            <h2>Test Product</h2>
+            <div class="product-actions">
+                <button class="compare-btn" onclick="alert('Compare function works!')">
+                    Compare Prices
+                </button>
+                <button class="add-to-cart-btn" 
+                        data-product-id="test-001"
+                        data-name="Test Product"
+                        data-price="99.99"
+                        data-image="./assets/images/Snatched.jpg"
+                        data-category="test">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+        
+        <div id="cart-status" style="background: var(--accent-lavender); color: white; padding: 1rem; border-radius: var(--radius-md); margin: 1rem 0;">
+            <h3>Cart Status:</h3>
+            <p id="cart-count">Items in cart: 0</p>
+        </div>
+        
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="checkout.html" style="display: inline-block; background: var(--gradient-primary); color: white; padding: 1rem 2rem; text-decoration: none; border-radius: var(--radius-lg); font-weight: 600;">
+                Go to Checkout →
+            </a>
+        </div>
+        
+        <div style="margin: 2rem 0;">
+            <h3>Test Steps:</h3>
+            <ol>
+                <li>Click "Add to Cart" button above</li>
+                <li>Check that cart count updates</li>
+                <li>Click "Go to Checkout" to test full flow</li>
+                <li>Verify product appears in checkout</li>
+                <li>Test form submission</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script src="./assets/js/checkout.js"></script>
+    <script>
+        // Update cart display
+        function updateCartDisplay() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            document.getElementById('cart-count').textContent = `Items in cart: ${cart.length}`;
+        }
+        
+        // Listen for cart updates
+        window.addEventListener('cartUpdated', updateCartDisplay);
+        
+        // Initial load
+        updateCartDisplay();
+    </script>
+</body>
+</html>
