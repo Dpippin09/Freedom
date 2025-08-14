@@ -10,7 +10,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Aced">
     <link rel="stylesheet" href="./assets/css/sleek-theme.css">
-    <link rel="stylesheet" href="./assets/css/contact.css">
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
     <title>Contact Us - Aced</title>
@@ -31,92 +30,146 @@
                 <li><a href="contact.html" class="active">Contact Us</a></li>
                 <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
                 <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link" id="cart-link">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <div class="nav-overlay" id="nav-overlay"></div>
     </header>
 
-    <article class="content contact-content">
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="header-content">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
                 <h1>💬 Get in Touch</h1>
                 <p>Have questions about deals, want to suggest a store, or need help finding the best price? We're here to help!</p>
-                <div class="response-stats">
-                    <span class="stat-item">⚡ 24hr Response Time</span>
-                    <span class="stat-item">💬 Live Chat Available</span>
-                    <span class="stat-item">📱 Social Media Support</span>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">⚡</span>
+                        <span class="stat-label">24hr Response</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">💬</span>
+                        <span class="stat-label">Live Chat</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">📱</span>
+                        <span class="stat-label">Social Support</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Options -->
-        <section class="contact-options">
-            <div class="contact-grid">
-                <!-- Customer Support -->
-                <div class="contact-card">
-                    <div class="contact-icon">🎧</div>
-                    <h3>Customer Support</h3>
-                    <p>Get help with price comparisons, deal alerts, or technical issues</p>
-                    <div class="contact-details">
-                        <span class="contact-item">📞 (555) 555-5555</span>
-                        <span class="contact-item">✉️ support@aced.com</span>
-                        <span class="contact-item">🕒 Mon-Fri 9AM-8PM EST</span>
+        <section class="contact-section">
+            <div class="container">
+                <h2 class="section-title">How Can We Help?</h2>
+                <div class="contact-grid">
+                    <!-- Customer Support -->
+                    <div class="contact-card">
+                        <div class="contact-icon">🎧</div>
+                        <h3>Customer Support</h3>
+                        <p>Get help with price comparisons, deal alerts, or technical issues</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="icon">📞</span>
+                                <span>(555) 555-5555</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">✉️</span>
+                                <span>support@aced.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">🕒</span>
+                                <span>Mon-Fri 9AM-8PM EST</span>
+                            </div>
+                        </div>
+                        <button class="contact-btn primary">Start Live Chat</button>
                     </div>
-                    <button class="contact-button">Start Live Chat</button>
-                </div>
 
-                <!-- Business Partnerships -->
-                <div class="contact-card">
-                    <div class="contact-icon">🤝</div>
-                    <h3>Store Partnerships</h3>
-                    <p>Interested in partnering with us? Let's discuss how we can work together</p>
-                    <div class="contact-details">
-                        <span class="contact-item">📧 partnerships@aced.com</span>
-                        <span class="contact-item">📋 Business inquiries</span>
-                        <span class="contact-item">🏢 Retailer onboarding</span>
+                    <!-- Business Partnerships -->
+                    <div class="contact-card">
+                        <div class="contact-icon">🤝</div>
+                        <h3>Store Partnerships</h3>
+                        <p>Interested in partnering with us? Let's discuss how we can work together</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="icon">📧</span>
+                                <span>partnerships@aced.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">📋</span>
+                                <span>Business inquiries</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">🏢</span>
+                                <span>Retailer onboarding</span>
+                            </div>
+                        </div>
+                        <button class="contact-btn secondary">Send Business Inquiry</button>
                     </div>
-                    <button class="contact-button">Send Business Inquiry</button>
-                </div>
 
-                <!-- Press & Media -->
-                <div class="contact-card">
-                    <div class="contact-icon">📰</div>
-                    <h3>Press & Media</h3>
-                    <p>Media inquiries, press releases, and interview requests</p>
-                    <div class="contact-details">
-                        <span class="contact-item">📧 press@aced.com</span>
-                        <span class="contact-item">🎤 Interview requests</span>
-                        <span class="contact-item">📊 Company information</span>
+                    <!-- Press & Media -->
+                    <div class="contact-card">
+                        <div class="contact-icon">📰</div>
+                        <h3>Press & Media</h3>
+                        <p>Media inquiries, press releases, and interview requests</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="icon">📧</span>
+                                <span>press@aced.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">🎤</span>
+                                <span>Interview requests</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">📊</span>
+                                <span>Company information</span>
+                            </div>
+                        </div>
+                        <button class="contact-btn secondary">Media Kit</button>
                     </div>
-                    <button class="contact-button">Media Kit</button>
-                </div>
 
-                <!-- Technical Issues -->
-                <div class="contact-card">
-                    <div class="contact-icon">🔧</div>
-                    <h3>Technical Support</h3>
-                    <p>Website issues, app problems, or data discrepancies</p>
-                    <div class="contact-details">
-                        <span class="contact-item">📧 tech@aced.com</span>
-                        <span class="contact-item">🐛 Bug reports</span>
-                        <span class="contact-item">⚡ Priority response</span>
+                    <!-- Technical Issues -->
+                    <div class="contact-card">
+                        <div class="contact-icon">🔧</div>
+                        <h3>Technical Support</h3>
+                        <p>Website issues, app problems, or data discrepancies</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="icon">📧</span>
+                                <span>tech@aced.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">🐛</span>
+                                <span>Bug reports</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="icon">⚡</span>
+                                <span>Priority response</span>
+                            </div>
+                        </div>
+                        <button class="contact-btn primary">Report Issue</button>
                     </div>
-                    <button class="contact-button">Report Issue</button>
                 </div>
             </div>
         </section>
 
         <!-- Contact Form -->
         <section class="contact-form-section">
-            <div class="form-container">
+            <div class="container">
                 <div class="form-header">
-                    <h2>Send Us a Message</h2>
-                    <p>Can't find what you're looking for? Drop us a line and we'll get back to you within 24 hours.</p>
+                    <h2 class="section-title">Send Us a Message</h2>
+                    <p class="section-subtitle">Can't find what you're looking for? Drop us a line and we'll get back to you within 24 hours.</p>
                 </div>
                 
                 <form class="contact-form" action="submit_form.php" method="post">
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label for="inquiry-type">What can we help you with?</label>
                         <select id="inquiry-type" name="inquiry-type" required>
                             <option value="">Select inquiry type...</option>
@@ -140,54 +193,63 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label for="subject">Subject *</label>
                         <input type="text" id="subject" name="subject" placeholder="Brief description of your inquiry" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group full-width">
                         <label for="message">Message *</label>
                         <textarea id="message" name="message" rows="6" placeholder="Tell us more about how we can help you..." required></textarea>
                     </div>
 
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="newsletter" name="newsletter">
-                        <label for="newsletter">📧 Subscribe to our weekly deals newsletter</label>
+                    <div class="checkbox-row">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">📧 Subscribe to our weekly deals newsletter</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="alerts" name="alerts">
+                            <label for="alerts">🔔 Get notified of flash sales and price drops</label>
+                        </div>
                     </div>
 
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="alerts" name="alerts">
-                        <label for="alerts">🔔 Get notified of flash sales and price drops</label>
-                    </div>
-
-                    <button type="submit" class="submit-button">Send Message</button>
+                    <button type="submit" class="contact-btn primary submit-btn">Send Message</button>
                 </form>
             </div>
         </section>
 
         <!-- FAQ Section -->
         <section class="faq-section">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <h4>🔍 How do you find the best prices?</h4>
-                    <p>We scan hundreds of retailers in real-time using advanced algorithms to ensure you always see the most current prices and deals.</p>
-                </div>
-                <div class="faq-item">
-                    <h4>🏪 Which stores do you compare?</h4>
-                    <p>We work with over 150 major retailers including Nordstrom, Zara, H&M, ASOS, Nike, and many more. New stores are added regularly.</p>
-                </div>
-                <div class="faq-item">
-                    <h4>💰 Is Aced free to use?</h4>
-                    <p>Yes! Our basic price comparison service is completely free. Premium features like advanced alerts are available with our Pro plan.</p>
-                </div>
-                <div class="faq-item">
-                    <h4>📱 Do you have a mobile app?</h4>
-                    <p>Our mobile app is coming soon! For now, our website is fully optimized for mobile browsing.</p>
-                </div>
-                <div class="faq-item">
-                    <h4>🔔 How do price alerts work?</h4>
-                    <p>Set up alerts for specific items and we'll notify you instantly when prices drop or when new deals become available.</p>
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-card">
+                        <div class="faq-icon">🔍</div>
+                        <h4>How do you find the best prices?</h4>
+                        <p>We scan hundreds of retailers in real-time using advanced algorithms to ensure you always see the most current prices and deals.</p>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-icon">🏪</div>
+                        <h4>Which stores do you compare?</h4>
+                        <p>We work with over 150 major retailers including Nordstrom, Zara, H&M, ASOS, Nike, and many more. New stores are added regularly.</p>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-icon">💰</div>
+                        <h4>Is Aced free to use?</h4>
+                        <p>Yes! Our basic price comparison service is completely free. Premium features like advanced alerts are available with our Pro plan.</p>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-icon">📱</div>
+                        <h4>Do you have a mobile app?</h4>
+                        <p>Our mobile app is coming soon! For now, our website is fully optimized for mobile browsing.</p>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-icon">🔔</div>
+                        <h4>How do price alerts work?</h4>
+                        <p>Set up alerts for specific items and we'll notify you instantly when prices drop or when new deals become available.</p>
+                    </div>
                 </div>
             </div>
         </section>

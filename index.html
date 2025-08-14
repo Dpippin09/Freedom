@@ -59,13 +59,20 @@
                         <span class="search-icon">🔍</span>
                     </button>
                 </div>
-                  <!-- Filter Tabs -->                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All Categories</button>
-                    <button class="filter-tab" data-filter="clothing">Clothing</button>
-                    <button class="filter-tab" data-filter="shoes">Shoes</button>
-                    <button class="filter-tab" data-filter="accessories">Accessories</button>
-                    <button class="filter-tab" data-filter="deals">Best Deals</button>
+                <!-- Search Examples -->
+                <div class="search-examples">
+                    <span class="examples-label">Try searching:</span>
+                    <!-- Examples will be populated by JavaScript -->
                 </div>
+            </div>
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Categories</button>
+                <button class="filter-tab" data-filter="clothing">Clothing</button>
+                <button class="filter-tab" data-filter="shoes">Shoes</button>
+                <button class="filter-tab" data-filter="accessories">Accessories</button>
+                <button class="filter-tab" data-filter="deals">Best Deals</button>
             </div>
 
             <!-- Mission Banner -->
@@ -463,20 +470,16 @@
         </div>
     </div>
 
-    <script src="./assets/js/api-service.js"></script>
-    <script src="./assets/js/scraping-service.js"></script>
-    <script src="./assets/js/auth-service.js"></script>
-    <script src="./assets/js/auth-ui.js"></script>
-    <script src="./assets/js/price-alert-service.js"></script>
-    <script src="./assets/js/price-alert-ui.js"></script>
-    <script src="./assets/js/price-alert-demo.js"></script>
-    <script src="./assets/js/analytics-service.js"></script>
-    <script src="./assets/js/analytics-ui.js"></script>
-    <script src="./assets/js/charts-service.js"></script>
-    <script src="./assets/js/charts-ui.js"></script>
-    <script src="./assets/js/enhanced-frontend.js"></script>
-    <script src="./assets/js/ai-fashion-matcher-demographic.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- Core Search System -->
+    <script src="./assets/js/hybrid-search-service.js"></script>
+    <script src="./assets/js/hybrid-search-ui.js"></script>
+    
+    <!-- Optional: Load other services on demand -->
+    <script src="./assets/js/api-service.js" defer></script>
+    <script src="./assets/js/auth-service.js" defer></script>
+    <script src="./assets/js/price-alert-service.js" defer></script>
+    <script src="./assets/js/analytics-service.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
     
     <!-- PWA Service Worker Registration -->
     <script>
@@ -810,6 +813,41 @@
                     CheckoutManager.addToCart(item);
                 }
             }
+        });
+
+        // Enhanced filter tab functionality - compatible with hybrid search
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Clear search when using filters
+                if (window.hybridSearchUI) {
+                    window.hybridSearchUI.clearSearch();
+                }
+                
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const filter = tab.dataset.filter;
+                let visibleCount = 0;
+                
+                productCards.forEach(card => {
+                    const category = card.dataset.category;
+                    const shouldShow = filter === 'all' || category === filter;
+                    
+                    if (shouldShow) {
+                        card.style.display = 'block';
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                // Hide no results when filtering
+                showNoResults(false);
+            });
         });
     </script>
     
