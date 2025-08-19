@@ -9,6 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Aced">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="shortcut icon" href="./favicon.svg">
     <link rel="stylesheet" href="./assets/css/sleek-theme.css">
     <link rel="stylesheet" href="./assets/css/ai-recommendations.css">
     <link rel="manifest" href="./manifest.json">
@@ -49,23 +51,31 @@
                     <h1>Aced</h1>
                     <p>Find Fashion for Less - Compare prices across hundreds of retailers and never miss a deal again!</p>
                 </div>
+                
+                <!-- Search Section - API Based -->
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search any product across hundreds of retailers..." class="search-input" id="searchInput">
+                        <button type="button" class="search-button" id="searchButton">
+                            <span class="search-icon">🔍</span>
+                        </button>
+                    </div>
+                    <!-- Search Examples -->
+                    <div class="search-examples">
+                        <span class="examples-label">Popular searches:</span>
+                        <button class="example-search-btn" onclick="performAPISearch('Nike Air Max')">Nike Air Max</button>
+                        <button class="example-search-btn" onclick="performAPISearch('iPhone 15')">iPhone 15</button>
+                        <button class="example-search-btn" onclick="performAPISearch('Levi\'s jeans')">Levi's Jeans</button>
+                        <button class="example-search-btn" onclick="performAPISearch('MacBook Pro')">MacBook Pro</button>
+                    </div>
+                    <!-- Search Status -->
+                    <div class="search-status" id="searchStatus" style="display: none;">
+                        <span class="results-count" id="resultsCount"></span>
+                        <span class="search-time" id="searchTime"></span>
+                    </div>
+                </div>
             </section>
         </header>        <article class="content">
-            <!-- Search and Filter Section -->
-            <div class="search-container">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search any fashion item and find the best price..." class="search-input" id="searchInput">
-                    <button type="button" class="search-button" id="searchButton">
-                        <span class="search-icon">🔍</span>
-                    </button>
-                </div>
-                <!-- Search Examples -->
-                <div class="search-examples">
-                    <span class="examples-label">Try searching:</span>
-                    <!-- Examples will be populated by JavaScript -->
-                </div>
-            </div>
-            
             <!-- Filter Tabs -->
             <div class="filter-tabs">
                 <button class="filter-tab active" data-filter="all">All Categories</button>
@@ -84,7 +94,7 @@
                 </div>
                 <img src="./assets/images/farming-image.jpg" class="mission-image" alt="sustainable farming" />
             </section> -->            <!-- Products Grid -->            <section class="products-grid">
-                <h2 class="section-title">Trending Searches & Best Deals</h2>
+                <h2 class="section-title">Best Deals & Featured Products</h2>
                 
                 <div class="products-container">                    <!-- Product Card 1: Designer Dresses -->
                     <div class="product-card" data-category="clothing">
@@ -470,9 +480,14 @@
         </div>
     </div>
 
-    <!-- Core Search System -->
-    <script src="./assets/js/hybrid-search-service.js"></script>
-    <script src="./assets/js/hybrid-search-ui.js"></script>
+    <!-- API Search System -->
+    <script src="./assets/js/api-search-service.js"></script>
+    <script src="./assets/js/api-search-ui.js"></script>
+    
+    <!-- AI Fashion Compatibility Engine - PATENT PENDING -->
+    <script src="./assets/js/ai-fashion-models.js"></script>
+    <script src="./assets/js/ai-fashion-compatibility-engine.js"></script>
+    <script src="./assets/js/ai-fashion-ui.js"></script>
     
     <!-- Optional: Load other services on demand -->
     <script src="./assets/js/api-service.js" defer></script>
@@ -815,15 +830,10 @@
             }
         });
 
-        // Enhanced filter tab functionality - compatible with hybrid search
+        // Enhanced filter tab functionality
         const filterTabs = document.querySelectorAll('.filter-tab');
         filterTabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Clear search when using filters
-                if (window.hybridSearchUI) {
-                    window.hybridSearchUI.clearSearch();
-                }
-                
                 // Update active tab
                 filterTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
@@ -844,9 +854,6 @@
                         card.classList.add('hidden');
                     }
                 });
-                
-                // Hide no results when filtering
-                showNoResults(false);
             });
         });
     </script>

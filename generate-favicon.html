@@ -1,0 +1,42 @@
+<!-- Simple HTML page to generate a favicon -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+</head>
+<body>
+    <canvas id="favicon" width="32" height="32"></canvas>
+    <script>
+        const canvas = document.getElementById('favicon');
+        const ctx = canvas.getContext('2d');
+        
+        // Create gradient background
+        const gradient = ctx.createLinearGradient(0, 0, 32, 32);
+        gradient.addColorStop(0, '#764ba2');
+        gradient.addColorStop(1, '#b8a9d9');
+        
+        // Draw rounded rectangle background
+        ctx.fillStyle = gradient;
+        ctx.roundRect(0, 0, 32, 32, 6);
+        ctx.fill();
+        
+        // Draw letter A
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 18px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('A', 16, 16);
+        
+        // Convert to data URL and create download link
+        const dataURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = 'favicon.png';
+        link.href = dataURL;
+        link.textContent = 'Download Favicon';
+        document.body.appendChild(link);
+        
+        // Auto download
+        link.click();
+    </script>
+</body>
+</html>
