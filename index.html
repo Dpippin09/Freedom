@@ -51,49 +51,32 @@
                     <h1>Aced</h1>
                     <p>Find Fashion for Less - Compare prices across hundreds of retailers and never miss a deal again!</p>
                 </div>
-                
-                <!-- Search Section - API Based -->
-                <div class="search-container">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search any product across hundreds of retailers..." class="search-input" id="searchInput">
-                        <button type="button" class="search-button" id="searchButton">
-                            <span class="search-icon">🔍</span>
-                        </button>
-                    </div>
-                    <!-- Search Examples -->
-                    <div class="search-examples">
-                        <span class="examples-label">Popular searches:</span>
-                        <button class="example-search-btn" onclick="performAPISearch('Nike Air Max')">Nike Air Max</button>
-                        <button class="example-search-btn" onclick="performAPISearch('iPhone 15')">iPhone 15</button>
-                        <button class="example-search-btn" onclick="performAPISearch('Levi\'s jeans')">Levi's Jeans</button>
-                        <button class="example-search-btn" onclick="performAPISearch('MacBook Pro')">MacBook Pro</button>
-                    </div>
-                    <!-- Search Status -->
-                    <div class="search-status" id="searchStatus" style="display: none;">
-                        <span class="results-count" id="resultsCount"></span>
-                        <span class="search-time" id="searchTime"></span>
-                    </div>
-                </div>
             </section>
         </header>        <article class="content">
-            <!-- Filter Tabs -->
-            <div class="filter-tabs">
-                <button class="filter-tab active" data-filter="all">All Categories</button>
-                <button class="filter-tab" data-filter="clothing">Clothing</button>
-                <button class="filter-tab" data-filter="shoes">Shoes</button>
-                <button class="filter-tab" data-filter="accessories">Accessories</button>
-                <button class="filter-tab" data-filter="deals">Best Deals</button>
+            <!-- Search Section - API Based -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search any product across hundreds of retailers..." class="search-input" id="searchInput">
+                    <button type="button" class="search-button" id="searchButton">
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+                <!-- Search Examples -->
+                <div class="search-examples">
+                    <span class="examples-label">Popular searches:</span>
+                    <button class="example-search-btn" onclick="performAPISearch('Nike Air Max')">Nike Air Max</button>
+                    <button class="example-search-btn" onclick="performAPISearch('iPhone 15')">iPhone 15</button>
+                    <button class="example-search-btn" onclick="performAPISearch('Levi\'s jeans')">Levi's Jeans</button>
+                    <button class="example-search-btn" onclick="performAPISearch('MacBook Pro')">MacBook Pro</button>
+                </div>
+                <!-- Search Status -->
+                <div class="search-status" id="searchStatus" style="display: none;">
+                    <span class="results-count" id="resultsCount"></span>
+                    <span class="search-time" id="searchTime"></span>
+                </div>
             </div>
 
-            <!-- Mission Banner -->
-            <!-- <section class="mission-banner">
-                <div class="mission-content">
-                    <h1>Sustainable Agriculture Solutions</h1>
-                    <p>Transform your farming with our innovative biochar and regenerative practices</p>
-                    <button class="cta-button">Get Started</button>
-                </div>
-                <img src="./assets/images/farming-image.jpg" class="mission-image" alt="sustainable farming" />
-            </section> -->            <!-- Products Grid -->            <section class="products-grid">
+            <!-- Products Grid -->            <section class="products-grid">
                 <h2 class="section-title">Best Deals & Featured Products</h2>
                 
                 <div class="products-container">                    <!-- Product Card 1: Designer Dresses -->
@@ -828,33 +811,6 @@
                     CheckoutManager.addToCart(item);
                 }
             }
-        });
-
-        // Enhanced filter tab functionality
-        const filterTabs = document.querySelectorAll('.filter-tab');
-        filterTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Update active tab
-                filterTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                const filter = tab.dataset.filter;
-                let visibleCount = 0;
-                
-                productCards.forEach(card => {
-                    const category = card.dataset.category;
-                    const shouldShow = filter === 'all' || category === filter;
-                    
-                    if (shouldShow) {
-                        card.style.display = 'block';
-                        card.classList.remove('hidden');
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                        card.classList.add('hidden');
-                    }
-                });
-            });
         });
     </script>
     
