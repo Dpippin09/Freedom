@@ -368,18 +368,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (isUsingMockData) {
         console.log('💡 To enable real APIs, see API_SETUP.md');
-        
-        // Add a subtle indicator for demo mode
-        const searchContainer = document.querySelector('.search-container');
-        if (searchContainer) {
-            const demoIndicator = document.createElement('div');
-            demoIndicator.className = 'demo-mode-indicator';
-            demoIndicator.innerHTML = `
-                <small style="color: #666; font-size: 0.8em;">
-                    🧪 Demo Mode - <a href="API_SETUP.md" target="_blank" style="color: #764ba2;">Enable Real APIs</a>
-                </small>
-            `;
-            searchContainer.appendChild(demoIndicator);
-        }
     }
 });
