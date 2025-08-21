@@ -5,37 +5,82 @@
 
 class APISearchService {
     constructor() {
+        // Load configuration
+        const config = window.API_CONFIG || {};
+        
+        // Real API Configuration
+        this.apiKeys = {
+            rapidapi: config.RAPIDAPI_KEY || 'YOUR_RAPIDAPI_KEY',
+            ebay: config.EBAY_CLIENT_ID || 'YOUR_EBAY_CLIENT_ID',
+            walmart: config.WALMART_API_KEY || 'YOUR_WALMART_KEY'
+        };
+
         this.searchEndpoints = {
             amazon: {
                 name: 'Amazon',
-                baseUrl: 'https://api.amazon-product-api.com/search',
-                enabled: true
+                baseUrl: 'https://amazon-products1.p.rapidapi.com/search',
+                headers: {
+                    'X-RapidAPI-Key': this.apiKeys.rapidapi,
+                    'X-RapidAPI-Host': 'amazon-products1.p.rapidapi.com'
+                },
+                enabled: true,
+                type: 'rapidapi'
             },
             ebay: {
                 name: 'eBay',
                 baseUrl: 'https://api.ebay.com/buy/browse/v1/item_summary/search',
-                enabled: true
+                headers: {
+                    'Authorization': `Bearer ${this.apiKeys.ebay}`,
+                    'Content-Type': 'application/json'
+                },
+                enabled: true,
+                type: 'official'
             },
             walmart: {
                 name: 'Walmart',
-                baseUrl: 'https://api.walmart.com/v3/items/search',
-                enabled: true
+                baseUrl: 'https://walmart-com1.p.rapidapi.com/search',
+                headers: {
+                    'X-RapidAPI-Key': this.apiKeys.rapidapi,
+                    'X-RapidAPI-Host': 'walmart-com1.p.rapidapi.com'
+                },
+                enabled: true,
+                type: 'rapidapi'
             },
             target: {
                 name: 'Target',
-                baseUrl: 'https://api.target.com/products/search',
-                enabled: true
+                baseUrl: 'https://target1.p.rapidapi.com/search',
+                headers: {
+                    'X-RapidAPI-Key': this.apiKeys.rapidapi,
+                    'X-RapidAPI-Host': 'target1.p.rapidapi.com'
+                },
+                enabled: true,
+                type: 'rapidapi'
             },
-            bestbuy: {
-                name: 'Best Buy',
-                baseUrl: 'https://api.bestbuy.com/v1/products/search',
-                enabled: true
+            etsy: {
+                name: 'Etsy',
+                baseUrl: 'https://etsy2.p.rapidapi.com/search',
+                headers: {
+                    'X-RapidAPI-Key': this.apiKeys.rapidapi,
+                    'X-RapidAPI-Host': 'etsy2.p.rapidapi.com'
+                },
+                enabled: true,
+                type: 'rapidapi'
             }
         };
         
         this.searchCache = new Map();
         this.searchTimeout = null;
         this.currentSearch = null;
+        this.useMockData = config.USE_MOCK_DATA !== false; // Default to true for safety
+        this.enableLogging = config.ENABLE_LOGGING !== false;
+        
+        if (this.enableLogging) {
+            console.log('🔍 API Search Service initialized');
+            console.log('📊 Mock data mode:', this.useMockData);
+            console.log('🔑 API keys configured:', Object.keys(this.apiKeys).filter(k => 
+                this.apiKeys[k] && !this.apiKeys[k].startsWith('YOUR_')
+            ));
+        }
     }
 
     /**
@@ -116,16 +161,285 @@ class APISearchService {
         const endpoint = this.searchEndpoints[apiKey];
         if (!endpoint || !endpoint.enabled) return null;
 
-        try {
-            // Simulate API calls with mock data for demo
+        // Use mock data if API keys not configured or useMockData is true
+        if (this.useMockData || !this.apiKeys.rapidapi || this.apiKeys.rapidapi === 'YOUR_RAPIDAPI_KEY') {
+            console.log(`Using mock data for ${endpoint.name} (API key not configured)`);
             return await this.simulateAPISearch(apiKey, query, options);
+        }
+
+        try {
+            console.log(`Searching ${endpoint.name} for: ${query}`);
             
-            // Real API implementation would look like:
-            // const response = await fetch(`${endpoint.baseUrl}?q=${encodeURIComponent(query)}&...`);
-            // return await response.json();
+            if (endpoint.type === 'rapidapi') {
+                return await this.searchRapidAPI(apiKey, endpoint, query, options);
+            } else if (endpoint.type === 'official') {
+                return await this.searchOfficialAPI(apiKey, endpoint, query, options);
+            }
             
         } catch (error) {
             console.error(`${endpoint.name} search error:`, error);
+            // Fallback to mock data on error
+            return await this.simulateAPISearch(apiKey, query, options);
+        }
+    }
+
+    /**
+     * Search RapidAPI endpoints
+     */
+    async searchRapidAPI(apiKey, endpoint, query, options = {}) {
+        const { limit = 10 } = options;
+        
+        let url = endpoint.baseUrl;
+        let searchParams = new URLSearchParams();
+
+        // Configure parameters based on API
+        switch (apiKey) {
+            case 'amazon':
+                searchParams.append('query', query);
+                searchParams.append('page', '1');
+                searchParams.append('country', 'US');
+                break;
+            case 'walmart':
+                searchParams.append('query', query);
+                searchParams.append('page', '1');
+                searchParams.append('sortBy', 'best_match');
+                break;
+            case 'target':
+                searchParams.append('query', query);
+                searchParams.append('limit', limit.toString());
+                break;
+            case 'etsy':
+                searchParams.append('query', query);
+                searchParams.append('limit', limit.toString());
+                searchParams.append('sort_on', 'relevancy');
+                break;
+        }
+
+        const fullUrl = `${url}?${searchParams.toString()}`;
+        console.log(`Making API call to: ${fullUrl}`);
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'GET',
+                headers: endpoint.headers,
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return this.parseRapidAPIResponse(apiKey, data, query);
+
+        } finally {
+            clearTimeout(timeoutId);
+        }
+    }
+
+    /**
+     * Search official APIs (like eBay)
+     */
+    async searchOfficialAPI(apiKey, endpoint, query, options = {}) {
+        const { limit = 10 } = options;
+        
+        if (apiKey === 'ebay') {
+            const searchParams = new URLSearchParams({
+                q: query,
+                limit: limit.toString(),
+                offset: '0',
+                category_ids: '281', // Fashion category
+                filter: 'price:[1..],priceCurrency:USD'
+            });
+
+            const fullUrl = `${endpoint.baseUrl}?${searchParams.toString()}`;
+            
+            const response = await fetch(fullUrl, {
+                method: 'GET',
+                headers: endpoint.headers
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return this.parseEbayResponse(data, query);
+        }
+
+        return null;
+    }
+
+    /**
+     * Parse RapidAPI responses
+     */
+    parseRapidAPIResponse(apiKey, data, query) {
+        const products = [];
+        
+        try {
+            let items = [];
+            
+            // Handle different response formats
+            switch (apiKey) {
+                case 'amazon':
+                    items = data.results || data.products || [];
+                    break;
+                case 'walmart':
+                    items = data.items || data.results || [];
+                    break;
+                case 'target':
+                    items = data.data?.search?.products || data.products || [];
+                    break;
+                case 'etsy':
+                    items = data.results || [];
+                    break;
+            }
+
+            items.forEach((item, index) => {
+                try {
+                    const product = this.normalizeProduct(apiKey, item, query);
+                    if (product) products.push(product);
+                } catch (error) {
+                    console.warn(`Error parsing product ${index} from ${apiKey}:`, error);
+                }
+            });
+
+        } catch (error) {
+            console.error(`Error parsing ${apiKey} response:`, error);
+        }
+
+        return {
+            products,
+            count: products.length,
+            source: apiKey
+        };
+    }
+
+    /**
+     * Parse eBay official API response
+     */
+    parseEbayResponse(data, query) {
+        const products = [];
+        
+        if (data.itemSummaries) {
+            data.itemSummaries.forEach((item, index) => {
+                try {
+                    const product = this.normalizeProduct('ebay', item, query);
+                    if (product) products.push(product);
+                } catch (error) {
+                    console.warn(`Error parsing eBay product ${index}:`, error);
+                }
+            });
+        }
+
+        return {
+            products,
+            count: products.length,
+            source: 'ebay'
+        };
+    }
+
+    /**
+     * Normalize product data from different APIs
+     */
+    normalizeProduct(source, item, query) {
+        const endpoint = this.searchEndpoints[source];
+        let product = {
+            id: `${source}-${item.id || item.asin || item.itemId || Date.now()}`,
+            source: source,
+            sourceName: endpoint.name,
+            title: '',
+            price: 0,
+            originalPrice: 0,
+            image: '',
+            rating: 0,
+            reviews: 0,
+            url: '',
+            availability: 'Available',
+            shipping: 'Standard shipping',
+            description: ''
+        };
+
+        try {
+            switch (source) {
+                case 'amazon':
+                    product.title = item.title || item.name || 'Unknown Product';
+                    product.price = parseFloat(item.price?.value || item.current_price || 0);
+                    product.originalPrice = parseFloat(item.original_price || item.price?.value || product.price * 1.2);
+                    product.image = item.image || item.main_image;
+                    product.rating = parseFloat(item.rating || item.reviews?.rating || 4);
+                    product.reviews = parseInt(item.reviews?.total_reviews || item.review_count || 0);
+                    product.url = item.url || item.link || `https://amazon.com/dp/${item.asin}`;
+                    product.description = item.description || `${product.title} from Amazon`;
+                    break;
+
+                case 'walmart':
+                    product.title = item.name || item.title || 'Unknown Product';
+                    product.price = parseFloat(item.price || item.current_price || 0);
+                    product.originalPrice = parseFloat(item.list_price || product.price * 1.15);
+                    product.image = item.image || item.thumbnail;
+                    product.rating = parseFloat(item.rating || 4);
+                    product.reviews = parseInt(item.reviews_count || 0);
+                    product.url = item.url || `https://walmart.com/ip/${item.id}`;
+                    product.description = item.description || `${product.title} from Walmart`;
+                    break;
+
+                case 'target':
+                    product.title = item.title || item.name || 'Unknown Product';
+                    product.price = parseFloat(item.price?.current || item.current_price || 0);
+                    product.originalPrice = parseFloat(item.price?.regular || product.price * 1.1);
+                    product.image = item.image || item.images?.[0];
+                    product.rating = parseFloat(item.rating || 4);
+                    product.reviews = parseInt(item.review_count || 0);
+                    product.url = item.url || `https://target.com/p/${item.tcin}`;
+                    product.description = item.description || `${product.title} from Target`;
+                    break;
+
+                case 'etsy':
+                    product.title = item.title || 'Unknown Product';
+                    product.price = parseFloat(item.price?.amount || item.price || 0) / 100; // Etsy prices in cents
+                    product.originalPrice = product.price * 1.1;
+                    product.image = item.Images?.[0]?.url_570xN || item.image;
+                    product.rating = parseFloat(item.rating || 4);
+                    product.reviews = parseInt(item.num_favorers || 0);
+                    product.url = item.url || `https://etsy.com/listing/${item.listing_id}`;
+                    product.description = item.description || `${product.title} from Etsy`;
+                    break;
+
+                case 'ebay':
+                    product.title = item.title || 'Unknown Product';
+                    product.price = parseFloat(item.price?.value || 0);
+                    product.originalPrice = product.price * 1.1;
+                    product.image = item.image?.imageUrl || item.thumbnailImages?.[0]?.imageUrl;
+                    product.rating = 4; // eBay doesn't provide ratings in search
+                    product.reviews = 0;
+                    product.url = item.itemWebUrl || `https://ebay.com/itm/${item.itemId}`;
+                    product.availability = item.availabilityStatus || 'Available';
+                    product.shipping = item.shippingOptions?.[0]?.shippingCost?.value ? 
+                                     `$${item.shippingOptions[0].shippingCost.value} shipping` : 
+                                     'See details';
+                    product.description = item.shortDescription || `${product.title} from eBay`;
+                    break;
+            }
+
+            // Ensure required fields
+            if (!product.title || product.price <= 0) {
+                return null;
+            }
+
+            // Format prices
+            product.price = product.price.toFixed(2);
+            product.originalPrice = product.originalPrice.toFixed(2);
+
+            return product;
+
+        } catch (error) {
+            console.error(`Error normalizing ${source} product:`, error, item);
             return null;
         }
     }
