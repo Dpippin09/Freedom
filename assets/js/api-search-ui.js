@@ -80,10 +80,17 @@ class APISearchUI {
         this.resultsContainer.className = 'search-results-container';
         this.resultsContainer.style.display = 'none';
 
-        // Insert after the filter tabs
+        // Insert after the search section or filter tabs
         const filterTabs = document.querySelector('.filter-tabs');
+        const searchSection = document.querySelector('.search-container');
+        
         if (filterTabs) {
             filterTabs.parentNode.insertBefore(this.resultsContainer, filterTabs.nextSibling);
+        } else if (searchSection) {
+            searchSection.parentNode.insertBefore(this.resultsContainer, searchSection.nextSibling);
+        } else {
+            // Fallback: append to body
+            document.body.appendChild(this.resultsContainer);
         }
     }
 

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Test - Freedom</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        .test-button { background: #764ba2; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .test-button:hover { background: #5a3a7a; }
+        .test-results { margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Freedom Search System Test</h1>
+    
+    <div class="test-section">
+        <h2>API Configuration Test</h2>
+        <button class="test-button" onclick="testAPIConfig()">Test API Config</button>
+        <div id="configResults" class="test-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Search Service Test</h2>
+        <button class="test-button" onclick="testSearchService()">Test Search Service</button>
+        <div id="serviceResults" class="test-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Mock Search Test</h2>
+        <button class="test-button" onclick="testMockSearch()">Test Mock Search</button>
+        <div id="searchResults" class="test-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>AI System Test</h2>
+        <button class="test-button" onclick="testAISystem()">Test AI System</button>
+        <div id="aiResults" class="test-results"></div>
+    </div>
+
+    <!-- Load all the necessary scripts -->
+    <script src="./config/api-config.js"></script>
+    <script src="./assets/js/api-search-service.js"></script>
+    <script src="./assets/js/ai-fashion-models.js"></script>
+    <script src="./assets/js/ai-fashion-compatibility-engine.js"></script>
+
+    <script>
+        function testAPIConfig() {
+            const results = document.getElementById('configResults');
+            try {
+                if (window.API_CONFIG) {
+                    results.innerHTML = `
+                        <div class="success">✅ API_CONFIG loaded successfully</div>
+                        <div>Mock Data Mode: ${window.API_CONFIG.USE_MOCK_DATA}</div>
+                        <div>RapidAPI Key: ${window.API_CONFIG.RAPIDAPI_KEY ? 'Set' : 'Not Set'}</div>
+                        <div>eBay Client ID: ${window.API_CONFIG.EBAY_CLIENT_ID ? 'Set' : 'Not Set'}</div>
+                    `;
+                } else {
+                    results.innerHTML = '<div class="error">❌ API_CONFIG not found</div>';
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        function testSearchService() {
+            const results = document.getElementById('serviceResults');
+            try {
+                if (window.APISearchService) {
+                    const service = new window.APISearchService();
+                    results.innerHTML = `
+                        <div class="success">✅ APISearchService class found</div>
+                        <div>Service instance created successfully</div>
+                        <div>Mock data mode: ${service.useMockData}</div>
+                    `;
+                } else {
+                    results.innerHTML = '<div class="error">❌ APISearchService class not found</div>';
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testMockSearch() {
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '<div>🔄 Testing mock search...</div>';
+            
+            try {
+                const service = new window.APISearchService();
+                const searchResults = await service.searchProducts('dress', { limit: 5 });
+                
+                if (searchResults && searchResults.products && searchResults.products.length > 0) {
+                    results.innerHTML = `
+                        <div class="success">✅ Mock search working!</div>
+                        <div>Found ${searchResults.products.length} products</div>
+                        <div>First product: ${searchResults.products[0].title}</div>
+                        <div>Price: $${searchResults.products[0].price}</div>
+                        <div>Source: ${searchResults.products[0].sourceName}</div>
+                    `;
+                } else {
+                    results.innerHTML = '<div class="error">❌ No search results returned</div>';
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="error">❌ Search Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testAISystem() {
+            const results = document.getElementById('aiResults');
+            results.innerHTML = '<div>🔄 Testing AI system...</div>';
+            
+            try {
+                if (window.StyleVectorAnalyzer) {
+                    const analyzer = new window.StyleVectorAnalyzer();
+                    await analyzer.initialize();
+                    
+                    const testItem = {
+                        title: 'Blue Cotton Dress',
+                        description: 'Casual summer dress',
+                        price: '49.99'
+                    };
+                    
+                    const features = await analyzer.extractStyleFeatures(testItem);
+                    
+                    results.innerHTML = `
+                        <div class="success">✅ AI System working!</div>
+                        <div>Style analyzer initialized</div>
+                        <div>Detected colors: ${features.colors.primary}</div>
+                        <div>Style category: ${features.style.primary}</div>
+                        <div>Formality level: ${features.formality.category}</div>
+                    `;
+                } else {
+                    results.innerHTML = '<div class="error">❌ AI classes not found</div>';
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="error">❌ AI Error: ${error.message}</div>`;
+            }
+        }
+
+        // Auto-run tests when page loads
+        window.addEventListener('load', function() {
+            console.log('🧪 Search test page loaded - click buttons to run tests');
+        });
+    </script>
+</body>
+</html>

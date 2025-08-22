@@ -45,8 +45,22 @@ self.addEventListener('fetch', function(event) {
                     return response;
                 }
                 return fetch(event.request);
-            }
-        )
+            })
+            .catch(function(error) {
+                // Handle fetch errors gracefully
+                console.log('Service Worker: Fetch failed for', event.request.url, error);
+                
+                // For navigation requests, return a fallback page
+                if (event.request.mode === 'navigate') {
+                    return caches.match('/');
+                }
+                
+                // For other requests, just fail silently
+                return new Response('Service Worker: Resource not available offline', {
+                    status: 503,
+                    statusText: 'Service Unavailable'
+                });
+            })
     );
 });
 
