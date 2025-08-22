@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📷 Camera Wardrobe - Freedom</title>
+    <meta name="description" content="Use AI to analyze your wardrobe and get personalized styling recommendations">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#764ba2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Freedom">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/camera-wardrobe.css">
+    
+    <!-- Icons -->
+    <link rel="apple-touch-icon" href="./assets/images/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/icons/icon-16.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <span class="brand-text">Freedom</span>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="trending-now.html" class="nav-link">Trending</a>
+                <a href="best-deals.html" class="nav-link">Deals</a>
+                <a href="camera-wardrobe.html" class="nav-link active">📷 Wardrobe</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="camera-wardrobe-container">
+        <!-- Header -->
+        <div class="camera-header">
+            <h1>📷 AI Wardrobe Analyzer</h1>
+            <p>Snap a photo of your outfit or individual items to get personalized styling recommendations, color analysis, and shopping suggestions powered by AI</p>
+        </div>
+
+        <!-- Camera Interface -->
+        <div class="camera-interface">
+            <!-- Mode Selector -->
+            <div class="camera-controls">
+                <div class="camera-mode-selector">
+                    <button class="mode-btn active" data-mode="outfit">👗 Full Outfit</button>
+                    <button class="mode-btn" data-mode="item">👔 Single Item</button>
+                    <button class="mode-btn" data-mode="color">🎨 Color Match</button>
+                    <button class="mode-btn" data-mode="occasion">🎯 Occasion</button>
+                </div>
+            </div>
+
+            <!-- Camera Display -->
+            <div class="camera-display">
+                <video id="cameraVideo" class="camera-video" playsinline muted></video>
+                <div class="camera-overlay">
+                    <div class="camera-guide">
+                        <h3>👗 Full Outfit Analysis</h3>
+                        <p>Capture your complete outfit for styling suggestions and compatibility analysis</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Preview -->
+            <div class="photo-preview">
+                <img class="preview-image" alt="Captured photo">
+            </div>
+
+            <!-- File Upload Alternative -->
+            <div class="file-upload" onclick="document.getElementById('photoUpload').click()">
+                <div class="file-upload-icon">📁</div>
+                <h3>Upload Photo</h3>
+                <p>Or click here to upload from your device</p>
+                <input type="file" id="photoUpload" accept="image/*" capture="environment">
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="camera-actions">
+                <button id="startCamera" class="camera-btn">
+                    📷 Start Camera
+                </button>
+                <button id="capturePhoto" class="camera-btn" style="display: none;">
+                    📸 Capture Photo
+                </button>
+                <button id="retakePhoto" class="camera-btn secondary" style="display: none;">
+                    🔄 Retake
+                </button>
+                <button id="analyzePhoto" class="camera-btn" style="display: none;">
+                    🧠 Analyze with AI
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Processing...</p>
+            </div>
+        </div>
+
+        <!-- AI Analysis Results -->
+        <div class="ai-analysis">
+            <h3>🧠 AI Analysis Results</h3>
+            <div class="analysis-grid">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <h3>🛍️ Recommended Items</h3>
+            <div class="recommendation-grid">
+                <!-- Recommendations will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Freedom</h3>
+                <p>AI-powered fashion discovery platform</p>
+            </div>
+            <div class="footer-section">
+                <h3>Features</h3>
+                <ul>
+                    <li><a href="index.html">Smart Search</a></li>
+                    <li><a href="trending-now.html">Trending Items</a></li>
+                    <li><a href="best-deals.html">Best Deals</a></li>
+                    <li><a href="camera-wardrobe.html">Wardrobe AI</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#help">Help Center</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Freedom. All rights reserved. | Made with ❤️ for fashion lovers</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./config/api-config.js"></script>
+    <script src="./assets/js/ai-fashion-models.js"></script>
+    <script src="./assets/js/ai-fashion-compatibility-engine.js"></script>
+    <script src="./assets/js/camera-wardrobe-matcher.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+
+    <!-- Camera Support Check -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startBtn = document.getElementById('startCamera');
+            const fileUpload = document.querySelector('.file-upload');
+            
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                // Camera not supported, show file upload only
+                startBtn.style.display = 'none';
+                fileUpload.innerHTML = `
+                    <div class="file-upload-icon">📱</div>
+                    <h3>Camera Not Available</h3>
+                    <p>Upload a photo from your device instead</p>
+                    <input type="file" id="photoUpload" accept="image/*">
+                `;
+            }
+            
+            // Check if mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            if (isMobile) {
+                console.log('📱 Mobile device detected - camera optimized for mobile');
+            }
+        });
+    </script>
+</body>
+</html>
