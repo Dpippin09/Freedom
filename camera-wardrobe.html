@@ -45,8 +45,8 @@
     <main class="camera-wardrobe-container">
         <!-- Header -->
         <div class="camera-header">
-            <h1>📷 AI Wardrobe Analyzer</h1>
-            <p>Snap a photo of your outfit or individual items to get personalized styling recommendations, color analysis, and shopping suggestions powered by AI</p>
+            <h1>✨ AI Wardrobe Analyzer</h1>
+            <p>Transform your fashion experience with cutting-edge AI technology. Capture your style, discover perfect matches, and elevate your wardrobe with personalized recommendations powered by advanced machine learning.</p>
         </div>
 
         <!-- Camera Interface -->
@@ -54,10 +54,10 @@
             <!-- Mode Selector -->
             <div class="camera-controls">
                 <div class="camera-mode-selector">
-                    <button class="mode-btn active" data-mode="outfit">👗 Full Outfit</button>
+                    <button class="mode-btn active" data-mode="outfit">👗 Complete Outfit</button>
                     <button class="mode-btn" data-mode="item">👔 Single Item</button>
-                    <button class="mode-btn" data-mode="color">🎨 Color Match</button>
-                    <button class="mode-btn" data-mode="occasion">🎯 Occasion</button>
+                    <button class="mode-btn" data-mode="color">🎨 Color Analysis</button>
+                    <button class="mode-btn" data-mode="occasion">✨ Style Match</button>
                 </div>
             </div>
 
@@ -66,8 +66,8 @@
                 <video id="cameraVideo" class="camera-video" playsinline muted></video>
                 <div class="camera-overlay">
                     <div class="camera-guide">
-                        <h3>👗 Full Outfit Analysis</h3>
-                        <p>Capture your complete outfit for styling suggestions and compatibility analysis</p>
+                        <h3>✨ Complete Outfit Analysis</h3>
+                        <p>Position yourself in frame for comprehensive style analysis and personalized fashion recommendations</p>
                     </div>
                 </div>
             </div>
@@ -79,38 +79,38 @@
 
             <!-- File Upload Alternative -->
             <div class="file-upload" onclick="document.getElementById('photoUpload').click()">
-                <div class="file-upload-icon">📁</div>
-                <h3>Upload Photo</h3>
-                <p>Or click here to upload from your device</p>
+                <div class="file-upload-icon">�️</div>
+                <h3>Upload Your Photo</h3>
+                <p>Drag & drop your fashion photos here or click to browse from your device</p>
                 <input type="file" id="photoUpload" accept="image/*" capture="environment">
             </div>
 
             <!-- Action Buttons -->
             <div class="camera-actions">
                 <button id="startCamera" class="camera-btn">
-                    📷 Start Camera
+                    � Launch Camera
                 </button>
                 <button id="capturePhoto" class="camera-btn" style="display: none;">
-                    📸 Capture Photo
+                    ✨ Capture Style
                 </button>
                 <button id="retakePhoto" class="camera-btn secondary" style="display: none;">
-                    🔄 Retake
+                    🔄 Try Again
                 </button>
                 <button id="analyzePhoto" class="camera-btn" style="display: none;">
-                    🧠 Analyze with AI
+                    🧠 Analyze Fashion
                 </button>
             </div>
 
             <!-- Loading State -->
             <div class="loading">
                 <div class="loading-spinner"></div>
-                <p>Processing...</p>
+                <p>✨ Analyzing your style...</p>
             </div>
         </div>
 
         <!-- AI Analysis Results -->
         <div class="ai-analysis">
-            <h3>🧠 AI Analysis Results</h3>
+            <h3>✨ AI Fashion Insights</h3>
             <div class="analysis-grid">
                 <!-- Results will be populated by JavaScript -->
             </div>
@@ -118,7 +118,7 @@
 
         <!-- Recommendations -->
         <div class="recommendations">
-            <h3>🛍️ Recommended Items</h3>
+            <h3>🛍️ Curated Recommendations</h3>
             <div class="recommendation-grid">
                 <!-- Recommendations will be populated by JavaScript -->
             </div>
