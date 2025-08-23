@@ -40,22 +40,10 @@
     ],
     "shortcuts": [
         {
-            "name": "Best Deals",
-            "short_name": "Deals",
-            "description": "View today's best fashion deals",
-            "url": "/best-deals.html",
-            "icons": [
-                {
-                    "src": "assets/images/Snatched.jpg",
-                    "sizes": "96x96"
-                }
-            ]
-        },
-        {
-            "name": "Trending Now",
-            "short_name": "Trending",
-            "description": "See what's trending in fashion",
-            "url": "/trending-now.html",
+            "name": "Wardrobe AI",
+            "short_name": "Wardrobe",
+            "description": "AI-powered wardrobe analysis",
+            "url": "/camera-wardrobe.html",
             "icons": [
                 {
                     "src": "assets/images/Snatched.jpg",

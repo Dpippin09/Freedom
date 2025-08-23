@@ -3,8 +3,7 @@ const CACHE_NAME = 'aced-fashion-v1.0.0';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/best-deals.html',
-    '/trending-now.html',
+    '/camera-wardrobe.html',
     '/contact.html',
     '/login-signup.html',
     '/assets/css/sleek-theme.css',
@@ -116,7 +115,7 @@ self.addEventListener('notificationclick', function(event) {
     
     if (event.action === 'explore') {
         event.waitUntil(
-            clients.openWindow('/best-deals.html')
+            clients.openWindow('/camera-wardrobe.html')
         );
     }
 });

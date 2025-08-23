@@ -19,12 +19,8 @@ app.get('/test-search.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'test-search.html'));
 });
 
-app.get('/best-deals.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'best-deals.html'));
-});
-
-app.get('/trending-now.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'trending-now.html'));
+app.get('/camera-wardrobe.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'camera-wardrobe.html'));
 });
 
 app.get('/contact.html', (req, res) => {
