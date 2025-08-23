@@ -15,6 +15,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
     <link rel="stylesheet" href="./assets/css/camera-wardrobe.css">
     
     <!-- Icons -->
@@ -24,22 +25,35 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
+    <header>
+        <nav>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
             <div class="navbar-brand">
                 <a href="index.html">
                     <span class="brand-text">Aced</span>
                 </a>
             </div>
-            <div class="navbar-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="trending-now.html" class="nav-link">Trending</a>
-                <a href="best-deals.html" class="nav-link">Deals</a>
-                <a href="camera-wardrobe.html" class="nav-link active">📷 Wardrobe</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="best-deals.html">Best Deals</a></li>
+                <li><a href="trending-now.html">Trending Now</a></li>
+                <li><a href="camera-wardrobe.html" class="active">📷 Wardrobe AI</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link" id="cart-link">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="nav-overlay" id="nav-overlay"></div>
+    </header>
 
     <!-- Main Content -->
     <main class="camera-wardrobe-container">
@@ -155,6 +169,47 @@
             <p>&copy; 2025 Aced. All rights reserved. | Made with ❤️ for fashion lovers</p>
         </div>
     </footer>
+
+    <!-- Hamburger Menu Script -->
+    <script>
+        // Hamburger menu functionality
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            const overlay = document.getElementById('nav-overlay');
+            const hamburger = document.getElementById('hamburger-menu');
+            
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const navOverlay = document.getElementById('nav-overlay');
+            
+            if (hamburgerMenu) {
+                hamburgerMenu.addEventListener('click', toggleMenu);
+            }
+            if (navOverlay) {
+                navOverlay.addEventListener('click', toggleMenu);
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const navLinks = document.getElementById('nav-links');
+                    const overlay = document.getElementById('nav-overlay');
+                    const hamburger = document.getElementById('hamburger-menu');
+                    
+                    if (navLinks && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburger.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="./config/api-config.js"></script>
