@@ -32,7 +32,7 @@ app.get('/contact.html', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`🚀 Freedom Fashion site running at http://localhost:${port}`);
+    console.log(`🚀 Fashion site running at http://localhost:${port}`);
     console.log(`📷 Camera Wardrobe available at http://localhost:${port}/camera-wardrobe.html`);
     console.log(`🔍 Test Search available at http://localhost:${port}/test-search.html`);
     console.log(`✨ All features working without database dependency`);

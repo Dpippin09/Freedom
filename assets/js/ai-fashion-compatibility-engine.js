@@ -8,7 +8,7 @@
  * 3. AI-powered fit prediction across brands
  * 4. Dynamic learning from user behavior patterns
  * 
- * @author Freedom Fashion Team
+ * @author Fashion AI Team
  * @patent_pending True
  */
 
