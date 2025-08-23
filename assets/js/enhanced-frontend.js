@@ -593,7 +593,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     text.textContent = 'Ready to scrape';
                 }
                 
-                console.log('Scraping status:', status);
+                // Only log status changes, not every update
+                if (window.lastScrapingStatus !== JSON.stringify(status)) {
+                    console.log('Scraping status changed:', status);
+                    window.lastScrapingStatus = JSON.stringify(status);
+                }
             } else {
                 indicator.style.background = '#dc3545'; // Red for error
                 text.textContent = 'Error checking status';

@@ -168,7 +168,11 @@ class APISearchService {
         }
 
         try {
-            console.log(`Searching ${endpoint.name} for: ${query}`);
+            // Only log unique searches to avoid spam
+            if (window.lastSearchLog !== `${endpoint.name}:${query}`) {
+                console.log(`🔍 Searching ${endpoint.name} for: ${query}`);
+                window.lastSearchLog = `${endpoint.name}:${query}`;
+            }
             
             if (endpoint.type === 'rapidapi') {
                 return await this.searchRapidAPI(apiKey, endpoint, query, options);
