@@ -495,9 +495,10 @@
 
 /* Camera Wardrobe Footer Overrides */
 .camera-wardrobe-container .footer {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     border-radius: 16px 16px 0 0;
     margin-top: 40px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .camera-wardrobe-container .footer-content {
@@ -539,22 +540,25 @@
 }
 
 .camera-wardrobe-container .footer-section ul li a {
-    color: #cbd5e0;
+    color: #2d3748;
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 0.95rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
 }
 
 .camera-wardrobe-container .footer-section ul li a:hover {
-    color: #ffffff;
+    color: #1a202c;
     text-decoration: underline;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.9);
 }
 
 .camera-wardrobe-container .footer-bottom {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .camera-wardrobe-container .footer-bottom p {
