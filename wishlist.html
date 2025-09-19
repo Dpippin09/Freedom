@@ -126,6 +126,21 @@
             font-size: 1.2rem;
         }
 
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border-lavender);
+            border-top: 4px solid var(--accent-lavender);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .empty-wishlist {
             text-align: center;
             padding: var(--spacing-4xl);
@@ -472,16 +487,19 @@
 
         .notification {
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
-            padding: var(--spacing-lg) var(--spacing-xl);
+            padding: var(--spacing-md) var(--spacing-lg);
             border-radius: var(--radius-lg);
             color: var(--pure-white);
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.9rem;
             z-index: 3000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
             transform: translateX(100%);
             transition: transform var(--transition-smooth);
+            max-width: 300px;
+            opacity: 0.9;
         }
 
         .notification.show {
@@ -494,6 +512,7 @@
 
         .notification.error {
             background: linear-gradient(135deg, #dc3545, #e74c3c);
+            opacity: 0.95;
         }
 
         @keyframes fadeIn {
@@ -628,12 +647,40 @@
                 </button>
             </div>
 
+            <!-- Filter Controls -->
+            <div class="filter-controls" style="margin-bottom: var(--spacing-lg); display: none;">
+                <select id="category-filter" class="form-input" style="margin-right: var(--spacing-md);">
+                    <option value="">All Categories</option>
+                </select>
+                <select id="sort-by" class="form-input">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="retailer">By Retailer</option>
+                </select>
+            </div>
+
             <!-- Wishlist Display -->
             <div id="wishlist-content">
                 <div class="loading" id="loading">
                     <div class="spinner"></div>
                     <p>Loading your wishlist...</p>
                 </div>
+                
+                <!-- Empty State -->
+                <div class="empty-wishlist" id="empty-state" style="display: none;">
+                    <div class="empty-wishlist-icon">💝</div>
+                    <h3>Your wishlist is empty</h3>
+                    <p>Add items to start building your dream collection!</p>
+                    <p>Use the "➕ Add Item" button above to get started.</p>
+                </div>
+                
+                <!-- Grid View -->
+                <div id="grid-view" class="wishlist-grid" style="display: none;"></div>
+                
+                <!-- Category View -->
+                <div id="category-view" style="display: none;"></div>
             </div>
         </div>
     </main>
@@ -713,30 +760,68 @@
 
         // Event Listeners
         function setupEventListeners() {
-            document.getElementById('search-input').addEventListener('input', filterWishlist);
-            document.getElementById('category-filter').addEventListener('change', filterWishlist);
-            document.getElementById('sort-by').addEventListener('change', filterWishlist);
+            const searchInput = document.getElementById('search-input');
+            const categoryFilter = document.getElementById('category-filter');
+            const sortBy = document.getElementById('sort-by');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', filterWishlist);
+            }
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', filterWishlist);
+            }
+            if (sortBy) {
+                sortBy.addEventListener('change', filterWishlist);
+            }
         }
 
         // API Functions
         async function loadWishlist() {
             try {
                 showLoading(true);
-                const response = await fetch(`${API_BASE}/${USER_ID}`);
-                const data = await response.json();
                 
-                if (data.success) {
-                    wishlistData = data.wishlist;
+                // Try to load from localStorage first (for demo/development)
+                const localData = localStorage.getItem('aced_wishlist');
+                if (localData) {
+                    wishlistData = JSON.parse(localData);
                     filteredData = [...wishlistData];
                     updateUI();
                     populateCategoryFilter();
-                    showNotification('Wishlist loaded successfully!', 'success');
-                } else {
-                    throw new Error(data.message);
+                    showLoading(false);
+                    return;
+                }
+                
+                // Try API if localStorage is empty
+                try {
+                    const response = await fetch(`${API_BASE}/${USER_ID}`);
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        wishlistData = data.wishlist;
+                        filteredData = [...wishlistData];
+                        updateUI();
+                        populateCategoryFilter();
+                        // Only show success message if we actually got data from API
+                        if (wishlistData.length > 0) {
+                            showNotification('Wishlist loaded successfully!', 'success');
+                        }
+                    } else {
+                        throw new Error(data.message);
+                    }
+                } catch (apiError) {
+                    // Silently fall back to empty wishlist instead of showing error
+                    console.log('API not available, using local storage only');
+                    wishlistData = [];
+                    filteredData = [];
+                    updateUI();
+                    populateCategoryFilter();
                 }
             } catch (error) {
                 console.error('Error loading wishlist:', error);
-                showNotification('Failed to load wishlist', 'error');
+                // Don't show error notification on page load
+                wishlistData = [];
+                filteredData = [];
+                updateUI();
             } finally {
                 showLoading(false);
             }
@@ -744,24 +829,41 @@
 
         async function addItemToWishlist(item) {
             try {
-                const response = await fetch(`${API_BASE}/${USER_ID}/add`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(item)
-                });
+                // Create item with ID and timestamp
+                const newItem = {
+                    id: Date.now().toString(),
+                    ...item,
+                    addedAt: new Date().toISOString()
+                };
                 
-                const data = await response.json();
-                
-                if (data.success) {
-                    wishlistData.push(data.item);
+                // Try API first
+                try {
+                    const response = await fetch(`${API_BASE}/${USER_ID}/add`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(item)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        wishlistData.push(data.item);
+                        localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                        filterWishlist();
+                        showNotification('Item added to wishlist!', 'success');
+                        return true;
+                    } else {
+                        throw new Error(data.message);
+                    }
+                } catch (apiError) {
+                    // Fall back to localStorage
+                    wishlistData.push(newItem);
+                    localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
                     filterWishlist();
                     showNotification('Item added to wishlist!', 'success');
                     return true;
-                } else {
-                    showNotification(data.message, 'error');
-                    return false;
                 }
             } catch (error) {
                 console.error('Error adding item:', error);
@@ -772,18 +874,28 @@
 
         async function removeItemFromWishlist(itemId) {
             try {
-                const response = await fetch(`${API_BASE}/${USER_ID}/${itemId}`, {
-                    method: 'DELETE'
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
+                // Try API first
+                try {
+                    const response = await fetch(`${API_BASE}/${USER_ID}/${itemId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        wishlistData = wishlistData.filter(item => item.id !== itemId);
+                        localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                        filterWishlist();
+                        showNotification('Item removed from wishlist', 'success');
+                    } else {
+                        throw new Error(data.message);
+                    }
+                } catch (apiError) {
+                    // Fall back to localStorage
                     wishlistData = wishlistData.filter(item => item.id !== itemId);
+                    localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
                     filterWishlist();
                     showNotification('Item removed from wishlist', 'success');
-                } else {
-                    throw new Error(data.message);
                 }
             } catch (error) {
                 console.error('Error removing item:', error);
@@ -862,10 +974,20 @@
         }
 
         function updateStats() {
-            document.getElementById('item-count').textContent = `${wishlistData.length} items`;
+            const totalItemsEl = document.getElementById('total-items');
+            const totalValueEl = document.getElementById('total-value');
             
-            const categories = [...new Set(wishlistData.map(item => item.category || 'Uncategorized'))];
-            document.getElementById('category-count').textContent = `${categories.length} categories`;
+            if (totalItemsEl) {
+                totalItemsEl.textContent = wishlistData.length;
+            }
+            
+            if (totalValueEl) {
+                const total = wishlistData.reduce((sum, item) => {
+                    const price = parseFloat(item.price?.replace(/[^0-9.]/g, '')) || 0;
+                    return sum + price;
+                }, 0);
+                totalValueEl.textContent = `$${total.toFixed(2)}`;
+            }
         }
 
         function renderGridView() {
@@ -1153,9 +1275,11 @@
             notification.className = `notification ${type}`;
             notification.classList.add('show');
             
+            // Hide notifications faster, especially error messages
+            const hideDelay = type === 'error' ? 2000 : 2500;
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 3000);
+            }, hideDelay);
         }
 
         // Export function for external use

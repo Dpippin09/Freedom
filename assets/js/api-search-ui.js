@@ -256,6 +256,16 @@ class APISearchUI {
                             data-product-source="${product.sourceName}">
                         Add to Compare
                     </button>
+                    <button class="add-to-wishlist-btn" 
+                            data-product-id="${product.id}" 
+                            data-product-name="${product.title}" 
+                            data-product-price="${product.price}" 
+                            data-product-image="${product.image}"
+                            data-product-url="${product.url}"
+                            data-product-source="${product.sourceName}"
+                            onclick="apiSearchUI.addToWishlist(this, ${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                        💝 Add to Wishlist
+                    </button>
                 </div>
             </div>
         `;
@@ -351,6 +361,114 @@ class APISearchUI {
         } finally {
             this.hideLoadingState();
         }
+    }
+
+    addToWishlist(button, product) {
+        try {
+            // Create wishlist item object
+            const wishlistItem = {
+                productUrl: product.url,
+                title: product.title,
+                price: `$${product.price}`,
+                retailer: product.sourceName,
+                category: 'Fashion',
+                image: product.image,
+                description: product.description || '',
+                originalPrice: product.originalPrice ? `$${product.originalPrice}` : null,
+                rating: product.rating,
+                reviews: product.reviews
+            };
+
+            // Get existing wishlist from localStorage
+            let wishlist = [];
+            try {
+                wishlist = JSON.parse(localStorage.getItem('aced_wishlist') || '[]');
+            } catch (e) {
+                wishlist = [];
+            }
+
+            // Check if item already exists
+            const existingIndex = wishlist.findIndex(item => 
+                item.productUrl === wishlistItem.productUrl || 
+                item.title === wishlistItem.title
+            );
+
+            if (existingIndex >= 0) {
+                // Item already in wishlist
+                this.showNotification('Item already in your wishlist!', 'info');
+                button.textContent = '💖 In Wishlist';
+                button.disabled = true;
+                return;
+            }
+
+            // Add unique ID and timestamp
+            wishlistItem.id = Date.now().toString();
+            wishlistItem.addedAt = new Date().toISOString();
+
+            // Add to wishlist
+            wishlist.push(wishlistItem);
+            localStorage.setItem('aced_wishlist', JSON.stringify(wishlist));
+
+            // Update button state
+            button.textContent = '💖 Added!';
+            button.disabled = true;
+            button.style.background = 'var(--accent-lavender)';
+
+            // Show success notification
+            this.showNotification('Added to wishlist!', 'success');
+
+            console.log('Item added to wishlist:', wishlistItem);
+        } catch (error) {
+            console.error('Error adding to wishlist:', error);
+            this.showNotification('Failed to add to wishlist', 'error');
+        }
+    }
+
+    showNotification(message, type = 'success') {
+        // Create notification element if it doesn't exist
+        let notification = document.getElementById('search-notification');
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.id = 'search-notification';
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                font-size: 0.9rem;
+                z-index: 3000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+            `;
+            document.body.appendChild(notification);
+        }
+
+        // Set message and style based on type
+        notification.textContent = message;
+        switch (type) {
+            case 'success':
+                notification.style.background = 'linear-gradient(135deg, #b8a9d9 0%, #d4c7e8 100%)';
+                break;
+            case 'error':
+                notification.style.background = 'linear-gradient(135deg, #dc3545, #e74c3c)';
+                break;
+            case 'info':
+                notification.style.background = 'linear-gradient(135deg, #17a2b8, #138496)';
+                break;
+        }
+
+        // Show notification
+        notification.style.transform = 'translateX(0)';
+
+        // Hide after delay
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+        }, type === 'error' ? 3000 : 2500);
     }
 }
 

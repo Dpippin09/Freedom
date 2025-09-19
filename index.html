@@ -534,10 +534,12 @@
         const navOverlay = document.getElementById('nav-overlay');
         
         function toggleMenu() {
+            console.log('Toggle menu clicked!');
             hamburgerMenu.classList.toggle('active');
             navLinks.classList.toggle('active');
             navOverlay.classList.toggle('active');
             document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+            console.log('Menu active:', navLinks.classList.contains('active'));
         }
         
         hamburgerMenu.addEventListener('click', toggleMenu);
