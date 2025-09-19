@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External Products API - Freedom Fashion</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .api-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .endpoint {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .get { background: #28a745; color: white; }
+        .post { background: #007bff; color: white; }
+        .response-area {
+            background: #263238;
+            color: #80cbc4;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .form-group {
+            margin: 1rem 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header style="text-align: center; padding: 2rem 0;">
+            <h1>🛍️ External Products API</h1>
+            <p>Pull product information from major retailers</p>
+        </header>
+
+        <!-- Retailers Info -->
+        <div class="api-section">
+            <h2>🏪 Supported Retailers</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <code>/api/external-products/retailers</code>
+                <button class="btn" onclick="getRetailers()" style="float: right;">Test</button>
+            </div>
+            <div id="retailers-response" class="response-area" style="display: none;"></div>
+        </div>
+
+        <!-- Product Search -->
+        <div class="api-section">
+            <h2>🔍 Search Products</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <code>/api/external-products/search</code>
+                
+                <div class="form-group">
+                    <label for="search-query">Search Query:</label>
+                    <input type="text" id="search-query" placeholder="e.g., nike sneakers" value="nike sneakers">
+                </div>
+                
+                <div class="form-group">
+                    <label for="search-retailers">Retailers (comma-separated):</label>
+                    <input type="text" id="search-retailers" placeholder="amazon,walmart,target" value="amazon,walmart">
+                </div>
+                
+                <div class="form-group">
+                    <label for="search-limit">Limit:</label>
+                    <input type="number" id="search-limit" value="5" min="1" max="20">
+                </div>
+                
+                <button class="btn" onclick="searchProducts()">Search Products</button>
+            </div>
+            <div id="search-response" class="response-area" style="display: none;"></div>
+        </div>
+
+        <!-- URL Scraping -->
+        <div class="api-section">
+            <h2>🔗 Scrape Product URL</h2>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <code>/api/external-products/scrape-url</code>
+                
+                <div class="form-group">
+                    <label for="scrape-url">Product URL:</label>
+                    <input type="url" id="scrape-url" placeholder="https://www.amazon.com/dp/PRODUCTID">
+                </div>
+                
+                <button class="btn" onclick="scrapeUrl()">Scrape Product</button>
+            </div>
+            <div id="scrape-response" class="response-area" style="display: none;"></div>
+        </div>
+
+        <!-- Price Comparison -->
+        <div class="api-section">
+            <h2>💰 Compare Prices</h2>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <code>/api/external-products/compare-prices</code>
+                
+                <div class="form-group">
+                    <label for="compare-urls">Product URLs (one per line):</label>
+                    <textarea id="compare-urls" rows="4" placeholder="https://www.amazon.com/dp/PRODUCT1&#10;https://www.walmart.com/ip/PRODUCT2&#10;https://www.target.com/p/PRODUCT3"></textarea>
+                </div>
+                
+                <button class="btn" onclick="comparePrices()">Compare Prices</button>
+            </div>
+            <div id="compare-response" class="response-area" style="display: none;"></div>
+        </div>
+
+        <!-- Trending Products -->
+        <div class="api-section">
+            <h2>📈 Trending Products</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <code>/api/external-products/trending</code>
+                
+                <div class="form-group">
+                    <label for="trending-category">Category (optional):</label>
+                    <select id="trending-category">
+                        <option value="">All Categories</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="home">Home & Garden</option>
+                    </select>
+                </div>
+                
+                <button class="btn" onclick="getTrending()">Get Trending</button>
+            </div>
+            <div id="trending-response" class="response-area" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = '/api/external-products';
+
+        async function makeRequest(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                return await response.json();
+            } catch (error) {
+                return { error: error.message };
+            }
+        }
+
+        function showResponse(elementId, data) {
+            const element = document.getElementById(elementId);
+            
+            // Enhanced display for search results with wishlist buttons
+            if (elementId === 'search-response' && data.success && data.results) {
+                let formattedOutput = formatSearchResults(data);
+                element.innerHTML = formattedOutput;
+            } else {
+                element.textContent = JSON.stringify(data, null, 2);
+            }
+            
+            element.style.display = 'block';
+        }
+
+        function formatSearchResults(data) {
+            let html = '<pre style="background: #263238; color: #80cbc4; padding: 1rem; border-radius: 4px; white-space: pre-wrap;">';
+            html += JSON.stringify(data, null, 2);
+            html += '</pre>';
+            
+            // Add wishlist buttons if there are results
+            if (data.results) {
+                html += '<div style="margin-top: 1rem;">';
+                html += '<h4 style="color: #333; margin-bottom: 1rem;">Quick Actions:</h4>';
+                
+                Object.entries(data.results).forEach(([retailer, retailerData]) => {
+                    if (retailerData.products && retailerData.products.length > 0) {
+                        html += `<div style="margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">`;
+                        html += `<h5 style="color: #007bff; margin-bottom: 0.5rem;">${retailer.toUpperCase()} Results:</h5>`;
+                        
+                        retailerData.products.slice(0, 3).forEach((product, index) => {
+                            const productId = `${retailer}-${index}`;
+                            html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #ddd;">`;
+                            html += `<div style="flex: 1;">`;
+                            html += `<strong>${product.title || 'Untitled'}</strong><br>`;
+                            html += `<span style="color: #28a745; font-weight: bold;">${product.price || 'Price not available'}</span>`;
+                            html += `</div>`;
+                            html += `<button class="btn" onclick="addToWishlistFromDemo('${productId}', ${JSON.stringify(product).replace(/"/g, '&quot;')})" style="background: #28a745; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; margin-left: 1rem;">`;
+                            html += `💝 Add to Wishlist`;
+                            html += `</button>`;
+                            html += `</div>`;
+                        });
+                        
+                        html += `</div>`;
+                    }
+                });
+                
+                html += '<div style="text-align: center; margin-top: 1rem;">';
+                html += '<a href="wishlist.html" class="btn" style="background: #007bff; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 4px;">👀 View My Wishlist</a>';
+                html += '</div>';
+                html += '</div>';
+            }
+            
+            return html;
+        }
+
+        function setLoading(button, loading = true) {
+            if (loading) {
+                button.classList.add('loading');
+                button.textContent = 'Loading...';
+            } else {
+                button.classList.remove('loading');
+            }
+        }
+
+        async function getRetailers() {
+            const button = event.target;
+            const originalText = button.textContent;
+            setLoading(button);
+            
+            const data = await makeRequest(`${BASE_URL}/retailers`);
+            showResponse('retailers-response', data);
+            
+            button.textContent = originalText;
+            setLoading(button, false);
+        }
+
+        async function searchProducts() {
+            const button = event.target;
+            const originalText = button.textContent;
+            setLoading(button);
+            
+            const query = document.getElementById('search-query').value;
+            const retailers = document.getElementById('search-retailers').value;
+            const limit = document.getElementById('search-limit').value;
+            
+            const params = new URLSearchParams({
+                query,
+                ...(retailers && { retailers }),
+                limit
+            });
+            
+            const data = await makeRequest(`${BASE_URL}/search?${params}`);
+            showResponse('search-response', data);
+            
+            button.textContent = originalText;
+            setLoading(button, false);
+        }
+
+        async function scrapeUrl() {
+            const button = event.target;
+            const originalText = button.textContent;
+            setLoading(button);
+            
+            const url = document.getElementById('scrape-url').value;
+            
+            if (!url) {
+                alert('Please enter a product URL');
+                button.textContent = originalText;
+                setLoading(button, false);
+                return;
+            }
+            
+            const data = await makeRequest(`${BASE_URL}/scrape-url`, {
+                method: 'POST',
+                body: JSON.stringify({ url })
+            });
+            showResponse('scrape-response', data);
+            
+            button.textContent = originalText;
+            setLoading(button, false);
+        }
+
+        async function comparePrices() {
+            const button = event.target;
+            const originalText = button.textContent;
+            setLoading(button);
+            
+            const urlsText = document.getElementById('compare-urls').value;
+            const urls = urlsText.split('\n').filter(url => url.trim());
+            
+            if (urls.length === 0) {
+                alert('Please enter at least one product URL');
+                button.textContent = originalText;
+                setLoading(button, false);
+                return;
+            }
+            
+            const data = await makeRequest(`${BASE_URL}/compare-prices`, {
+                method: 'POST',
+                body: JSON.stringify({ urls })
+            });
+            showResponse('compare-response', data);
+            
+            button.textContent = originalText;
+            setLoading(button, false);
+        }
+
+        async function getTrending() {
+            const button = event.target;
+            const originalText = button.textContent;
+            setLoading(button);
+            
+            const category = document.getElementById('trending-category').value;
+            
+            const params = new URLSearchParams({
+                ...(category && { category }),
+                limit: 10
+            });
+            
+            const data = await makeRequest(`${BASE_URL}/trending?${params}`);
+            showResponse('trending-response', data);
+            
+            button.textContent = originalText;
+            setLoading(button, false);
+        }
+
+        // Wishlist Functions
+        async function addToWishlistFromDemo(productId, product) {
+            try {
+                const wishlistItem = {
+                    productUrl: product.link || '#',
+                    title: product.title,
+                    price: product.price,
+                    image: product.image,
+                    retailer: product.retailer,
+                    description: '',
+                    category: 'Fashion'
+                };
+
+                const response = await makeRequest('/api/wishlist/demo-user/add', {
+                    method: 'POST',
+                    body: JSON.stringify(wishlistItem)
+                });
+
+                if (response.success) {
+                    showWishlistNotification('Item added to wishlist! 💝', 'success');
+                } else {
+                    showWishlistNotification(response.message || 'Failed to add to wishlist', 'error');
+                }
+            } catch (error) {
+                showWishlistNotification('Error adding to wishlist', 'error');
+            }
+        }
+
+        function showWishlistNotification(message, type) {
+            // Create notification if it doesn't exist
+            let notification = document.getElementById('wishlist-notification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'wishlist-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 500;
+                    z-index: 1000;
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                    max-width: 300px;
+                `;
+                document.body.appendChild(notification);
+            }
+
+            notification.textContent = message;
+            notification.style.backgroundColor = type === 'success' ? '#28a745' : '#dc3545';
+            notification.style.transform = 'translateX(0)';
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

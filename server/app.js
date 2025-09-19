@@ -101,6 +101,8 @@ const alertRoutes = require('./routes/alerts');
 const notificationRoutes = require('./routes/notifications');
 const monitoringRoutes = require('./routes/monitoring');
 const analyticsRoutes = require('./routes/analytics');
+const externalProductRoutes = require('./routes/external-products');
+const wishlistRoutes = require('./routes/wishlist');
 
 // Health check endpoints (before other routes)
 app.get('/health', async (req, res) => {
@@ -163,6 +165,8 @@ app.use('/api/alerts', alertRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/monitoring', monitoringRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/external-products', externalProductRoutes);
+app.use('/api/wishlist', wishlistRoutes);
 
 // Serve static files (your existing HTML/CSS/JS)
 app.get('/', (req, res) => {
@@ -188,7 +192,9 @@ app.get('/api', (req, res) => {
             scraping: '/api/scraping',
             notifications: '/api/notifications',
             monitoring: '/api/monitoring',
-            analytics: '/api/analytics'
+            analytics: '/api/analytics',
+            externalProducts: '/api/external-products',
+            wishlist: '/api/wishlist'
         }
     });
 });

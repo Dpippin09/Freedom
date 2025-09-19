@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your personal wishlist - Save and organize your favorite fashion items from Aced">
+    <meta name="theme-color" content="#764ba2">
+    <title>My Wishlist - Aced</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="./assets/css/sleek-theme.css">
+    <style>
+        body {
+            background: var(--cream-white);
+            min-height: 100vh;
+            font-family: var(--font-primary);
+            padding-top: 80px; /* Account for fixed nav */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xl);
+        }
+
+        .header {
+            background: var(--pure-white);
+            box-shadow: var(--shadow-subtle);
+            padding: var(--spacing-2xl) 0;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+
+        .header h1 {
+            margin: 0;
+            color: var(--primary-dark);
+            font-family: var(--font-secondary);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .controls {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: 2px solid var(--border-lavender);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            background: var(--pure-white);
+            color: var(--primary-dark);
+            transition: all var(--transition-smooth);
+            min-width: 200px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-lavender);
+            box-shadow: var(--glow-lavender);
+        }
+
+        .view-toggle {
+            display: flex;
+            border: 2px solid var(--border-lavender);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--pure-white);
+        }
+
+        .view-btn {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: none;
+            background: transparent;
+            color: var(--primary-dark);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            font-weight: 500;
+        }
+
+        .view-btn.active {
+            background: var(--accent-lavender);
+            color: var(--pure-white);
+        }
+
+        .view-btn:hover:not(.active) {
+            background: var(--light-cream);
+        }
+
+        .add-item-btn {
+            background: var(--gradient-accent);
+            color: var(--pure-white);
+            border: none;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .add-item-btn:hover {
+            background: var(--accent-deep-lavender);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .loading {
+            text-align: center;
+            padding: var(--spacing-4xl);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: var(--spacing-4xl);
+            background: var(--pure-white);
+            border-radius: var(--radius-2xl);
+            margin: var(--spacing-2xl) 0;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .empty-wishlist-icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.6;
+        }
+
+        .empty-wishlist h3 {
+            color: var(--primary-dark);
+            margin-bottom: var(--spacing-md);
+            font-family: var(--font-secondary);
+        }
+
+        .empty-wishlist p {
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .wishlist-item {
+            background: var(--pure-white);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: all var(--transition-smooth);
+            border: 1px solid var(--border-lavender);
+            position: relative;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-lavender);
+        }
+
+        .item-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .wishlist-item:hover .item-image img {
+            transform: scale(1.05);
+        }
+
+        .item-actions {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            display: flex;
+            gap: var(--spacing-sm);
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+        }
+
+        .wishlist-item:hover .item-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-smooth);
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            background: var(--accent-lavender);
+            color: var(--pure-white);
+            transform: scale(1.1);
+        }
+
+        .action-btn.remove:hover {
+            background: #dc3545;
+        }
+
+        .item-info {
+            padding: var(--spacing-lg);
+        }
+
+        .item-title {
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+            line-height: 1.3;
+        }
+
+        .item-category {
+            color: var(--accent-lavender);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .item-price {
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .item-notes {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .item-date {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .category-section {
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background: var(--warm-cream);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--accent-lavender);
+        }
+
+        .category-title {
+            color: var(--primary-dark);
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .category-count {
+            background: var(--accent-lavender);
+            color: var(--pure-white);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 36, 56, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--pure-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-2xl);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform var(--transition-smooth);
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--border-lavender);
+        }
+
+        .modal-title {
+            color: var(--primary-dark);
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-smooth);
+        }
+
+        .close-btn:hover {
+            background: var(--accent-light-lavender);
+            color: var(--primary-dark);
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-label {
+            display: block;
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: 2px solid var(--border-lavender);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            color: var(--primary-dark);
+            background: var(--cream-white);
+            transition: all var(--transition-smooth);
+            font-family: var(--font-primary);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-lavender);
+            box-shadow: var(--glow-lavender);
+            background: var(--pure-white);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right var(--spacing-lg) center;
+            background-size: 1rem;
+            padding-right: 3rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: flex-end;
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 2px solid var(--border-lavender);
+        }
+
+        .btn {
+            padding: var(--spacing-md) var(--spacing-xl);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: var(--pure-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-deep-lavender);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--warm-cream);
+            color: var(--primary-dark);
+            border: 2px solid var(--border-lavender);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-lavender);
+            transform: translateY(-2px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: var(--spacing-lg) var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            color: var(--pure-white);
+            font-weight: 600;
+            z-index: 3000;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: var(--gradient-accent);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #dc3545, #e74c3c);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .controls {
+                justify-content: space-between;
+            }
+
+            .search-input {
+                min-width: 150px;
+            }
+
+            .wishlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: var(--spacing-lg);
+            }
+
+            .modal-content {
+                margin: var(--spacing-lg);
+                width: calc(100% - 2rem);
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .category-header {
+                padding: var(--spacing-md) var(--spacing-lg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .view-toggle {
+                align-self: stretch;
+            }
+
+            .view-btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation from home page -->
+    <header>
+        <nav>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="camera-wardrobe.html">📷 Wardrobe AI</a></li>
+                <li><a href="wishlist.html" class="active">💝 My Wishlist</a></li>
+                <li><a href="external-products-demo.html">🔍 Browse Products</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
+                <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link" id="cart-link">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="nav-overlay" id="nav-overlay"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Page Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>💝 My Wishlist</h1>
+                <div class="controls">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search your wishlist...">
+                    
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="grid-view-btn" onclick="setView('grid')">
+                            📊 Grid
+                        </button>
+                        <button class="view-btn" id="category-view-btn" onclick="setView('category')">
+                            📁 Categories
+                        </button>
+                    </div>
+                    
+                    <button class="add-item-btn" onclick="showAddItemModal()">
+                        ➕ Add Item
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wishlist Content -->
+        <div class="wishlist-content">
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label">Total Items:</span>
+                    <span class="stat-value" id="total-items">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Value:</span>
+                    <span class="stat-value" id="total-value">$0.00</span>
+                </div>
+                <button class="btn btn-danger" onclick="clearWishlist()">
+                    🗑️ Clear All
+                </button>
+            </div>
+
+            <!-- Wishlist Display -->
+            <div id="wishlist-content">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Loading your wishlist...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Item Modal -->
+    <div id="add-item-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Item</h2>
+                <button class="close-btn" onclick="hideAddItemModal()">&times;</button>
+            </div>
+            <form id="add-item-form" onsubmit="handleAddItemSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" for="new-url">Product URL</label>
+                    <input type="url" id="new-url" class="form-input" placeholder="https://example.com/product" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-title">Product Title</label>
+                    <input type="text" id="new-title" class="form-input" placeholder="Product name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-price">Price</label>
+                    <input type="text" id="new-price" class="form-input" placeholder="$29.99">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-retailer">Retailer</label>
+                    <input type="text" id="new-retailer" class="form-input" placeholder="Store name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-category">Category</label>
+                    <select id="new-category" class="form-input form-select">
+                        <option value="">Select category</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Accessories">Accessories</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Home">Home</option>
+                        <option value="Beauty">Beauty</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-image">Image URL</label>
+                    <input type="url" id="new-image" class="form-input" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-description">Description</label>
+                    <textarea id="new-description" class="form-input form-textarea" placeholder="Optional notes about this item"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="hideAddItemModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add to Wishlist</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Configuration
+        const USER_ID = 'demo-user'; // In a real app, this would come from authentication
+        const API_BASE = '/api/wishlist';
+        
+        // State
+        let wishlistData = [];
+        let filteredData = [];
+        let currentView = 'grid'; // 'grid' or 'category'
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWishlist();
+            setupEventListeners();
+        });
+
+        // Event Listeners
+        function setupEventListeners() {
+            document.getElementById('search-input').addEventListener('input', filterWishlist);
+            document.getElementById('category-filter').addEventListener('change', filterWishlist);
+            document.getElementById('sort-by').addEventListener('change', filterWishlist);
+        }
+
+        // API Functions
+        async function loadWishlist() {
+            try {
+                showLoading(true);
+                const response = await fetch(`${API_BASE}/${USER_ID}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    wishlistData = data.wishlist;
+                    filteredData = [...wishlistData];
+                    updateUI();
+                    populateCategoryFilter();
+                    showNotification('Wishlist loaded successfully!', 'success');
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error loading wishlist:', error);
+                showNotification('Failed to load wishlist', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function addItemToWishlist(item) {
+            try {
+                const response = await fetch(`${API_BASE}/${USER_ID}/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(item)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    wishlistData.push(data.item);
+                    filterWishlist();
+                    showNotification('Item added to wishlist!', 'success');
+                    return true;
+                } else {
+                    showNotification(data.message, 'error');
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error adding item:', error);
+                showNotification('Failed to add item', 'error');
+                return false;
+            }
+        }
+
+        async function removeItemFromWishlist(itemId) {
+            try {
+                const response = await fetch(`${API_BASE}/${USER_ID}/${itemId}`, {
+                    method: 'DELETE'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    wishlistData = wishlistData.filter(item => item.id !== itemId);
+                    filterWishlist();
+                    showNotification('Item removed from wishlist', 'success');
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error removing item:', error);
+                showNotification('Failed to remove item', 'error');
+            }
+        }
+
+        async function updateItemNotes(itemId, notes, category) {
+            try {
+                const response = await fetch(`${API_BASE}/${USER_ID}/${itemId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ notes, category })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const item = wishlistData.find(item => item.id === itemId);
+                    if (item) {
+                        item.notes = notes;
+                        item.category = category;
+                    }
+                    showNotification('Item updated!', 'success');
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error updating item:', error);
+                showNotification('Failed to update item', 'error');
+            }
+        }
+
+        async function clearWishlist() {
+            if (!confirm('Are you sure you want to clear your entire wishlist? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/${USER_ID}/clear`, {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    wishlistData = [];
+                    filteredData = [];
+                    updateUI();
+                    showNotification('Wishlist cleared', 'success');
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error clearing wishlist:', error);
+                showNotification('Failed to clear wishlist', 'error');
+            }
+        }
+
+        // UI Functions
+        function updateUI() {
+            updateStats();
+            
+            if (filteredData.length === 0) {
+                showEmptyState();
+            } else {
+                hideEmptyState();
+                if (currentView === 'grid') {
+                    renderGridView();
+                } else {
+                    renderCategoryView();
+                }
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('item-count').textContent = `${wishlistData.length} items`;
+            
+            const categories = [...new Set(wishlistData.map(item => item.category || 'Uncategorized'))];
+            document.getElementById('category-count').textContent = `${categories.length} categories`;
+        }
+
+        function renderGridView() {
+            const gridView = document.getElementById('grid-view');
+            gridView.innerHTML = '';
+            
+            filteredData.forEach(item => {
+                const itemElement = createItemElement(item);
+                gridView.appendChild(itemElement);
+            });
+        }
+
+        function renderCategoryView() {
+            const categoryView = document.getElementById('category-view');
+            categoryView.innerHTML = '';
+            
+            // Group items by category
+            const categories = {};
+            filteredData.forEach(item => {
+                const category = item.category || 'Uncategorized';
+                if (!categories[category]) {
+                    categories[category] = [];
+                }
+                categories[category].push(item);
+            });
+            
+            // Render each category
+            Object.entries(categories).forEach(([categoryName, items]) => {
+                const categorySection = document.createElement('div');
+                categorySection.className = 'category-section';
+                
+                categorySection.innerHTML = `
+                    <div class="category-header">
+                        <h3>${categoryName}</h3>
+                        <span class="category-count">${items.length} items</span>
+                    </div>
+                    <div class="wishlist-grid" id="category-${categoryName}"></div>
+                `;
+                
+                categoryView.appendChild(categorySection);
+                
+                const categoryGrid = categorySection.querySelector('.wishlist-grid');
+                items.forEach(item => {
+                    const itemElement = createItemElement(item);
+                    categoryGrid.appendChild(itemElement);
+                });
+            });
+        }
+
+        function createItemElement(item) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'wishlist-item';
+            
+            const imageUrl = item.image || 'https://via.placeholder.com/300x200?text=No+Image';
+            const price = item.price || 'Price not available';
+            const retailer = item.retailer || 'Unknown';
+            const category = item.category || 'Uncategorized';
+            const addedDate = new Date(item.addedAt).toLocaleDateString();
+            
+            itemDiv.innerHTML = `
+                <img src="${imageUrl}" alt="${item.title}" class="item-image" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                <div class="item-content">
+                    <div class="item-header">
+                        <div>
+                            <h3 class="item-title">${item.title}</h3>
+                            <div class="item-retailer">${retailer}</div>
+                        </div>
+                    </div>
+                    <div class="item-price">${price}</div>
+                    <div class="item-category">${category}</div>
+                    <div class="item-meta">
+                        <span>Added: ${addedDate}</span>
+                    </div>
+                    <textarea class="item-notes" placeholder="Add your notes..." data-item-id="${item.id}">${item.notes || ''}</textarea>
+                    <div class="item-actions">
+                        <a href="${item.productUrl}" target="_blank" class="btn btn-primary btn-sm">View Product</a>
+                        <button class="btn btn-outline btn-sm" onclick="saveNotes('${item.id}')">Save Notes</button>
+                        <button class="btn btn-danger btn-sm" onclick="removeItem('${item.id}')">Remove</button>
+                    </div>
+                </div>
+            `;
+            
+            return itemDiv;
+        }
+
+        function filterWishlist() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const categoryFilter = document.getElementById('category-filter').value;
+            const sortBy = document.getElementById('sort-by').value;
+            
+            // Filter
+            filteredData = wishlistData.filter(item => {
+                const matchesSearch = item.title.toLowerCase().includes(searchTerm) ||
+                                   (item.retailer && item.retailer.toLowerCase().includes(searchTerm)) ||
+                                   (item.category && item.category.toLowerCase().includes(searchTerm));
+                
+                const matchesCategory = !categoryFilter || item.category === categoryFilter;
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            // Sort
+            filteredData.sort((a, b) => {
+                switch (sortBy) {
+                    case 'newest':
+                        return new Date(b.addedAt) - new Date(a.addedAt);
+                    case 'oldest':
+                        return new Date(a.addedAt) - new Date(b.addedAt);
+                    case 'price-low':
+                        const priceA = parseFloat(a.price?.replace(/[^0-9.]/g, '')) || 0;
+                        const priceB = parseFloat(b.price?.replace(/[^0-9.]/g, '')) || 0;
+                        return priceA - priceB;
+                    case 'price-high':
+                        const priceA2 = parseFloat(a.price?.replace(/[^0-9.]/g, '')) || 0;
+                        const priceB2 = parseFloat(b.price?.replace(/[^0-9.]/g, '')) || 0;
+                        return priceB2 - priceA2;
+                    case 'retailer':
+                        return (a.retailer || '').localeCompare(b.retailer || '');
+                    default:
+                        return 0;
+                }
+            });
+            
+            updateUI();
+        }
+
+        function populateCategoryFilter() {
+            const categoryFilter = document.getElementById('category-filter');
+            const categories = [...new Set(wishlistData.map(item => item.category || 'Uncategorized'))];
+            
+            // Clear existing options except "All Categories"
+            while (categoryFilter.children.length > 1) {
+                categoryFilter.removeChild(categoryFilter.lastChild);
+            }
+            
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categoryFilter.appendChild(option);
+            });
+        }
+
+        // View management
+        function setView(view) {
+            currentView = view;
+            
+            const gridView = document.getElementById('grid-view');
+            const categoryView = document.getElementById('category-view');
+            const gridBtn = document.getElementById('grid-view-btn');
+            const categoryBtn = document.getElementById('category-view-btn');
+            
+            if (view === 'grid') {
+                gridView.style.display = 'grid';
+                categoryView.style.display = 'none';
+                gridBtn.classList.add('active');
+                categoryBtn.classList.remove('active');
+            } else {
+                gridView.style.display = 'none';
+                categoryView.style.display = 'block';
+                gridBtn.classList.remove('active');
+                categoryBtn.classList.add('active');
+            }
+            
+            updateUI();
+        }
+
+        // Modal management
+        function showAddItemModal() {
+            document.getElementById('add-item-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideAddItemModal() {
+            document.getElementById('add-item-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            document.getElementById('add-item-form').reset();
+        }
+
+        // Handle form submission
+        async function handleAddItemSubmit(event) {
+            event.preventDefault();
+            
+            const item = {
+                productUrl: document.getElementById('new-url').value,
+                title: document.getElementById('new-title').value,
+                price: document.getElementById('new-price').value,
+                retailer: document.getElementById('new-retailer').value,
+                category: document.getElementById('new-category').value || 'Other',
+                image: document.getElementById('new-image').value,
+                description: document.getElementById('new-description').value
+            };
+            
+            const success = await addItemToWishlist(item);
+            if (success) {
+                hideAddItemModal();
+                populateCategoryFilter();
+            }
+        }
+
+        function toggleAddForm() {
+            const form = document.getElementById('add-item-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            
+            if (form.style.display === 'block') {
+                document.getElementById('new-title').focus();
+            }
+        }
+
+        async function addNewItem() {
+            const url = document.getElementById('new-url').value.trim();
+            const title = document.getElementById('new-title').value.trim();
+            const price = document.getElementById('new-price').value.trim();
+            const retailer = document.getElementById('new-retailer').value.trim();
+            const category = document.getElementById('new-category').value.trim();
+            const image = document.getElementById('new-image').value.trim();
+            const description = document.getElementById('new-description').value.trim();
+            
+            if (!url || !title) {
+                showNotification('URL and title are required', 'error');
+                return;
+            }
+            
+            const item = {
+                productUrl: url,
+                title,
+                price,
+                retailer,
+                category: category || 'Fashion',
+                image,
+                description
+            };
+            
+            const success = await addItemToWishlist(item);
+            if (success) {
+                // Clear form
+                document.getElementById('new-url').value = '';
+                document.getElementById('new-title').value = '';
+                document.getElementById('new-price').value = '';
+                document.getElementById('new-retailer').value = '';
+                document.getElementById('new-category').value = '';
+                document.getElementById('new-image').value = '';
+                document.getElementById('new-description').value = '';
+                
+                toggleAddForm();
+                populateCategoryFilter();
+            }
+        }
+
+        function saveNotes(itemId) {
+            const notesTextarea = document.querySelector(`textarea[data-item-id="${itemId}"]`);
+            const notes = notesTextarea.value;
+            
+            // Get current category (you could add a category select for each item)
+            const item = wishlistData.find(item => item.id === itemId);
+            const category = item ? item.category : 'Fashion';
+            
+            updateItemNotes(itemId, notes, category);
+        }
+
+        function removeItem(itemId) {
+            if (confirm('Are you sure you want to remove this item from your wishlist?')) {
+                removeItemFromWishlist(itemId);
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('wishlist-content').style.display = show ? 'none' : 'block';
+        }
+
+        function showEmptyState() {
+            document.getElementById('empty-state').style.display = 'block';
+            document.getElementById('wishlist-content').style.display = 'none';
+        }
+
+        function hideEmptyState() {
+            document.getElementById('empty-state').style.display = 'none';
+            document.getElementById('wishlist-content').style.display = 'block';
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Export function for external use
+        window.addToWishlistFromSearch = async function(searchResult) {
+            const item = {
+                productUrl: searchResult.link || searchResult.url || '#',
+                title: searchResult.title,
+                price: searchResult.price,
+                image: searchResult.image,
+                retailer: searchResult.retailer,
+                description: searchResult.description || '',
+                category: 'Fashion'
+            };
+            
+            const success = await addItemToWishlist(item);
+            if (success) {
+                populateCategoryFilter();
+            }
+            return success;
+        };
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <h2>Building a Smarter Shopping World Together</h2>
+        <p>&copy; Aced</p>
+        <ul class="contactInfo" id="contactInfo">
+            <li>Phone: (555)5555555</li>
+            <li>Email: hello@aced.com</li>
+            <li>Ogden, UT</li>
+        </ul>
+    </footer>
+
+    <!-- Navigation Scripts -->
+    <script>
+        // Hamburger Menu Functionality
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navOverlay = document.getElementById('nav-overlay');
+        
+        function toggleMenu() {
+            hamburgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        
+        hamburgerMenu.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking on nav links
+        navLinks.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                toggleMenu();
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Cart count update functionality
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('aced_cart') || '[]');
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCountEl = document.getElementById('cart-count');
+            
+            if (cartCountEl) {
+                cartCountEl.textContent = cartCount;
+                cartCountEl.classList.toggle('has-items', cartCount > 0);
+            }
+        }
+
+        // Update cart count on page load
+        updateCartCount();
+
+        // Listen for storage events (cart updates from other pages)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'aced_cart') {
+                updateCartCount();
+            }
+        });
+
+        // Listen for custom cart update events
+        window.addEventListener('cartUpdated', updateCartCount);
+    </script>
+</body>
+</html>
