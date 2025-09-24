@@ -1,6 +1,6 @@
 {
-    "name": "Aced - AI Fashion Styling",
-    "short_name": "Aced",
+    "name": "StyleLink - AI Fashion Styling",
+    "short_name": "StyleLink",
     "description": "AI-powered fashion matching and price comparison. Find perfect outfit combinations and never miss a deal!",
     "start_url": "/",
     "display": "standalone",

@@ -1,5 +1,5 @@
-// Service Worker for Aced Fashion PWA
-const CACHE_NAME = 'aced-fashion-v1.0.0';
+// Service Worker for StyleLink Fashion PWA
+const CACHE_NAME = 'stylelink-fashion-v1.0.0';
 const urlsToCache = [
     '/',
     '/index.html',
@@ -25,11 +25,11 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(function(cache) {
-                console.log('Aced: App resources cached successfully');
+                console.log('StyleLink: App resources cached successfully');
                 return cache.addAll(urlsToCache);
             })
             .catch(function(error) {
-                console.log('Aced: Cache installation failed:', error);
+                console.log('StyleLink: Cache installation failed:', error);
             })
     );
 });
@@ -105,7 +105,7 @@ self.addEventListener('push', function(event) {
     };
     
     event.waitUntil(
-        self.registration.showNotification('Aced - Fashion Deals!', options)
+        self.registration.showNotification('StyleLink - Fashion Deals!', options)
     );
 });
 

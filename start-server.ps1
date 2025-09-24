@@ -1,4 +1,4 @@
-Write-Host "Starting Aced Fashion Development Server..." -ForegroundColor Green
+Write-Host "Starting StyleLink Fashion Development Server..." -ForegroundColor Green
 Write-Host "Server URL: http://localhost:8000" -ForegroundColor Cyan
 Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Yellow
 Write-Host ""

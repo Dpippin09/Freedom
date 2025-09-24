@@ -1,5 +1,5 @@
 /**
- * AI Fashion Matching System for Aced
+ * AI Fashion Matching System for StyleLink
  * Optimized for Young Adult and Middle-Aged Women (Ages 18-45)
  * Integrates with MCP servers for advanced fashion recommendations
  */

@@ -1,5 +1,5 @@
 /**
- * AI Fashion Matching System for Aced
+ * AI Fashion Matching System for StyleLink
  * Integrates with MCP servers for advanced fashion recommendations
  */
 
@@ -516,7 +516,7 @@ class AIFashionMatcher {
     }
 
     getUserId() {
-        return localStorage.getItem('aced_user_id') || 'anonymous_' + Date.now();
+        return localStorage.getItem('stylelink_user_id') || 'anonymous_' + Date.now();
     }
 
     estimatePriceRange(item) {

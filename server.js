@@ -62,6 +62,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(3000, () => {
-    console.log('🚀 Aced Fashion PWA Server running at http://localhost:3000');
+    console.log('🚀 StyleLink Fashion PWA Server running at http://localhost:3000');
     console.log('📱 Your app can now be installed as a PWA!');
 });

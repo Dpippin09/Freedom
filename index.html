@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#764ba2">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Aced">
+    <meta name="apple-mobile-web-app-title" content="StyleLink">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="shortcut icon" href="./favicon.svg">
     <link rel="stylesheet" href="./assets/css/sleek-theme.css">
@@ -16,7 +16,7 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Aced - Find Fashion for Less</title>
+    <title>StyleLink - Find Fashion for Less</title>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
             
             <section class="hero">
                 <div class="hero-content">
-                    <h1>Aced</h1>
+                    <h1>StyleLink</h1>
                     <p>Find Fashion for Less - Compare prices across hundreds of retailers and never miss a deal again!</p>
                 </div>
             </section>
@@ -84,7 +84,7 @@
 
             <!-- Call to Action Section -->            <section class="cta-section">
                 <div class="cta-content">
-                    <h2>Elevate Your Style with Aced</h2>
+                    <h2>Elevate Your Style with StyleLink</h2>
                     <p>Join the exclusive community of fashion enthusiasts who choose premium quality and timeless elegance</p>
                     <div class="cta-buttons">
                         <button class="cta-primary">Explore Collections</button>
@@ -152,7 +152,7 @@
                 <h3>Personal Styling:</h3>
                 <div class="fertilizer-content">
                     <p>
-                        Aced elevates your style by pairing premium pieces with expert styling advice. Combined with our 
+                        StyleLink elevates your style by pairing premium pieces with expert styling advice. Combined with our 
                         personalized styling service, we transform your look in just a few sessions instead of years of fashion trial and error. Our process starts with detailed style analysis for each individual client, then based on the 
                         results we custom curate a wardrobe and styling plan designed to enhance your specific body type, lifestyle, and personal preferences.
                     </p>
@@ -244,7 +244,7 @@
         <main id="our-customers" class="our-farms">
             <h2>Our Customers and Community</h2>
             <p>
-                Our journey at Aced is driven by the belief that everyone deserves great fashion at the best possible price. 
+                Our journey at StyleLink is driven by the belief that everyone deserves great fashion at the best possible price. 
                 We are helping smart shoppers discover amazing deals and save money on the items they love by comparing prices 
                 across hundreds of retailers in real-time.
                 The benefits extend far beyond just savings. Our community thrives as savvy shoppers, deal hunters and bargain 
@@ -252,7 +252,7 @@
                 with comprehensive price comparisons and deal alerts that help them shop smarter.
                 We help people of all budgets find exactly what they're looking for at prices that work for them, turning 
                 expensive wish lists into affordable reality - all while ensuring the best value.
-                At Aced, we're transforming the way people shop by making every purchase a smart purchase.
+                At StyleLink, we're transforming the way people shop by making every purchase a smart purchase.
             </p>
         </main> 
 
@@ -265,11 +265,11 @@
     <footer class="footer" id="footer">
         <h2>Building a Smarter Shopping World Together</h2>
         <p>
-            &copy; Aced
+            &copy; StyleLink
         </p>
         <ul class="contactInfo" id="contactInfo">
             <li>Phone: (555)5555555</li>
-            <li>Email: hello@aced.com</li>
+            <li>Email: hello@stylelink.com</li>
             <li>Ogden, UT</li>
         </ul>
     </footer>
@@ -348,10 +348,10 @@
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
-                        console.log('Aced: Service Worker registered successfully:', registration.scope);
+                        console.log('StyleLink: Service Worker registered successfully:', registration.scope);
                     })
                     .catch(function(error) {
-                        console.log('Aced: Service Worker registration failed:', error);
+                        console.log('StyleLink: Service Worker registration failed:', error);
                     });
             });
         }
@@ -361,7 +361,7 @@
         let installButton;
 
         window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('Aced: Install prompt triggered');
+            console.log('StyleLink: Install prompt triggered');
             // Prevent Chrome 67 and earlier from automatically showing the prompt
             e.preventDefault();
             // Stash the event so it can be triggered later
@@ -376,7 +376,7 @@
             if (!document.getElementById('install-button')) {
                 installButton = document.createElement('button');
                 installButton.id = 'install-button';
-                installButton.textContent = '📱 Install Aced App';
+                installButton.textContent = '📱 Install StyleLink App';
                 installButton.style.cssText = `
                     position: fixed;
                     bottom: 20px;
@@ -419,13 +419,13 @@
                 // Wait for the user to respond to the prompt
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
-                        console.log('Aced: User accepted the install prompt');
+                        console.log('StyleLink: User accepted the install prompt');
                         // Hide the install button
                         if (installButton) {
                             installButton.style.display = 'none';
                         }
                     } else {
-                        console.log('Aced: User dismissed the install prompt');
+                        console.log('StyleLink: User dismissed the install prompt');
                     }
                     deferredPrompt = null;
                 });
@@ -434,7 +434,7 @@
 
         // Handle successful app installation
         window.addEventListener('appinstalled', (evt) => {
-            console.log('Aced: App was installed successfully');
+            console.log('StyleLink: App was installed successfully');
             // Hide install button
             if (installButton) {
                 installButton.style.display = 'none';
@@ -442,7 +442,7 @@
             
             // Show thank you message
             const thankYou = document.createElement('div');
-            thankYou.innerHTML = '✨ Welcome to Aced! App installed successfully.';
+            thankYou.innerHTML = '✨ Welcome to StyleLink! App installed successfully.';
             thankYou.style.cssText = `
                 position: fixed;
                 top: 20px;
@@ -633,7 +633,7 @@
 
         // Cart count update functionality
         function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('aced_cart') || '[]');
+            const cart = JSON.parse(localStorage.getItem('stylelink_cart') || '[]');
             const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
             const cartCountEl = document.getElementById('cart-count');
             
@@ -648,7 +648,7 @@
 
         // Listen for storage events (cart updates from other pages)
         window.addEventListener('storage', function(e) {
-            if (e.key === 'aced_cart') {
+            if (e.key === 'stylelink_cart') {
                 updateCartCount();
             }
         });

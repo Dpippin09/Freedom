@@ -382,7 +382,7 @@ class APISearchUI {
             // Get existing wishlist from localStorage
             let wishlist = [];
             try {
-                wishlist = JSON.parse(localStorage.getItem('aced_wishlist') || '[]');
+                wishlist = JSON.parse(localStorage.getItem('stylelink_wishlist') || '[]');
             } catch (e) {
                 wishlist = [];
             }
@@ -407,7 +407,7 @@ class APISearchUI {
 
             // Add to wishlist
             wishlist.push(wishlistItem);
-            localStorage.setItem('aced_wishlist', JSON.stringify(wishlist));
+            localStorage.setItem('stylelink_wishlist', JSON.stringify(wishlist));
 
             // Update button state
             button.textContent = '💖 Added!';

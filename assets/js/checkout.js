@@ -25,7 +25,7 @@ class CheckoutManager {
      * Load cart from localStorage or create default cart for demo
      */
     loadCart() {
-        const savedCart = localStorage.getItem('aced_cart');
+        const savedCart = localStorage.getItem('stylelink_cart');
         if (savedCart) {
             return JSON.parse(savedCart);
         }
@@ -49,7 +49,7 @@ class CheckoutManager {
      * Save cart to localStorage
      */
     saveCart() {
-        localStorage.setItem('aced_cart', JSON.stringify(this.cart));
+        localStorage.setItem('stylelink_cart', JSON.stringify(this.cart));
     }
 
     /**
@@ -426,7 +426,7 @@ class CheckoutManager {
         };
 
         // Store order for confirmation page
-        localStorage.setItem('aced_last_order', JSON.stringify(orderData));
+        localStorage.setItem('stylelink_last_order', JSON.stringify(orderData));
         
         // Clear cart
         this.cart = [];
@@ -484,7 +484,7 @@ class CheckoutManager {
      * Add item to cart (for use from other pages)
      */
     static addToCart(item) {
-        const cart = JSON.parse(localStorage.getItem('aced_cart') || '[]');
+        const cart = JSON.parse(localStorage.getItem('stylelink_cart') || '[]');
         
         // Check if item already exists
         const existingItem = cart.find(cartItem => cartItem.id === item.id);
@@ -499,7 +499,7 @@ class CheckoutManager {
             });
         }
         
-        localStorage.setItem('aced_cart', JSON.stringify(cart));
+        localStorage.setItem('stylelink_cart', JSON.stringify(cart));
         
         // Dispatch cart update event
         window.dispatchEvent(new CustomEvent('cartUpdated'));

@@ -12,6 +12,6 @@
     "@modelcontextprotocol/sdk": "^0.4.0"
   },
   "keywords": ["mcp", "fashion", "ai", "style", "recommendations"],
-  "author": "Aced Fashion AI Team",
+  "author": "StyleLink Fashion AI Team",
   "license": "MIT"
 }

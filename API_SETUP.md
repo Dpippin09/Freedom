@@ -1,4 +1,4 @@
-# API Setup Guide for Aced
+# API Setup Guide for StyleLink
 
 This guide will help you set up real API integrations for your price comparison site.
 

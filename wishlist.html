@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your personal wishlist - Save and organize your favorite fashion items from Aced">
+    <meta name="description" content="Your personal wishlist - Save and organize your favorite fashion items from StyleLink">
     <meta name="theme-color" content="#764ba2">
-    <title>My Wishlist - Aced</title>
+    <title>My Wishlist - StyleLink</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="stylesheet" href="./assets/css/sleek-theme.css">
     <style>
@@ -834,7 +834,7 @@
                 showLoading(true);
                 
                 // Try to load from localStorage first (for demo/development)
-                const localData = localStorage.getItem('aced_wishlist');
+                const localData = localStorage.getItem('stylelink_wishlist');
                 if (localData) {
                     wishlistData = JSON.parse(localData);
                     filteredData = [...wishlistData];
@@ -903,7 +903,7 @@
                     
                     if (data.success) {
                         wishlistData.push(data.item);
-                        localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                        localStorage.setItem('stylelink_wishlist', JSON.stringify(wishlistData));
                         filterWishlist();
                         showNotification('Item added to wishlist!', 'success');
                         return true;
@@ -913,7 +913,7 @@
                 } catch (apiError) {
                     // Fall back to localStorage
                     wishlistData.push(newItem);
-                    localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                    localStorage.setItem('stylelink_wishlist', JSON.stringify(wishlistData));
                     filterWishlist();
                     showNotification('Item added to wishlist!', 'success');
                     return true;
@@ -937,7 +937,7 @@
                     
                     if (data.success) {
                         wishlistData = wishlistData.filter(item => item.id !== itemId);
-                        localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                        localStorage.setItem('stylelink_wishlist', JSON.stringify(wishlistData));
                         filterWishlist();
                         showNotification('Item removed from wishlist', 'success');
                     } else {
@@ -946,7 +946,7 @@
                 } catch (apiError) {
                     // Fall back to localStorage
                     wishlistData = wishlistData.filter(item => item.id !== itemId);
-                    localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                    localStorage.setItem('stylelink_wishlist', JSON.stringify(wishlistData));
                     filterWishlist();
                     showNotification('Item removed from wishlist', 'success');
                 }
@@ -1001,7 +1001,7 @@
                     if (data.success) {
                         wishlistData = [];
                         filteredData = [];
-                        localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                        localStorage.setItem('stylelink_wishlist', JSON.stringify(wishlistData));
                         updateUI();
                         populateCategoryFilter();
                         showNotification('Wishlist cleared', 'success');
@@ -1013,7 +1013,7 @@
                     // Fall back to localStorage
                     wishlistData = [];
                     filteredData = [];
-                    localStorage.setItem('aced_wishlist', JSON.stringify(wishlistData));
+                    localStorage.setItem('stylelink_wishlist', JSON.stringify(wishlistData));
                     updateUI();
                     populateCategoryFilter();
                     showNotification('Wishlist cleared', 'success');
@@ -1372,10 +1372,10 @@
     <!-- Footer -->
     <footer class="footer" id="footer">
         <h2>Building a Smarter Shopping World Together</h2>
-        <p>&copy; Aced</p>
+        <p>&copy; StyleLink</p>
         <ul class="contactInfo" id="contactInfo">
             <li>Phone: (555)5555555</li>
-            <li>Email: hello@aced.com</li>
+            <li>Email: hello@stylelink.com</li>
             <li>Ogden, UT</li>
         </ul>
     </footer>
@@ -1413,7 +1413,7 @@
 
         // Cart count update functionality
         function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('aced_cart') || '[]');
+            const cart = JSON.parse(localStorage.getItem('stylelink_cart') || '[]');
             const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
             const cartCountEl = document.getElementById('cart-count');
             
@@ -1428,7 +1428,7 @@
 
         // Listen for storage events (cart updates from other pages)
         window.addEventListener('storage', function(e) {
-            if (e.key === 'aced_cart') {
+            if (e.key === 'stylelink_cart') {
                 updateCartCount();
             }
         });
