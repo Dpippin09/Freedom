@@ -19,192 +19,8 @@
     <link rel="stylesheet" href="./assets/css/ai-recommendations.css">
     <link rel="manifest" href="./manifest.json">
     
-    <!-- Inline Dark Grey, Silver, and Cream Color Scheme -->
-    <style>
-        :root {
-            --dark-grey: #2C2C2C;
-            --medium-grey: #4A4A4A;
-            --light-grey: #6B6B6B;
-            --silver: #C0C0C0;
-            --light-silver: #E5E5E5;
-            --cream: #F8F6F0;
-            --warm-cream: #FBF9F3;
-        }
-        
-        /* Dark grey, silver, and cream color scheme */
-        body { background-color: var(--cream) !important; }
-        
-        nav { background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important; }
-        
-        .nav-links a { 
-            background-color: rgba(44, 44, 44, 0.9) !important;
-            border: 1px solid rgba(192, 192, 192, 0.3) !important;
-            color: var(--silver) !important;
-        }
-        
-        .nav-links a:hover {
-            background-color: rgba(74, 74, 74, 0.9) !important;
-            color: var(--light-silver) !important;
-        }
-        
-        .login-signup {
-            background-color: var(--dark-grey) !important;
-            color: var(--silver) !important;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important;
-        }
-        
-        .cta-primary {
-            background: var(--cream) !important;
-            color: var(--dark-grey) !important;
-            border: 2px solid var(--silver) !important;
-        }
-        
-        .cta-primary:hover {
-            background: var(--silver) !important;
-            color: var(--dark-grey) !important;
-        }
-        
-        .search-button {
-            background: var(--dark-grey) !important;
-            color: var(--silver) !important;
-        }
-        
-        .search-button:hover {
-            background: var(--medium-grey) !important;
-            color: var(--light-silver) !important;
-        }
-        
-        /* Hero title styling - Luxury typography */
-        .hero-content h1 {
-            color: var(--silver) !important;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
-            font-weight: 400 !important;
-            letter-spacing: 3px !important;
-            -webkit-font-smoothing: antialiased !important;
-            -moz-osx-font-smoothing: grayscale !important;
-            text-rendering: optimizeLegibility !important;
-            font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif !important;
-            font-size: 9rem !important;
-            text-transform: uppercase !important;
-            background: linear-gradient(135deg, #F8F6F0 0%, #E5E5E5 30%, #C0C0C0 70%, #A8A8A8 100%) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
-            text-align: center !important;
-            margin: 0 auto !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            display: block !important;
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            padding: 0 20px !important;
-            box-sizing: border-box !important;
-            line-height: 0.9 !important;
-        }
-        
-        /* Responsive breakpoints for hero title */
-        @media (max-width: 1400px) {
-            .hero-content h1 {
-                font-size: 7.5rem !important;
-                letter-spacing: 2px !important;
-            }
-        }
-        
-        @media (max-width: 1200px) {
-            .hero-content h1 {
-                font-size: 6.5rem !important;
-                letter-spacing: 2px !important;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .hero-content h1 {
-                font-size: 5.5rem !important;
-                letter-spacing: 1.5px !important;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 4.5rem !important;
-                letter-spacing: 1.5px !important;
-                padding: 0 15px !important;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero-content h1 {
-                font-size: 3.8rem !important;
-                letter-spacing: 1px !important;
-                padding: 0 10px !important;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 3.2rem !important;
-                letter-spacing: 0.8px !important;
-                padding: 0 10px !important;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .hero-content h1 {
-                font-size: 2.8rem !important;
-                letter-spacing: 0.5px !important;
-                padding: 0 5px !important;
-            }
-        }
-        
-        @media (max-width: 320px) {
-            .hero-content h1 {
-                font-size: 2.5rem !important;
-                letter-spacing: 0.3px !important;
-                padding: 0 5px !important;
-            }
-        }
-        
-        .hero-content p {
-            color: var(--light-silver) !important;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
-            font-weight: 500 !important;
-            -webkit-font-smoothing: antialiased !important;
-            -moz-osx-font-smoothing: grayscale !important;
-            text-rendering: optimizeLegibility !important;
-            opacity: 0.95 !important;
-        }
-        
-        /* Additional styling for the new color scheme */
-        .search-input {
-            background-color: var(--warm-cream) !important;
-            border: 2px solid var(--light-grey) !important;
-            color: var(--dark-grey) !important;
-        }
-        
-        .search-input:focus {
-            border-color: var(--silver) !important;
-            box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.2) !important;
-        }
-        
-        .example-search-btn {
-            background-color: var(--cream) !important;
-            color: var(--dark-grey) !important;
-            border: 1px solid var(--light-grey) !important;
-        }
-        
-        .example-search-btn:hover {
-            background-color: var(--silver) !important;
-            color: var(--dark-grey) !important;
-        }
-    </style>
+    <!-- Custom Dark Grey, Silver, and Cream Theme -->
+    <link rel="stylesheet" href="./assets/css/custom-theme.css">
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>StyleLink - Find Fashion for Less</title>
@@ -283,7 +99,6 @@
                 </div>
             </section>
         </article>
-            <!-- <h2>How We Style You</h2>
             
              <img id="graphic-image" src="./assets/images/newCycleGraphic2.png" alt="a graphic of fashion styling process" />            <p>Understanding and optimizing your personal style is how we help you look and feel your best every day.
                 
@@ -571,15 +386,15 @@
                     position: fixed;
                     bottom: 20px;
                     right: 20px;
-                    background: linear-gradient(135deg, #4A9B8E 0%, #87A96B 100%);
-                    color: white;
+                    background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%);
+                    color: #C0C0C0;
                     border: none;
                     padding: 12px 20px;
                     border-radius: 25px;
                     font-weight: 600;
                     font-size: 0.9rem;
                     cursor: pointer;
-                    box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
+                    box-shadow: 0 4px 16px rgba(44, 44, 44, 0.3);
                     z-index: 1000;
                     transition: all 0.3s ease;
                     animation: installPulse 2s infinite;
@@ -591,12 +406,12 @@
                 // Add install button hover effects
                 installButton.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-2px)';
-                    this.style.boxShadow = '0 6px 20px rgba(184, 169, 217, 0.4)';
+                    this.style.boxShadow = '0 6px 20px rgba(44, 44, 44, 0.4)';
                 });
                 
                 installButton.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
-                    this.style.boxShadow = '0 4px 16px rgba(184, 169, 217, 0.3)';
+                    this.style.boxShadow = '0 4px 16px rgba(44, 44, 44, 0.3)';
                 });
             }
         }
@@ -637,13 +452,13 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: linear-gradient(135deg, #4A9B8E 0%, #87A96B 100%);
-                color: white;
+                background: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%);
+                color: #C0C0C0;
                 padding: 15px 20px;
                 border-radius: 10px;
                 font-weight: 600;
                 z-index: 1001;
-                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
+                box-shadow: 0 4px 16px rgba(44, 44, 44, 0.3);
             `;
             document.body.appendChild(thankYou);
             
@@ -656,20 +471,7 @@
         });
     </script>
 
-    <!-- Add CSS for install button animation -->
-    <style>
-        @keyframes installPulse {
-            0% {
-                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
-            }
-            50% {
-                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.6), 0 0 0 10px rgba(184, 169, 217, 0.1);
-            }
-            100% {
-                box-shadow: 0 4px 16px rgba(184, 169, 217, 0.3);
-            }
-        }
-    </style>
+
     
     <!-- Initialize Authentication, Price Alerts, Analytics, Charts, and AI -->
     <script>
