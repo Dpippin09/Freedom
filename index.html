@@ -78,7 +78,7 @@
             -moz-osx-font-smoothing: grayscale !important;
             text-rendering: optimizeLegibility !important;
             font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif !important;
-            font-size: 10rem !important;
+            font-size: 9rem !important;
             text-transform: uppercase !important;
             background: linear-gradient(135deg, #E5E5E5 0%, #B8B8B8 50%, #A8A8A8 100%) !important;
             -webkit-background-clip: text !important;
@@ -89,9 +89,9 @@
             width: 100% !important;
             max-width: 100% !important;
             display: block !important;
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
-            hyphens: auto !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
             padding: 0 20px !important;
             box-sizing: border-box !important;
             line-height: 0.9 !important;
@@ -100,28 +100,28 @@
         /* Responsive breakpoints for hero title */
         @media (max-width: 1400px) {
             .hero-content h1 {
-                font-size: 8rem !important;
+                font-size: 7.5rem !important;
                 letter-spacing: 2px !important;
             }
         }
         
         @media (max-width: 1200px) {
             .hero-content h1 {
-                font-size: 7rem !important;
+                font-size: 6.5rem !important;
                 letter-spacing: 2px !important;
             }
         }
         
         @media (max-width: 992px) {
             .hero-content h1 {
-                font-size: 6rem !important;
+                font-size: 5.5rem !important;
                 letter-spacing: 1.5px !important;
             }
         }
         
         @media (max-width: 768px) {
             .hero-content h1 {
-                font-size: 5rem !important;
+                font-size: 4.5rem !important;
                 letter-spacing: 1.5px !important;
                 padding: 0 15px !important;
             }
@@ -129,7 +129,7 @@
         
         @media (max-width: 576px) {
             .hero-content h1 {
-                font-size: 4rem !important;
+                font-size: 3.8rem !important;
                 letter-spacing: 1px !important;
                 padding: 0 10px !important;
             }
@@ -137,16 +137,24 @@
         
         @media (max-width: 480px) {
             .hero-content h1 {
-                font-size: 3.5rem !important;
-                letter-spacing: 1px !important;
+                font-size: 3.2rem !important;
+                letter-spacing: 0.8px !important;
                 padding: 0 10px !important;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .hero-content h1 {
+                font-size: 2.8rem !important;
+                letter-spacing: 0.5px !important;
+                padding: 0 5px !important;
             }
         }
         
         @media (max-width: 320px) {
             .hero-content h1 {
-                font-size: 2.8rem !important;
-                letter-spacing: 0.5px !important;
+                font-size: 2.5rem !important;
+                letter-spacing: 0.3px !important;
                 padding: 0 5px !important;
             }
         }
