@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Find the best fashion deals across hundreds of retailers. Compare prices, track trends, and never miss a sale again!">
-    <meta name="theme-color" content="#8B6F47">
+    <meta name="theme-color" content="#2C2C2C">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="StyleLink">
@@ -19,59 +19,72 @@
     <link rel="stylesheet" href="./assets/css/ai-recommendations.css">
     <link rel="manifest" href="./manifest.json">
     
-    <!-- Inline Tan Color Scheme Override -->
+    <!-- Inline Dark Grey, Silver, and Cream Color Scheme -->
     <style>
         :root {
-            --primary-tan: #8B6F47;
-            --accent-teal: #4A9B8E;
-            --accent-coral: #E07A5F;
-            --warm-white: #FEFCF7;
-            --cream-tan: #F5F1E8;
+            --dark-grey: #2C2C2C;
+            --medium-grey: #4A4A4A;
+            --light-grey: #6B6B6B;
+            --silver: #C0C0C0;
+            --light-silver: #E5E5E5;
+            --cream: #F8F6F0;
+            --warm-cream: #FBF9F3;
         }
         
-        /* Force tan color scheme */
-        body { background-color: var(--cream-tan) !important; }
+        /* Dark grey, silver, and cream color scheme */
+        body { background-color: var(--cream) !important; }
         
-        nav { background: linear-gradient(135deg, var(--primary-tan) 0%, var(--accent-teal) 100%) !important; }
+        nav { background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important; }
         
         .nav-links a { 
-            background-color: rgba(139, 111, 71, 0.8) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            background-color: rgba(44, 44, 44, 0.9) !important;
+            border: 1px solid rgba(192, 192, 192, 0.3) !important;
+            color: var(--silver) !important;
         }
         
         .nav-links a:hover {
-            background-color: rgba(74, 155, 142, 0.8) !important;
+            background-color: rgba(74, 74, 74, 0.9) !important;
+            color: var(--light-silver) !important;
         }
         
         .login-signup {
-            background-color: var(--primary-tan) !important;
+            background-color: var(--dark-grey) !important;
+            color: var(--silver) !important;
         }
         
         .hero {
-            background: linear-gradient(135deg, var(--primary-tan) 0%, var(--accent-teal) 100%) !important;
+            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important;
         }
         
         .cta-section {
-            background: linear-gradient(135deg, var(--primary-tan) 0%, var(--accent-teal) 100%) !important;
+            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important;
         }
         
         .cta-primary {
-            background: #fff !important;
-            color: var(--primary-tan) !important;
+            background: var(--cream) !important;
+            color: var(--dark-grey) !important;
+            border: 2px solid var(--silver) !important;
+        }
+        
+        .cta-primary:hover {
+            background: var(--silver) !important;
+            color: var(--dark-grey) !important;
         }
         
         .search-button {
-            background: var(--primary-tan) !important;
+            background: var(--dark-grey) !important;
+            color: var(--silver) !important;
         }
         
         .search-button:hover {
-            background: #6B4A2A !important;
+            background: var(--medium-grey) !important;
+            color: var(--light-silver) !important;
         }
         
         /* Hero title styling - Luxury typography */
         .hero-content h1 {
-            color: #C0C0C0 !important;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+            color: var(--silver) !important;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
             font-weight: 400 !important;
             letter-spacing: 3px !important;
             -webkit-font-smoothing: antialiased !important;
@@ -80,7 +93,7 @@
             font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif !important;
             font-size: 9rem !important;
             text-transform: uppercase !important;
-            background: linear-gradient(135deg, #E5E5E5 0%, #B8B8B8 50%, #A8A8A8 100%) !important;
+            background: linear-gradient(135deg, #F8F6F0 0%, #E5E5E5 30%, #C0C0C0 70%, #A8A8A8 100%) !important;
             -webkit-background-clip: text !important;
             -webkit-text-fill-color: transparent !important;
             background-clip: text !important;
@@ -160,13 +173,36 @@
         }
         
         .hero-content p {
-            color: #F5F1E8 !important;
-            text-shadow: none !important;
+            color: var(--light-silver) !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
             font-weight: 500 !important;
             -webkit-font-smoothing: antialiased !important;
             -moz-osx-font-smoothing: grayscale !important;
             text-rendering: optimizeLegibility !important;
             opacity: 0.95 !important;
+        }
+        
+        /* Additional styling for the new color scheme */
+        .search-input {
+            background-color: var(--warm-cream) !important;
+            border: 2px solid var(--light-grey) !important;
+            color: var(--dark-grey) !important;
+        }
+        
+        .search-input:focus {
+            border-color: var(--silver) !important;
+            box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.2) !important;
+        }
+        
+        .example-search-btn {
+            background-color: var(--cream) !important;
+            color: var(--dark-grey) !important;
+            border: 1px solid var(--light-grey) !important;
+        }
+        
+        .example-search-btn:hover {
+            background-color: var(--silver) !important;
+            color: var(--dark-grey) !important;
         }
     </style>
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
