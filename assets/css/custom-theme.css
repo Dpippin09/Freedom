@@ -1,5 +1,17 @@
-/* Dark Grey, Silver, and Cream Color Scheme */
+/* Dark Grey, Silver, and Cream Color Scheme - Override all previous themes */
 :root {
+    /* Override old tan/teal variables with new dark grey scheme */
+    --primary-tan: #2C2C2C !important;
+    --light-tan: #4A4A4A !important;
+    --cream-tan: #F8F6F0 !important;
+    --dark-tan: #2C2C2C !important;
+    --accent-teal: #C0C0C0 !important;
+    --accent-coral: #6B6B6B !important;
+    --accent-gold: #E5E5E5 !important;
+    --warm-white: #FBF9F3 !important;
+    --charcoal: #2C2C2C !important;
+    
+    /* New dark grey, silver, cream palette */
     --dark-grey: #2C2C2C;
     --medium-grey: #4A4A4A;
     --light-grey: #6B6B6B;
@@ -7,31 +19,79 @@
     --light-silver: #E5E5E5;
     --cream: #F8F6F0;
     --warm-cream: #FBF9F3;
+    
+    /* Override gradients */
+    --gradient-primary: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%) !important;
+    --gradient-accent: linear-gradient(135deg, #4A4A4A 0%, #6B6B6B 100%) !important;
+    --gradient-elegant: linear-gradient(135deg, #2C2C2C 0%, #4A4A4A 100%) !important;
 }
 
-/* Dark grey, silver, and cream color scheme */
-body { background-color: var(--cream) !important; }
+/* FORCE Dark grey, silver, and cream color scheme - Override everything */
+body { 
+    background-color: var(--cream) !important; 
+    background: var(--cream) !important;
+}
 
-nav { background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important; }
+/* Navigation - Force dark grey theme */
+nav, 
+header nav,
+nav.nav-container { 
+    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important; 
+    background-color: var(--dark-grey) !important;
+}
 
-.nav-links a { 
+/* Navigation Links - Override all styles */
+.nav-links,
+nav .nav-links,
+header .nav-links { 
+    background: transparent !important;
+}
+
+.nav-links a,
+nav .nav-links a,
+header .nav-links a,
+.nav-links li a { 
     background-color: rgba(44, 44, 44, 0.9) !important;
     border: 1px solid rgba(192, 192, 192, 0.3) !important;
     color: var(--silver) !important;
+    background: rgba(44, 44, 44, 0.9) !important;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+nav .nav-links a:hover,
+header .nav-links a:hover,
+.nav-links li a:hover {
     background-color: rgba(74, 74, 74, 0.9) !important;
     color: var(--light-silver) !important;
+    background: rgba(74, 74, 74, 0.9) !important;
 }
 
-.login-signup {
+.nav-links a::before,
+.nav-links a:hover::before {
+    background: var(--silver) !important;
+}
+
+/* Login/Signup Button */
+.login-signup,
+.nav-links .login-signup,
+nav .login-signup {
     background-color: var(--dark-grey) !important;
     color: var(--silver) !important;
+    background: var(--dark-grey) !important;
 }
 
-.hero {
-    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important;
+.login-signup:hover,
+.nav-links .login-signup:hover {
+    background-color: var(--medium-grey) !important;
+    background: var(--medium-grey) !important;
+}
+
+/* Hero Section - Force dark grey background */
+.hero,
+section.hero,
+header .hero { 
+    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important; 
+    background-color: var(--dark-grey) !important;
 }
 
 .cta-section {
@@ -180,6 +240,119 @@ nav { background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey
 
 .example-search-btn:hover {
     background-color: var(--silver) !important;
+    color: var(--dark-grey) !important;
+}
+
+/* Hamburger Menu - Force dark grey theme */
+.hamburger-menu,
+#hamburger-menu {
+    background: transparent !important;
+}
+
+.hamburger-line,
+.hamburger-menu span {
+    background-color: var(--silver) !important;
+    background: var(--silver) !important;
+}
+
+.hamburger-menu.active .hamburger-line,
+.hamburger-menu.active span {
+    background-color: var(--light-silver) !important;
+}
+
+/* Navigation Overlay */
+.nav-overlay {
+    background: rgba(44, 44, 44, 0.9) !important;
+}
+
+/* Cart Link */
+.cart-link,
+.nav-links .cart-link {
+    color: var(--silver) !important;
+    background: rgba(44, 44, 44, 0.8) !important;
+}
+
+.cart-link:hover,
+.nav-links .cart-link:hover {
+    background: rgba(74, 74, 74, 0.9) !important;
+}
+
+.cart-count {
+    background: var(--silver) !important;
+    color: var(--dark-grey) !important;
+}
+
+/* Search Examples - Force theme */
+.search-examples,
+.examples-label {
+    color: var(--dark-grey) !important;
+}
+
+.search-status {
+    color: var(--dark-grey) !important;
+}
+
+/* Content Areas */
+.content,
+article.content {
+    background: var(--cream) !important;
+    color: var(--dark-grey) !important;
+}
+
+/* Ensure all text content uses proper colors */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--dark-grey) !important;
+}
+
+p {
+    color: var(--dark-grey) !important;
+}
+
+/* Footer - ensure consistency */
+.footer,
+footer {
+    background: var(--dark-grey) !important;
+    color: var(--silver) !important;
+}
+
+.footer h2,
+footer h2 {
+    color: var(--light-silver) !important;
+}
+
+/* FINAL OVERRIDES - Ensure no old colors show through */
+body {
+    background-color: var(--cream) !important;
+}
+
+/* Force override any lingering gradients */
+[style*="background: linear-gradient"][style*="#8B6F47"],
+[style*="background-color: #8B6F47"],
+[style*="background: #8B6F47"],
+[style*="background: linear-gradient"][style*="#4A9B8E"],
+[style*="background-color: #4A9B8E"],
+[style*="background: #4A9B8E"] {
+    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%) !important;
+    background-color: var(--dark-grey) !important;
+}
+
+/* Ensure CTA section uses dark theme */
+.cta-content h2 {
+    color: var(--light-silver) !important;
+}
+
+.cta-content p {
+    color: var(--silver) !important;
+}
+
+.cta-secondary {
+    background: transparent !important;
+    color: var(--silver) !important;
+    border: 2px solid var(--silver) !important;
+}
+
+.cta-secondary:hover {
+    background: var(--silver) !important;
     color: var(--dark-grey) !important;
 }
 
