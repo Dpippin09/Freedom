@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Find the best fashion deals across hundreds of retailers. Compare prices, track trends, and never miss a sale again!">
-    <meta name="theme-color" content="#764ba2">
+    <meta name="theme-color" content="#8B6F47">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="StyleLink">
@@ -14,6 +14,56 @@
     <link rel="stylesheet" href="./assets/css/sleek-theme.css">
     <link rel="stylesheet" href="./assets/css/ai-recommendations.css">
     <link rel="manifest" href="./manifest.json">
+    
+    <!-- Inline Tan Color Scheme Override -->
+    <style>
+        :root {
+            --primary-tan: #8B6F47;
+            --accent-teal: #4A9B8E;
+            --accent-coral: #E07A5F;
+            --warm-white: #FEFCF7;
+            --cream-tan: #F5F1E8;
+        }
+        
+        /* Force tan color scheme */
+        body { background-color: var(--cream-tan) !important; }
+        
+        nav { background: linear-gradient(135deg, var(--primary-tan) 0%, var(--accent-teal) 100%) !important; }
+        
+        .nav-links a { 
+            background-color: rgba(139, 111, 71, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(74, 155, 142, 0.8) !important;
+        }
+        
+        .login-signup {
+            background-color: var(--primary-tan) !important;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary-tan) 0%, var(--accent-teal) 100%) !important;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-tan) 0%, var(--accent-teal) 100%) !important;
+        }
+        
+        .cta-primary {
+            background: #fff !important;
+            color: var(--primary-tan) !important;
+        }
+        
+        .search-button {
+            background: var(--primary-tan) !important;
+        }
+        
+        .search-button:hover {
+            background: #6B4A2A !important;
+        }
+    </style>
     <link rel="apple-touch-icon" href="./assets/images/Snatched.jpg">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>StyleLink - Find Fashion for Less</title>
@@ -31,7 +81,6 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="camera-wardrobe.html">📷 Wardrobe AI</a></li>
                 <li><a href="wishlist.html">💝 My Wishlist</a></li>
-                <li><a href="external-products-demo.html">🔍 Browse Products</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="#" onclick="openFeedbackModal()">Feedback</a></li>
                 <li><a href="login-signup.html" class="login-signup">Login/Signup</a></li>
@@ -381,7 +430,7 @@
                     position: fixed;
                     bottom: 20px;
                     right: 20px;
-                    background: linear-gradient(135deg, #b8a9d9 0%, #d4c7e8 100%);
+                    background: linear-gradient(135deg, #4A9B8E 0%, #87A96B 100%);
                     color: white;
                     border: none;
                     padding: 12px 20px;
@@ -447,7 +496,7 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: linear-gradient(135deg, #b8a9d9 0%, #d4c7e8 100%);
+                background: linear-gradient(135deg, #4A9B8E 0%, #87A96B 100%);
                 color: white;
                 padding: 15px 20px;
                 border-radius: 10px;

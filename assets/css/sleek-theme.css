@@ -7,35 +7,48 @@
 
 /* CSS Variables for consistent theming */
 :root {
-    /* Color Palette - Cream & Lavender Elegance */
-    --primary-dark: #2d2438;
-    --secondary-dark: #3d3447;
-    --tertiary-dark: #4a4458;
-    --charcoal: #5a5468;
-    --dark-gray: #6a6478;
+    /* Tan-focused sophisticated palette */
+    --primary-tan: #8B6F47;
+    --light-tan: #D4C4A8;
+    --cream-tan: #F5F1E8;
+    --dark-tan: #5D4E37;
+    --accent-teal: #4A9B8E;
+    --accent-coral: #E07A5F;
+    --accent-gold: #D4A574;
+    --warm-white: #FEFCF7;
+    --soft-gray: #6B6B6B;
+    --charcoal: #2C2C2C;
+    --sage-green: #87A96B;
+    --dusty-rose: #D4A5A5;
+
+    /* Legacy color mappings for compatibility */
+    --primary-dark: #2C2C2C;
+    --secondary-dark: #5D4E37;
+    --tertiary-dark: #8B6F47;
+    --dark-gray: #6B6B6B;
     
-    /* Elegant Lavender Accents */
-    --accent-lavender: #b8a9d9;
-    --accent-light-lavender: #d4c7e8;
-    --accent-deep-lavender: #9d8bc9;
-    --accent-mauve: #c9b4d4;
+    /* Updated accent colors */
+    --accent-lavender: #4A9B8E;
+    --accent-light-lavender: #87A96B;
+    --accent-deep-lavender: #5D4E37;
+    --accent-mauve: #D4A574;
     
-    /* Cream & Neutral Palette */
-    --pure-white: #ffffff;
-    --cream-white: #faf8f3;
-    --warm-cream: #f7f4ef;
-    --light-cream: #f5f2ed;
-    --warm-taupe: #a89b8f;
-    --text-muted: #8b8680;
-    --border-lavender: #e8dfe8;
-    --subtle-cream: #f9f6f1;
+    /* Updated neutral palette */
+    --pure-white: #FEFCF7;
+    --cream-white: #F5F1E8;
+    --warm-cream: #D4C4A8;
+    --light-cream: #F5F1E8;
+    --warm-taupe: #8B6F47;
+    --text-muted: #6B6B6B;
+    --border-lavender: #D4C4A8;
+    --subtle-cream: #F5F1E8;
     
     /* Sophisticated Gradients */
-    --gradient-primary: linear-gradient(135deg, #2d2438 0%, #4a4458 50%, #b8a9d9 100%);
-    --gradient-accent: linear-gradient(135deg, #b8a9d9 0%, #d4c7e8 50%, #c9b4d4 100%);
-    --gradient-elegant: linear-gradient(135deg, #2d2438 0%, #4a4458 100%);
-    --gradient-overlay: linear-gradient(135deg, rgba(45, 36, 56, 0.9) 0%, rgba(74, 68, 88, 0.7) 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(184, 169, 217, 0.1) 0%, rgba(212, 199, 232, 0.05) 100%);
+    --gradient-primary: linear-gradient(135deg, #5D4E37 0%, #8B6F47 50%, #4A9B8E 100%);
+    --gradient-accent: linear-gradient(135deg, #4A9B8E 0%, #87A96B 50%, #D4A574 100%);
+    --gradient-elegant: linear-gradient(135deg, #5D4E37 0%, #8B6F47 100%);
+    --gradient-overlay: linear-gradient(135deg, rgba(93, 78, 55, 0.9) 0%, rgba(139, 111, 71, 0.7) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(74, 155, 142, 0.1) 0%, rgba(135, 169, 107, 0.05) 100%);
     
     /* Typography */
     --font-primary: 'Inter', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -60,17 +73,17 @@
     --radius-2xl: 32px;
     
     /* Elegant Shadows */
-    --shadow-subtle: 0 1px 3px rgba(45, 36, 56, 0.05);
-    --shadow-sm: 0 2px 8px rgba(45, 36, 56, 0.08);
-    --shadow-md: 0 4px 16px rgba(45, 36, 56, 0.12);
-    --shadow-lg: 0 8px 32px rgba(45, 36, 56, 0.16);
-    --shadow-xl: 0 16px 64px rgba(45, 36, 56, 0.2);
-    --shadow-2xl: 0 25px 80px rgba(45, 36, 56, 0.25);
+    --shadow-subtle: 0 1px 3px rgba(139, 111, 71, 0.05);
+    --shadow-sm: 0 2px 8px rgba(139, 111, 71, 0.08);
+    --shadow-md: 0 4px 16px rgba(139, 111, 71, 0.12);
+    --shadow-lg: 0 8px 32px rgba(139, 111, 71, 0.16);
+    --shadow-xl: 0 16px 64px rgba(139, 111, 71, 0.2);
+    --shadow-2xl: 0 25px 80px rgba(139, 111, 71, 0.25);
     
     /* Premium Glows */
-    --glow-lavender: 0 0 20px rgba(184, 169, 217, 0.3);
-    --glow-mauve: 0 0 20px rgba(201, 180, 212, 0.3);
-    --glow-cream: 0 0 20px rgba(247, 244, 239, 0.2);
+    --glow-lavender: 0 0 20px rgba(74, 155, 142, 0.3);
+    --glow-mauve: 0 0 20px rgba(135, 169, 107, 0.3);
+    --glow-cream: 0 0 20px rgba(245, 241, 232, 0.2);
     
     /* Transitions - More fluid */
     --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -699,7 +712,7 @@ nav:hover {
 
 .rating-star {
     font-size: 1.5rem;
-    color: rgba(184, 169, 217, 0.3);
+    color: rgba(74, 155, 142, 0.3);
     cursor: pointer;
     transition: all var(--transition-fast);
 }
@@ -741,11 +754,11 @@ nav:hover {
     width: 100%;
     height: 100%;
     background-image: 
-        radial-gradient(circle at 20% 20%, rgba(184, 169, 217, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(212, 199, 232, 0.25) 0%, transparent 50%),
-        radial-gradient(circle at 60% 40%, rgba(201, 180, 212, 0.2) 0%, transparent 60%),
-        radial-gradient(circle at 30% 70%, rgba(184, 169, 217, 0.15) 0%, transparent 70%),
-        radial-gradient(circle at 90% 30%, rgba(157, 139, 201, 0.2) 0%, transparent 50%);
+        radial-gradient(circle at 20% 20%, rgba(74, 155, 142, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(135, 169, 107, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 60% 40%, rgba(212, 165, 116, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 30% 70%, rgba(74, 155, 142, 0.15) 0%, transparent 70%),
+        radial-gradient(circle at 90% 30%, rgba(139, 111, 71, 0.2) 0%, transparent 50%);
     background-size: 300% 300%, 250% 250%, 400% 400%, 350% 350%, 200% 200%;
     animation: waveFlow 20s ease-in-out infinite, colorShift 15s linear infinite;
     opacity: 0.7;
@@ -759,8 +772,8 @@ nav:hover {
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(45deg, rgba(184, 169, 217, 0.1) 0%, transparent 30%, rgba(212, 199, 232, 0.08) 60%, transparent 100%),
-        linear-gradient(-45deg, transparent 0%, rgba(201, 180, 212, 0.06) 30%, transparent 70%, rgba(157, 139, 201, 0.1) 100%);
+        linear-gradient(45deg, rgba(74, 155, 142, 0.1) 0%, transparent 30%, rgba(135, 169, 107, 0.08) 60%, transparent 100%),
+        linear-gradient(-45deg, transparent 0%, rgba(212, 165, 116, 0.06) 30%, transparent 70%, rgba(139, 111, 71, 0.1) 100%);
     background-size: 200% 200%, 300% 300%;
     animation: waveSweep 18s ease-in-out infinite reverse;
     opacity: 0.6;
@@ -4087,7 +4100,7 @@ a:focus-visible {
 
 /* AI Compatibility Button on Product Cards */
 .ai-compatibility-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4A9B8E 0%, #8B6F47 100%);
     color: white;
     border: none;
     padding: 8px 16px;

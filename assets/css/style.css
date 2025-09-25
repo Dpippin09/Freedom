@@ -181,7 +181,7 @@ body:hover nav {
 }
 
 .nav-links a:hover {
-    background-color: rgba(102, 126, 234, 0.8);
+    background-color: rgba(74, 155, 142, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.4);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -216,12 +216,12 @@ body:hover nav {
 }
 
 .nav-links .login-signup {
-    background-color: #667eea;
+    background-color: #8B6F47;
     color: #ffffff;
 }
 
 .nav-links .login-signup:hover {
-    background-color: #5a67d8;
+    background-color: #6B4A2A;
     color: #ffffff;
 }
 
@@ -299,8 +299,8 @@ section {
     padding: 50px;
     height: auto; /* Change height to auto for better responsiveness */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #8e44ad;
-    color: #fff5df;
+    background-color: #8B6F47;
+    color: #FEFCF7;
     border-radius: 30px; /* Adjust the value as needed */
 }
 
@@ -364,8 +364,8 @@ main.about-Us h2 {
     padding: 50px;
     height: auto; /* Change height to auto for better responsiveness */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #9b59b6;
-    color: #f8f0ff;
+    background-color: #4A9B8E;
+    color: #FEFCF7;
 }
 
 .soil-health img {
@@ -426,8 +426,8 @@ main.about-Us h2 {
     padding: 50px;
     height: auto; /* Change height to auto for better responsiveness */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #f3e8ff;
-    color: #2e0249;
+    background-color: #F5F1E8;
+    color: #2C2C2C;
 }
 
 main.Projects {
@@ -845,7 +845,7 @@ main.Projects section {
 
 .contact button {
     padding: 10px 20px;
-    background-color: #6a4c93;
+    background-color: #8B6F47;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -855,7 +855,7 @@ main.Projects section {
 }
 
 .contact button:hover {
-    background-color: #4c2a6a;
+    background-color: #6B4A2A;
 }
 
 /* Media queries for mobile compatibility */
@@ -961,7 +961,7 @@ body:hover .search-container {
 }
 
 .search-button {
-    background: #6a4c93;
+    background: #8B6F47;
     border: none;
     padding: 15px 20px;
     cursor: pointer;
@@ -972,7 +972,7 @@ body:hover .search-container {
 }
 
 .search-button:hover {
-    background: #4c2a6a;
+    background: #6B4A2A;
 }
 
 .search-icon {
@@ -1070,9 +1070,9 @@ body:hover .search-container {
 
 .filter-tab.active,
 .filter-tab:hover {
-    background: #6a4c93;
+    background: #8B6F47;
     color: white;
-    border-color: #6a4c93;
+    border-color: #8B6F47;
 }
 
 /* Mission Banner */
@@ -1081,7 +1081,7 @@ body:hover .search-container {
     align-items: center;
     justify-content: space-between;
     padding: 60px 40px;
-    background: linear-gradient(135deg, #8e44ad 0%, #6a4c93 100%);
+    background: linear-gradient(135deg, #8B6F47 0%, #4A9B8E 100%);
     color: white;
     margin: 0;
     min-height: 400px;
@@ -1107,7 +1107,7 @@ body:hover .search-container {
 
 .cta-button {
     background: #fff;
-    color: #6a4c93;
+    color: #8B6F47;
     border: none;
     padding: 15px 30px;
     border-radius: 30px;
@@ -1364,7 +1364,7 @@ body:hover .search-container {
 /* Product Button */
 .product-button {
     width: 100%;
-    background: #6a4c93;
+    background: #8B6F47;
     color: white;
     border: none;
     padding: 15px 20px;
@@ -1378,7 +1378,7 @@ body:hover .search-container {
 }
 
 .product-button:hover {
-    background: #4c2a6a;
+    background: #6B4A2A;
     transform: translateY(-2px);
 }
 
@@ -1442,7 +1442,7 @@ body:hover .search-container {
 
 /* Call to Action Section */
 .cta-section {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    background: linear-gradient(135deg, #8B6F47 0%, #4A9B8E 100%);
     color: white;
     padding: 80px 40px;
     text-align: center;
@@ -1468,7 +1468,7 @@ body:hover .search-container {
 
 .cta-primary {
     background: #fff;
-    color: #764ba2;
+    color: #8B6F47;
     border: none;
     padding: 15px 30px;
     border-radius: 30px;
@@ -1498,7 +1498,7 @@ body:hover .search-container {
 
 .cta-secondary:hover {
     background: white;
-    color: #764ba2;
+    color: #8B6F47;
 }
 
 /* Responsive Design for Product Cards */
@@ -2020,7 +2020,7 @@ body:hover .search-container {
 
 /* Page Headers - Fashion Theme */
 .page-header {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    background: linear-gradient(135deg, #8B6F47 0%, #4A9B8E 100%);
     color: #ffffff;
     padding: 80px 40px;
     text-align: center;
