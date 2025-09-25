@@ -84,6 +84,32 @@
             -webkit-background-clip: text !important;
             -webkit-text-fill-color: transparent !important;
             background-clip: text !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            width: 100% !important;
+            display: block !important;
+        }
+        
+        /* Mobile responsiveness for hero title */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 6rem !important;
+                letter-spacing: 2px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 4rem !important;
+                letter-spacing: 1px !important;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .hero-content h1 {
+                font-size: 3rem !important;
+                letter-spacing: 0.5px !important;
+            }
         }
         
         .hero-content p {
